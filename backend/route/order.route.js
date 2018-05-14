@@ -4,8 +4,8 @@ const permission = require('permission');
 
 orderRouter.get('/', permission(), OrderController.list);
 orderRouter.get('/:id', permission(), OrderController.getAllFromUser);
-orderRouter.post('/', permission(/*['admin']*/), OrderController.create);
-orderRouter.put('/:id', permission(/*['admin']*/), OrderController.update);
-orderRouter.put('/:id', permission(/*['admin']*/), OrderController.delete);
+orderRouter.post('/', permission('admin'), OrderController.create);
+orderRouter.put('/:id', permission('admin'), OrderController.update);
+orderRouter.put('/:id', permission('admin'), OrderController.delete);
 
 module.exports = orderRouter;

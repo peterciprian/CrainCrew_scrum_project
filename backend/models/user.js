@@ -12,9 +12,10 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-  isAdmin: {
-    type: Boolean,
+  role: {
+    type: String,
     required: true,
+    default: 'user',
   },
   orders: [{
     type: mongoose.Schema.Types.ObjectId,

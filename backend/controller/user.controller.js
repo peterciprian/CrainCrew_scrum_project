@@ -31,7 +31,7 @@ module.exports = {
   },
 
   updateProfile: (req, res) => {
-    User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
+    User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
       if (err) {
         res.send(err);
         console.log(err);
