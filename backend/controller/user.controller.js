@@ -10,6 +10,7 @@ module.exports = {
   register: (req, res) => {
     User.register(new User({
       username: req.body.username,
+      isAdmin: req.body.isAdmin,
       email: req.body.email,
     }), req.body.password)
       .then(() => res.json({
@@ -33,15 +34,14 @@ module.exports = {
 
   },
 
-  deleteProfile: (req, res) => {
+  delete: (req, res) => {
     User.findByIdAndRemove(req.params.id, (err, data) => {
       if (err) {
-          res.send(err)
-          console.log(err)
+        res.send(err);
+        console.log(err);
       } else {
-          res.json(data)
+        res.json(data);
       }
-  })
-  }
-
+    });
+  },
 };
