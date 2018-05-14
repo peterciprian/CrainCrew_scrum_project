@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import {FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Http, RequestOptions } from '@angular/http';
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -92,6 +91,7 @@ options = new RequestOptions({ withCredentials: true });
             console.log(data['_body']);
         });
 }
+
   ngOnInit() {
   }
 
