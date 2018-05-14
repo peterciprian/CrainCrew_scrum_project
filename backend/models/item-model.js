@@ -10,6 +10,7 @@ const ItemSchema = new mongoose.Schema({
   itemId: {
     type: String,
     required: true,
+    unique: true,
   },
   url: {
     type: String,
@@ -17,7 +18,6 @@ const ItemSchema = new mongoose.Schema({
   },
   img: {
     type: String,
-    required: true,
   },
   manufacturer: {
     type: String,
@@ -27,10 +27,6 @@ const ItemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  orders: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Order',
-  }],
 }, {
   timestamps: true,
 });
