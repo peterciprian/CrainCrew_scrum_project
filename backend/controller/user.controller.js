@@ -28,4 +28,20 @@ module.exports = {
       success: 'Sikeres kilépés',
     });
   },
+
+  updateProfile: (req, res) => {
+
+  },
+
+  deleteProfile: (req, res) => {
+    User.findByIdAndRemove(req.params.id, (err, data) => {
+      if (err) {
+          res.send(err)
+          console.log(err)
+      } else {
+          res.json(data)
+      }
+  })
+  }
+
 };
