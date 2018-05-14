@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import {FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Http, RequestOptions } from '@angular/http';
+import { NgModule } from '@angular/core';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -17,8 +19,8 @@ export class NavbarComponent implements OnInit {
   messageClass2;
   baseUrl = 'http://localhost:8080/user/';
   user: any = {
-    username: 'YOUR RESGISTERED USERNAME',
-    password: 'YOUR RESGISTERED USER PASSWORD'
+    username: 'oberthzsigmond@gmail.com',
+    password: '012345678'
 };
 options = new RequestOptions({ withCredentials: true });
 
@@ -90,6 +92,12 @@ options = new RequestOptions({ withCredentials: true });
         .subscribe(data => {
             console.log(data['_body']);
         });
+}
+logout() {
+  this.http.get(this.baseUrl + 'logout', this.options)
+      .subscribe(data => {
+          console.log(data['_body']);
+      });
 }
 
   ngOnInit() {
