@@ -44,7 +44,7 @@ app.use(bodyParser.urlencoded({
 
 // Session handling
 app.use(session({
-  secret: 'secret',
+  secret: 'CraneCrew secret string: just do it!!',
   resave: true,
   httpOnly: false,
   saveUninitialized: true,
