@@ -12,14 +12,14 @@ db.createUser(
 )
 */
 
-const host = 'localhost';
-const port = 27017;
-const user = 'root';
-const password = 'toor';
-const database = 'blog';
+// const host = 'localhost';
+// const port = 27017;
+// const user = 'root';
+// const password = 'toor';
+// const database = 'blog';
 
 module.exports = {
-  uri: `mongodb://${user}:${password}@${host}:${port}/${database}`,
+  uri: 'mongodb://crane-crew:crane-crew@ds119150.mlab.com:19150/crane-crew',
   options: {
     connectTimeoutMS: 5000,
     reconnectTries: Number.MAX_VALUE,
