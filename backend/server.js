@@ -14,6 +14,7 @@ const db = require('./config/database.js');
 const User = require('./models/user');
 const userRouter = require('./route/user.route');
 const blogpostRouter = require('./route/blogpost.route');
+const permission = require('permission');
 
 const logDirectory = path.join(__dirname, 'log');
 const port = process.env.PORT || 8080;
