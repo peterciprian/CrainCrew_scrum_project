@@ -16,6 +16,11 @@ const OrderSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  id: {
+    type: String,
+    unique: true,
+    required: true,
+  },
 }, {
   timestamps: true,
 });
