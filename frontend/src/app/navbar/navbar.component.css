@@ -1,0 +1,9 @@
+.navbar .navbar-nav>li>a {
+  color: white;
+  font-size: 18px;
+}
+  
+.navbar .navbar-nav>li>a:hover,
+.navbar .navbar-nav>li>a:focus {
+  color: #E0A800;
+}
