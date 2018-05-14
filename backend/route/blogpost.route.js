@@ -4,11 +4,11 @@ const blogpostRouter = express.Router();
 const blogpostController = require('../controller/blogpost.controller');
 
 function loggedIn(req, res, next) {
-    if (req.user) {
-        next();
-    } else {
-        res.json({error: 'Be kell jelentkezned'});
-    }
+  if (req.user) {
+    next();
+  } else {
+    res.json({error: 'Be kell jelentkezned'});
+  }
 }
 
 blogpostRouter.route('/')
