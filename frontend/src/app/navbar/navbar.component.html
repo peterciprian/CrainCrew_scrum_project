@@ -37,6 +37,112 @@
     </div>
   </div>
 </nav>
-
+<!-- regisztáció modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Regisztráció</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="form-group">
+            <label for="username">Felhasználónév</label>
+            <div>
+              <input type="text" name="username" class="form-control" placeholder="Felhasználónév" formControlName="username">
+              <div class="alert alert-danger" *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">A mező kitöltése kötelező</div>
+              <div class="alert alert-danger" *ngIf="form.controls.username.errors?.minlength || form.controls.username.errors?.maxlength">
+                A felhasználónév minimum 3, maximum 15 karakter hosszú.
+              </div>
+              <div class="alert alert-danger" *ngIf="form.controls.username.errors?.validateUsername && form.controls.username.dirty">A felhasználónév nem tartalmazhat speciális karaktereket.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div>
+              <input type="text" name="email" class="form-control" placeholder="Email" formControlName="email">
+              <div class="alert alert-danger" *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">A mező kitöltése kötelező</div>
+              <div class="alert alert-danger" *ngIf="(form.controls.email.errors?.minlength || form.controls.email.errors?.maxlength) && form.controls.email.dirty">
+                  Az email cím minimum 5, maximum 30 karakter hosszú.
+              </div>
+              <div class="alert alert-danger" *ngIf="form.controls.email.errors?.validateEmail && form.controls.email.dirty">Érvényes email címet kell megadnod.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Jelszó</label>
+            <div>
+              <input type="password" name="password" class="form-control" placeholder="Jelszó" formControlName="password">
+              <div class="alert alert-danger" *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">A mező kitöltése kötelező</div>
+              <div class="alert alert-danger" *ngIf="form.controls.password.errors?.minlength || form.controls.password.errors?.maxlength">
+                  A jelszó minimum 8, maximum 30 karakter hosszú.
+              </div>
+              <div class="alert alert-danger" *ngIf="form.controls.password.errors?.validatePassword && form.controls.password.dirty">A jelszónak tartalmaznia kell legalább egy kisbetűt, nagybetűt, speciális karaktert és számot.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="confirm">Jelszó ismét</label>
+            <div>
+              <input type="password" name="confirm" class="form-control" placeholder="Jelszó ismét" formControlName="confirm">
+              <div class="alert alert-danger" *ngIf="form.controls.confirm.errors?.required && form.controls.confirm.dirty">A mező kitöltése kötelező</div>
+              <div class="alert alert-danger" *ngIf="form.errors?.samePasswords && form.controls.confirm.dirty">A jelszavak nem egyeznek.</div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="row show-hide-message">
+          <div [ngClass]="messageClass">
+            {{message}}
+          </div>
+        </div> 
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
+        <button [disabled]="!form.valid" type="button" class="btn btn-success" (click)="onSubmit()">Küldés</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- login modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Belépés</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form [formGroup]="form">
+              <div class="form-group">
+                <label for="username">Felhasználónév</label>
+                <div>
+                  <input type="text" name="username" class="form-control" placeholder="Felhasználónév" formControlName="username">
+                  <div class="alert alert-danger" *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">A mező kitöltése kötelező</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Jelszó</label>
+                <div>
+                  <input type="password" name="password" class="form-control" placeholder="Jelszó" formControlName="password">
+                  <div class="alert alert-danger" *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">A mező kitöltése kötelező</div>
+                </div>
+              </div>
+            </form>
+      </div>
+      <div class="modal-footer">
+          <div class="row show-hide-message">
+            <div [ngClass]="messageClass2">
+              {{message2}}
+            </div>
+          </div> 
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
+        <button type="button" class="btn btn-success" (click)="login()">Belépés</button>
+      </div>
+    </div>
+  </div>
+</div>
  
 
