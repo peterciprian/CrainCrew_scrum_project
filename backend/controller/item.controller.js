@@ -25,7 +25,7 @@ module.exports = {
       .catch(err => res.send(err));
   },
 
-  remove: (req, res) => {
+  delete: (req, res) => {
     Item.findByIdAndRemove(req.params.id)
       .then(item => res.json(item))
       .catch(err => res.send(err));
