@@ -4,6 +4,7 @@ import {FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Http, RequestOptions } from '@angular/http';
 import { NgModule } from '@angular/core';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-navbar',
@@ -24,7 +25,10 @@ export class NavbarComponent implements OnInit {
 };
 options = new RequestOptions({ withCredentials: true });
 
-  constructor( private formBuilder: FormBuilder, public http: Http) { this.createForm(); }
+  constructor( 
+    private formBuilder: FormBuilder,
+    public http: Http,
+    private flashMessagesService: FlashMessagesService) { this.createForm(); }
 
   createForm() {
     this.form = this.formBuilder.group({
@@ -92,12 +96,14 @@ options = new RequestOptions({ withCredentials: true });
         .subscribe(data => {
             console.log(data['_body']);
         });
+    this.flashMessagesService.show('Sikeres belépés.', { cssClass: 'alert-success' });
 }
-logout() {
-  this.http.get(this.baseUrl + 'logout', this.options)
-      .subscribe(data => {
-          console.log(data['_body']);
-      });
+  logout() {
+    this.http.get(this.baseUrl + 'logout', this.options)
+        .subscribe(data => {
+            console.log(data['_body']);
+        });
+    this.flashMessagesService.show('Sikeres kilépés.', { cssClass: 'alert-success' });
 }
 
   ngOnInit() {
