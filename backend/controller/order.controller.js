@@ -5,31 +5,81 @@ const mongoose = require('mongoose');
 
 module.exports = {
   list: (req, res) => {
-    Item.find({}).then(item => res.json(item))
-      .catch(err => res.send(err));
+    Order.find({}, (err, datas) => {
+      if (err) {
+        res.json(err);
+      }
+      res.json(datas);
+    });
   },
 
-  find: (req, res) => {
-    Item.findById(req.params.id)
-      .then(item => res.json(item))
-      .catch(err => res.send(err));
+  getAllFromUser: (req, res) => {
+    User.findById(req.params.id, (err, data) => {
+      if (err) {
+        res.json(err);
+      }
+      Order.find({
+        _id: data.tasks,
+      }, (err, datas) => {
+        if (err) {
+          res.json(err);
+        }
+        res.json(datas);
+      });
+    });
   },
 
   create: (req, res) => {
-    Item.create(req.body)
-      .then(item => res.send(item))
-      .catch(err => res.send(err));
+    Order.create(req.body, (err, order) => {
+      if (err) {
+        res.json(err);
+      }
+      User.findByIdAndUpdate(
+        req.body.userid, {
+          $push: {
+            tasks: order._id,
+          },
+        },
+        (err, data) => {
+          if (err) {
+            res.json(err);
+          }
+          res.json({
+            success: 'Order created',
+          });
+        },
+      );
+    });
   },
-
+  delete: (req, res) => {
+    Order.findByIdAndRemove(req.params.id, (err, order) => {
+      if (err) {
+        res.json(err);
+      }
+      User.findByIdAndUpdate(req.body.userid, {
+        $pull: {
+          tasks: order._id,
+        },
+      }, (err, data) => {
+        if (err) {
+          res.json(err);
+        }
+        res.json({
+          success: 'Order deleted',
+        });
+      });
+    });
+  },
   update: (req, res) => {
-    Item.findByIdAndUpdate(req.params.id, req.body)
-      .then(item => res.json(item))
-      .catch(err => res.send(err));
+    Order.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    }, (err, data) => {
+      if (err) {
+        res.json(err);
+      }
+      res.json(data);
+    });
   },
 
-  remove: (req, res) => {
-    Item.findByIdAndRemove(req.params.id)
-      .then(item => res.json(item))
-      .catch(err => res.send(err));
-  },
+
 };
