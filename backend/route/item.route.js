@@ -6,6 +6,6 @@ itemRouter.get('/', permission(), ItemController.list);
 itemRouter.get('/:id', permission(), ItemController.find);
 itemRouter.post('/', permission(/*['admin']*/), ItemController.create);
 itemRouter.put('/:id', permission(/*['admin']*/), ItemController.update);
-itemRouter.delete('/:id', permission(/*['admin']*/), ItemController.delete);
+itemRouter.delete('/:id', permission(/*['admin']*/), ItemController.remove);
 
 module.exports = itemRouter;
