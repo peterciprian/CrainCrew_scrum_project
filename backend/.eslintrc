@@ -5,7 +5,8 @@
         "chai-expect"
     ],
     "rules": {
-        "no-console": "off"
+        "no-console": "off",
+        "linebreak-style": 0
     },
     "env": {
         "node": true,
