@@ -201,4 +201,3 @@ A publikus oldalak mindenki számára elérhetők. A design szabadon választott
 * __Rendelés nézet:__ A kosárból lehessen továbblépni a rendelés nézetre. Itt tudjuk a termékek darabszámát növelni, vagy törölni egy terméket a kosárból. Ha a felhasználó nincs belépve, a rendelés leadásához léptessük be. A rendelési mezőknél a felhasználó adatai automatikusan kerüljenek kitöltésre. A szállítási és számlázási címet kötelezően meg kell adni. 
 * __Profil oldal__:  a felhasználóknak itt tudják a módosítani az összes adatukat, megváltoztatni a jelszavukat, kilistázni az eddigi rendeléseiket.
 * __Kapcsolat oldal:__ Cégadatok megjelenítése, valamint egy google maps vagy valamilyen nyilvános API használatával egy térkép megjelenítése, melyen a cég székhelye jelölve van. Az oldalon lehetőség van emailt küldeni az oldal tulajdonosának/üzemeltetőjének.  Használjatok Nodemailert.
-...
