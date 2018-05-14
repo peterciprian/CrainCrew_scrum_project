@@ -6,7 +6,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { BuyersComponent } from './buyers/buyers.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { UsersComponent } from './users/users.component';
@@ -14,7 +13,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, pathMatch: 'full' },
-  { path: 'buyers', component: BuyersComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'users', component: UsersComponent },
@@ -25,7 +23,6 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     NavbarComponent,
-    BuyersComponent,
     OrdersComponent,
     ProductsComponent,
     UsersComponent,
