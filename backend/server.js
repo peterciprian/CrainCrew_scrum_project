@@ -13,6 +13,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const db = require('./config/database.js');
 const User = require('./models/user');
 const userRouter = require('./route/user.route');
+const itemRouter = require('./route/item.route');
+const orderRouter = require('./route/order.route');
 const blogpostRouter = require('./route/blogpost.route');
 const permission = require('permission');
 
@@ -73,6 +75,8 @@ app.use(cors({
 
 // User User router
 app.use('/user/', userRouter);
+app.use('/item/', itemRouter);
+app.use('/order/', orderRouter);
 app.use('/blogpost/', blogpostRouter);
 
 // Start server
