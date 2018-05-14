@@ -15,7 +15,6 @@ const User = require('./models/user');
 const userRouter = require('./route/user.route');
 const itemRouter = require('./route/item.route');
 const orderRouter = require('./route/order.route');
-const blogpostRouter = require('./route/blogpost.route');
 const permission = require('permission');
 
 const logDirectory = path.join(__dirname, 'log');
@@ -77,7 +76,6 @@ app.use(cors({
 app.use('/user/', userRouter);
 app.use('/item/', itemRouter);
 app.use('/order/', orderRouter);
-app.use('/blogpost/', blogpostRouter);
 
 // Start server
 app.listen(port);
