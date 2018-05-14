@@ -34,10 +34,22 @@ module.exports = {
       if (err) {
         res.json(err);
       }
+      Item.findById(
+        req.body.itemid, {
+          $push: {
+            items: item._id,
+          },
+        },
+        (err, data) => {
+          if (err) {
+            res.json(err);
+          }
+        },
+      );
       User.findByIdAndUpdate(
         req.body.userid, {
           $push: {
-            tasks: order._id,
+            orders: order._id,
           },
         },
         (err, data) => {
