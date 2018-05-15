@@ -2,6 +2,8 @@ const Order = require('../models/order-model.js');
 const Item = require('../models/item-model.js');
 const User = require('../models/user.js');
 
+const mongoose = require('mongoose');
+
 module.exports = {
   list: (req, res) => {
     Order.find({}, (err, datas) => {
@@ -19,9 +21,9 @@ module.exports = {
       }
       Order.find({
         _id: data.tasks,
-      }, (errr, datas) => {
-        if (errr) {
-          res.json(errr);
+      }, (err, datas) => {
+        if (err) {
+          res.json(err);
         }
         res.json(datas);
       });
@@ -39,9 +41,9 @@ module.exports = {
             items: item._id,
           },
         },
-        (errr, data) => {
-          if (errr) {
-            res.json(errr);
+        (err, data) => {
+          if (err) {
+            res.json(err);
           }
         },
       );
@@ -51,9 +53,9 @@ module.exports = {
             orders: order._id,
           },
         },
-        (errr, data) => {
-          if (errr) {
-            res.json(errr);
+        (err, data) => {
+          if (err) {
+            res.json(err);
           }
           res.json({
             success: 'Order created',
@@ -71,9 +73,9 @@ module.exports = {
         $pull: {
           tasks: order._id,
         },
-      }, (errr, data) => {
-        if (errr) {
-          res.json(errr);
+      }, (err, data) => {
+        if (err) {
+          res.json(err);
         }
         res.json({
           success: 'Order deleted',
