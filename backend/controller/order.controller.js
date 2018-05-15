@@ -4,93 +4,21 @@ const User = require('../models/user.js');
 
 module.exports = {
   list: (req, res) => {
-    Order.find({}, (err, datas) => {
-      if (err) {
-        res.json(err);
-      }
-      res.json(datas);
-    });
+    Order.find({}).then(item => res.json(item))
+      .catch(err => res.send(err));
   },
 
-  getAllFromUser: (req, res) => {
-    User.findById(req.params.id, (err, data) => {
-      if (err) {
-        res.json(err);
-      }
-      Order.find({
-        _id: data.tasks,
-      }, (errr, datas) => {
-        if (errr) {
-          res.json(errr);
-        }
-        res.json(datas);
-      });
-    });
+  findOrder: (req, res) => {
+    Order.findById(req.params.id)
+      .then(order => res.json(order))
+      .catch(err => res.send(err));
   },
 
-  create: (req, res) => {
-    Order.create(req.body, (err, order) => {
-      if (err) {
-        res.json(err);
-      }
-      Item.findById(
-        req.body.itemid, {
-          $push: {
-            items: item._id,
-          },
-        },
-        (errr, data) => {
-          if (errr) {
-            res.json(errr);
-          }
-        },
-      );
-      User.findByIdAndUpdate(
-        req.body.userid, {
-          $push: {
-            orders: order._id,
-          },
-        },
-        (errr, data) => {
-          if (errr) {
-            res.json(errr);
-          }
-          res.json({
-            success: 'Order created',
-          });
-        },
-      );
-    });
+  listOrderItems: (req, res) => {
+    Order.findById(req.params.id)
+      .then(Item.find({ _id: []}))
+      .then(order => res.json(order))
+      .catch(err => res.send(err));
   },
-  delete: (req, res) => {
-    Order.findByIdAndRemove(req.params.id, (err, order) => {
-      if (err) {
-        res.json(err);
-      }
-      User.findByIdAndUpdate(req.body.userid, {
-        $pull: {
-          tasks: order._id,
-        },
-      }, (errr, data) => {
-        if (errr) {
-          res.json(errr);
-        }
-        res.json({
-          success: 'Order deleted',
-        });
-      });
-    });
-  },
-  update: (req, res) => {
-    Order.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    }, (err, data) => {
-      if (err) {
-        res.json(err);
-      }
-      res.json(data);
-    });
-  },
-
 
 };
