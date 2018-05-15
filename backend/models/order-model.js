@@ -4,22 +4,25 @@ const User = require('./user');
 
 const OrderSchema = new mongoose.Schema({
 
-  user: [{
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-  }],
+    required: true,
+  },
   items: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Item',
+    item: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Item',
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+
   }],
   price: {
     type: Number,
-    required: true,
-  },
-  id: {
-    type: String,
-    unique: true,
-    required: true,
   },
 }, {
   timestamps: true,
