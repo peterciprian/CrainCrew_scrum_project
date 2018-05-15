@@ -7,6 +7,15 @@ module.exports = {
     });
   },
 
+  list: (req, res) => {
+    User.find({}, (err, roles) => {
+      if (err) {
+        res.json(err);
+      }
+      res.json(roles);
+    });
+  },
+
   register: (req, res) => {
     User.register(new User({
       username: req.body.username,
