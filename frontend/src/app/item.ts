@@ -4,5 +4,7 @@ export interface Item {
     url: string,
     img?: string,
     manufacturer: string,
-    price: number
+    price: number,
+    createdAt?: Date,
+    updatedAt?: Date,
 }

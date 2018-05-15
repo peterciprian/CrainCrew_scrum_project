@@ -23,6 +23,7 @@ export class ProductsComponent implements OnInit {
     manufacturer: '',
     price: 0
   };
+
   item: Item = {
     name: '',
     url: '',
@@ -30,17 +31,28 @@ export class ProductsComponent implements OnInit {
     manufacturer: '',
     price: 0
   };
+  
+  showThumbnail = true;
 
   ngOnInit() {
   }
 
   constructor(public http: Http) { this.list(); }
 
+  showThumbnailSwitch() {
+    this.showThumbnail = true;
+    this.list();
+  }
+
+  showList(){
+    this.showThumbnail = false;
+    this.list();
+  }
+
   list() {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
         this.items = JSON.parse(data['_body']);
-        console.log(this.items);
       });
   }
 
