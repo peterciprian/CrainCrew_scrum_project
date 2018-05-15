@@ -34,6 +34,10 @@ export class ProductsComponent implements OnInit {
   
   showThumbnail = true;
 
+  searchValue = '';
+  searchSuccess = true;
+  searchFor: string;
+
   ngOnInit() {
   }
 
@@ -104,4 +108,19 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+  search(searchValue) {
+    this.searchValue = this.searchFor;
+    this.http.get(this.baseUrl, this.options).subscribe(
+      (data => {
+        this.items = JSON.parse(data['_body']);
+        this.items = this.items.filter(item => 
+          ((item.name).toLocaleLowerCase().indexOf(this.searchFor) !== -1
+          || (item.url).toLocaleLowerCase().indexOf(this.searchFor) !== -1
+          || (item.manufacturer).toLocaleLowerCase().indexOf(this.searchFor) !== -1));
+        if (!this.items[0]) {
+          this.searchSuccess = false;
+        }
+      });
+    this.searchSuccess = true;
+  }
 }

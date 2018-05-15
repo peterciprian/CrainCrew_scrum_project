@@ -97,6 +97,7 @@ module.exports = {
   },
 
   update: (req, res) => {
+    req.body.updatedAt = new Date();
     Item.findByIdAndUpdate(req.params.id, req.body)
       .then(item => res.json(item))
       .catch(err => res.send(err));

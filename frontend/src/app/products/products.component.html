@@ -112,6 +112,7 @@
           <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
         </div>
         <div class="modal-body">
+          <p>A módosításhoz csak írja át a változtatni kívánt részt!</p>
           <div class="input-group mb-3">
             <div class="input-group-prepend"><span  class="input-group-text">Termék név:</span></div>
             <input [(ngModel)]="actualItem.name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default" class="form-control"/>
@@ -121,10 +122,6 @@
             <input [(ngModel)]="actualItem.url" type="text" aria-label="url" aria-describedby="inputGroup-sizing-default" class="form-control"/>
           </div>
           <div class="input-group">
-            <div class="input-group-prepend"><span class="input-group-text">Kép elérési útvonal:</span></div>
-            <input [(ngModel)]="actualItem.img" type="text" aria-label="img-url" aria-describedby="inputGroup-sizing-default" class="form-control"/>
-          </div>
-          <div class="input-group">
             <div class="input-group-prepend"><span class="input-group-text">Gyártó:</span></div>
             <input [(ngModel)]="actualItem.manufacturer" type="text" aria-label="manufacturer" aria-describedby="inputGroup-sizing-default" class="form-control"/>
           </div>
@@ -132,6 +129,11 @@
             <div class="input-group-prepend"><span class="input-group-text">Ár:</span></div>
             <input [(ngModel)]="actualItem.price" type="text" aria-label="price" aria-describedby="inputGroup-sizing-default" class="form-control"/>
           </div>
+          <br>
+          <div class="input-group">
+                <p> Kép csere: &nbsp;</p>
+                <input id="imageModal" type="file" class="input-control-file"/>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" data-dismiss="modal" class="btn btn-info">Close</button>
