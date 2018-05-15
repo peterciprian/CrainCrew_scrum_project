@@ -8,8 +8,8 @@ userRouter.post('/register', UserController.register);
 userRouter.post('/login', passport.authenticate('local'), UserController.login);
 userRouter.get('/logout', UserController.logout);
 
-userRouter.delete('/:id', UserController.delete);
-userRouter.put('/update/:id', UserController.updateProfile);
+userRouter.delete('/:id', permission('admin'), UserController.delete);
+userRouter.put('/update/:id', permission('admin'), UserController.updateProfile);
 
 
 module.exports = userRouter;
