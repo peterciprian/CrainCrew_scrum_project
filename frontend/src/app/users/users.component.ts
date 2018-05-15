@@ -12,6 +12,12 @@ export class UsersComponent implements OnInit {
   baseUrl = 'http://localhost:8080/user/users';
   users: any;
   selectedUser: any;
+  newUser: any = {
+    username: '',
+    email: '',
+    password: '',
+    role: '',
+  };
   constructor(public http: Http) {this.getUsers()}
 
   ngOnInit() {
@@ -30,6 +36,7 @@ export class UsersComponent implements OnInit {
     this.http.put(`http://localhost:8080/user/update/${this.selectedUser['_id']}`, this.selectedUser, this.options)
       .subscribe(data => {
         console.log(data);
+        setTimeout(this.getUsers(), 300);
       });
   }
 
@@ -37,7 +44,15 @@ export class UsersComponent implements OnInit {
       this.http.delete(`http://localhost:8080/user/${user['_id']}`, this.options)
       .subscribe(data => {
         console.log(data);
+        setTimeout(this.getUsers(), 300);
       });
+  }
+  addUser() {
+    this.http.post(`http://localhost:8080/user/register`, this.newUser, this.options)
+    .subscribe(data => {
+      console.log(data['_body']);
+      setTimeout(this.getUsers(), 300);
+    });
   }
 
 }
