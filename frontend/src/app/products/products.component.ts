@@ -23,6 +23,13 @@ export class ProductsComponent implements OnInit {
     manufacturer: '',
     price: 0
   };
+  item: Item = {
+    name: '',
+    url: '',
+    img: '',
+    manufacturer: '',
+    price: 0
+  };
 
   ngOnInit() {
   }
@@ -45,10 +52,19 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  create(item) {
-    this.http.post(this.baseUrl, item, this.options)
+  create() {
+    console.log(this.item);
+    this.http.post(this.baseUrl, this.item, this.options)
       .subscribe(data => {
         console.log(data);
+        this.item = {
+          name: '',
+          url: '',
+          img: '',
+          manufacturer: '',
+          price: 0
+        };
+        this.list();
       });
   }
 
@@ -67,11 +83,13 @@ export class ProductsComponent implements OnInit {
 
 
   delete(itemId) {
-    this.http.delete(this.baseUrl + itemId, this.options)
-      .subscribe(data => {
-        console.log(data);
-        this.list()
-      });
+    if (confirm('Really?')) {
+      this.http.delete(this.baseUrl + itemId, this.options)
+        .subscribe(data => {
+          console.log(data);
+          this.list()
+        });
+    }
   }
 
 }
