@@ -11,7 +11,8 @@ import { ItemCrudService } from '../item-crud.service';
 export class ProductsComponent implements OnInit {
 
   options = new RequestOptions({ withCredentials: true });
-  baseUrl = 'https://api.mlab.com/api/1/databases/crane-crew/collections/items/?apiKey=IM0DBPnVxrZDK4-YxGS0hxzTSXVbKRED';
+  //baseUrl = 'https://api.mlab.com/api/1/databases/crane-crew/collections/items/?apiKey=IM0DBPnVxrZDK4-YxGS0hxzTSXVbKRED';
+  baseUrl = 'http://localhost:8080/item/';
   items: any;
   ngOnInit() {
   }

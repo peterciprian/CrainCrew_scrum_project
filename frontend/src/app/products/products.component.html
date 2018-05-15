@@ -1,11 +1,15 @@
 <br>
 <h2>Termékeink</h2>
 <hr>
+
 <div class="container">
-  <div class="row">
-    <div class="col-3" *ngFor='let item of items'>
-      <img src="{{item.url}}" alt="pikcsör">
-       <p>{{item.name}}</p>
+  <div class="card-columns">
+    <div class="card" *ngFor='let item of items'>
+      <img class="card-img-top" src="{{item.url}}" alt="bicikli kep">
+      <div class="card-body">
+        <h5 class="card-title">{{item.name}}</h5>
+        <p class="card-text">{{item.price}}</p>
+      </div>
     </div>
   </div>
 </div>
