@@ -36,6 +36,9 @@ app.use(morgan('combined', {
 // Security
 app.use(helmet());
 
+// // Product pictures folder
+// app.use('/uploads', express.static('uploads'));
+
 // Body Parse middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

@@ -1,16 +1,11 @@
 const mongoose = require('mongoose');
-const Order = require('./order-model');
+// const Order = require('./order-model');
 
 const ItemSchema = new mongoose.Schema({
 
   name: {
     type: String,
     required: true,
-  },
-  itemId: {
-    type: String,
-    required: true,
-    unique: true,
   },
   url: {
     type: String,
@@ -27,8 +22,6 @@ const ItemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-}, {
-  timestamps: true,
 });
 
 
