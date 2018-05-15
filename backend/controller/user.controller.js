@@ -10,7 +10,6 @@ module.exports = {
   register: (req, res) => {
     User.register(new User({
       username: req.body.username,
-      isAdmin: req.body.isAdmin,
       email: req.body.email,
     }), req.body.password)
       .then(() => res.json({

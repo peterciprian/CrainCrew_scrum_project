@@ -6,6 +6,7 @@ import { Http, RequestOptions } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -20,14 +21,21 @@ export class NavbarComponent implements OnInit {
   messageClass2;
   baseUrl = 'http://localhost:8080/user/';
   user: any = {
-    username: 'oberthzsigmond@gmail.com',
-    password: '012345678'
+    username: '',
+    password: ''
 };
+newuser: any = {
+    email : '',
+    username: '',
+    password: ''
+};
+
 options = new RequestOptions({ withCredentials: true });
 
   constructor( 
     private formBuilder: FormBuilder,
     public http: Http,
+    private router: Router,
     private flashMessagesService: FlashMessagesService) { this.createForm(); }
 
   createForm() {
@@ -35,19 +43,19 @@ options = new RequestOptions({ withCredentials: true });
       email: ['', Validators.compose([
         Validators.required,
         Validators.minLength(5),
-        Validators.maxLength(30),
+        Validators.maxLength(50),
         this.validateEmail
       ])],
       username: ['', Validators.compose([
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(8),
+        Validators.maxLength(30),
         this.validateUsername
       ])],
       password: ['', Validators.compose([
         Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(8),
+        Validators.minLength(8),
+        Validators.maxLength(80),
         this.validatePassword
       ])],
       confirm: ['', Validators.required]
@@ -59,7 +67,7 @@ options = new RequestOptions({ withCredentials: true });
     if (regExp.test(controls.value)) {
       return null;
     } else {
-      return { 'validateEmail': true }
+      return { 'validateEmail': true };
     }
   }
 
@@ -68,27 +76,27 @@ options = new RequestOptions({ withCredentials: true });
     if (regExp.test(controls.value)) {
       return null;
     } else {
-      return { 'validateUsername': true }
+      return { 'validateUsername': true };
     }
   }
 
   validatePassword(controls) {
-    const regExp = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/);
+    const regExp = new RegExp(/^[a-zA-Z0-9]+$/);
     if (regExp.test(controls.value)) {
       return null;
     } else {
-      return { 'validatePassword': true }
+      return { 'validatePassword': true };
     }
   }
 
   samePasswords(password, confirm) {
     return (group: FormGroup) => {
-      if(group.controls[password].value === group.controls[confirm].value) {
+      if (group.controls[password].value === group.controls[confirm].value) {
         return null;
       } else {
         return {'samePasswords': true}
       }
-    }
+    };
   }
 
   login() {
@@ -104,6 +112,13 @@ options = new RequestOptions({ withCredentials: true });
             console.log(data['_body']);
         });
     this.flashMessagesService.show('Sikeres kilépés.', { cssClass: 'alert-success' });
+}
+
+register() {
+  this.http.post(this.baseUrl + 'register', this.newuser, this.options).subscribe(data => {
+    console.log(data['_body']);
+});
+this.flashMessagesService.show('Sikeres regisztráció.', { cssClass: 'alert-success' });
 }
 
   ngOnInit() {
