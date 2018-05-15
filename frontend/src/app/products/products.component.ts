@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ItemCrudService } from '../item-crud.service';
+import { Item } from '../item';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +14,16 @@ export class ProductsComponent implements OnInit {
   options = new RequestOptions({ withCredentials: true });
   //baseUrl = 'https://api.mlab.com/api/1/databases/crane-crew/collections/items/?apiKey=IM0DBPnVxrZDK4-YxGS0hxzTSXVbKRED';
   baseUrl = 'http://localhost:8080/item/';
-  items: any;
+  items: Array<Item>;
+  actualItem: Item = {
+    _id: '',
+    name: '',
+    url: '',
+    img: '',
+    manufacturer: '',
+    price: 0
+  };
+
   ngOnInit() {
   }
 
@@ -39,13 +49,19 @@ export class ProductsComponent implements OnInit {
     this.http.post(this.baseUrl, item, this.options)
       .subscribe(data => {
         console.log(data);
-    });
-}
+      });
+  }
 
-  update(itemId, item) {
-    this.http.put(this.baseUrl + itemId, item, this.options)
+  modalChange(id) {
+    const choosen = this.items.filter(item => item._id === id)[0];
+    this.actualItem = Object.assign({}, choosen); // a this.modal megkapja egy duplikációját a choosennen
+  }
+
+  update() {
+    this.http.put(this.baseUrl + this.actualItem['_id'], this.actualItem, this.options)
       .subscribe(data => {
         console.log(data);
+        this.list()
       });
   }
 
@@ -54,6 +70,7 @@ export class ProductsComponent implements OnInit {
     this.http.delete(this.baseUrl + itemId, this.options)
       .subscribe(data => {
         console.log(data);
+        this.list()
       });
   }
 
