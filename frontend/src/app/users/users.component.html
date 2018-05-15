@@ -1,3 +1,14 @@
-<br>
-<h2>Felhasználók</h2>
-<hr>
+<div class="container">
+    <div class="row" *ngFor="let user of users">
+      <div class="input-group">
+        <input class="form-control" type="text" name="username" [(ngModel)]="user.username">
+        <input class="form-control" type="text" name="email" [(ngModel)]="user.email">
+        <select class="custom-select" name="userRole" [(ngModel)]="user.role">
+          <option value="true">admin</option>
+          <option value="false">user</option>
+        </select>
+        <button class="btn btn-danger" (click)="removeUser(user)">Törlés</button>
+        <button class="btn btn-warning" (click)="editUser(user)">Módosítások mentése</button>
+      </div>
+    </div>
+  </div>
