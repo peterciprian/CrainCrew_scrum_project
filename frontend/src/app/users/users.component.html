@@ -1,14 +1,63 @@
-<div class="container">
-    <div class="row" *ngFor="let user of users">
-      <div class="input-group">
-        <input class="form-control" type="text" name="username" [(ngModel)]="user.username">
-        <input class="form-control" type="text" name="email" [(ngModel)]="user.email">
-        <select class="custom-select" name="userRole" [(ngModel)]="user.role">
-          <option value="admin">admin</option>
-          <option value="user">user</option>
-        </select>
-        <button class="btn btn-danger" (click)="removeUser(user)">Törlés</button>
-        <button class="btn btn-warning" (click)="editUser(user)">Módosítások mentése</button>
-      </div>
-    </div>
-  </div>
+ <table class="table table-bordered text-center">
+        <thead>
+          <th>username</th>
+          <th>email</th>
+          <th>role</th>
+          <th>action</th>
+
+        </thead>
+        <tbody>
+          <tr>
+          </tr>
+          <tr *ngFor="let user of users">
+            <td>
+              <input type="text" class="form-control" [(ngModel)]="user.username">
+            </td>
+            <td>
+              <input type="text" class="form-control" [(ngModel)]="user.email">
+            </td>
+            <td>
+                    <select class="custom-select" name="userRole" [(ngModel)]="user.role">
+                            <option value="admin">admin</option>
+                            <option value="user">user</option>
+                          </select>
+            </td>
+            <td>
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary" (click)="editUser(user)">Update</button>
+                <button type="button" class="btn btn-danger" (click)="removeUser(user)">Delete</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-primary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#createModal">Create User</button>
+      <!-- create modal -->
+      <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Regisztráció</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" value="username" name="username" id="" [(ngModel)]="newUser.username">
+                        <br>
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" id="" [(ngModel)]="newUser.email">
+                        <br>
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" name="password" id="" [(ngModel)]="newUser.password">
+                    </div>
+                    <div class="modal-footer">
+                      <div class="row show-hide-message">
+                        <div [ngClass]="messageClass">
+                          {{message}}
+                        </div>
+                      </div> 
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
+                      <input type="button" class="btn btn-success" value="Create" name="create" id="" (click)="addUser()">
+                    </div>
