@@ -1,3 +1,102 @@
 <br>
-<h2>Termékek</h2>
+<h2>Termékeink</h2>
 <hr>
+
+<div class="row">
+    <div class="col-md-12 col-lg-8">
+      <div role="group" aria-label="Basic example" class="btn-group">
+        <button type="button" data-toggle="collapse" data-target="#addNew" aria-expanded="false" aria-controls="collapseExample" class="btn btn-info">Új termék hozzáadása</button>
+        <button type="button" (click)="showThumbnail()" class="btn btn-info">Nagyképes nézet</button>
+        <button type="button" (click)="showList()" class="btn btn-info">Lista nézet</button>
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-4">
+      <form class="form-inline">
+        <input name="searchValue" type="search" placeholder="keresés" aria-label="Search" [(ngModel)]="searchFor" class="form-control col-md-6"/>
+        <button type="button" (click)="search()" class="btn btn-warning my-4 my-sm-0">Keres</button>
+      </form>
+    </div>
+  </div><br/>
+  <div id="addNew" class="collapse">
+    <div class="card card-body">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend"><span  class="input-group-text">Termék neve:</span></div>
+        <input [(ngModel)]="item.name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default" class="form-control"/>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend"><span  class="input-group-text">Gyártó:</span></div>
+        <input [(ngModel)]="item.manufacturer" type="text" aria-label="manufacturer" aria-describedby="inputGroup-sizing-default" class="form-control"/>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend"><span  class="input-group-text">Ár:</span></div>
+        <input [(ngModel)]="item.price" type="text" aria-label="price" aria-describedby="inputGroup-sizing-default" class="form-control"/>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend"><span  class="input-group-text">URL:</span></div>
+        <input [(ngModel)]="item.url" type="text" aria-label="url" aria-describedby="inputGroup-sizing-default" class="form-control"/>
+      </div>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <label for="image"> Upload a picture</label>
+          <input id="image" type="file" class="input-control-file"/>
+        </div>
+      </div><br/>
+      <button type="sumbmit" (click)="create()" data-toggle="collapse" data-target="#addNew" aria-controls="collapseExample" class="btn btn-info">Hozzáad</button>
+      <button type="button" data-toggle="collapse" data-target="#addNew" aria-controls="collapseExample" class="btn btn-light">Mégsem</button>
+    </div>
+  </div><br/>
+
+
+<div class="container">
+  <div class="card-columns">
+    <div class="card" *ngFor='let item of items'>
+      <img class="card-img-top" src="{{item.url}}" alt="bicikli kep">
+      <div class="card-body">
+        <h5 class="card-title">Termék neve: {{item.name}}</h5>
+        <p class="card-text">Fogyasztói ár: {{item.price | currency:'HUF '}}  </p>
+      </div>
+      <div class="card-footer">
+        <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek / Módosítás</button>
+        <button type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törles</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- *********** MODAL FOR SHOW DETAILS / UPDATE ITEM -->
+<div id="updatePost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade">
+    <div role="document" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="exampleModalLabel" class="modal-title">ID: {{actualItem._id}}</h5>
+          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend"><span  class="input-group-text">Termék név:</span></div>
+            <input [(ngModel)]="actualItem.name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default" class="form-control"/>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend"><span  class="input-group-text">Url:</span></div>
+            <input [(ngModel)]="actualItem.url" type="text" aria-label="url" aria-describedby="inputGroup-sizing-default" class="form-control"/>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend"><span class="input-group-text">Kép elérési útvonal:</span></div>
+            <input [(ngModel)]="actualItem.img" type="text" aria-label="img-url" aria-describedby="inputGroup-sizing-default" class="form-control"/>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend"><span class="input-group-text">Gyártó:</span></div>
+            <input [(ngModel)]="actualItem.manufacturer" type="text" aria-label="manufacturer" aria-describedby="inputGroup-sizing-default" class="form-control"/>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend"><span class="input-group-text">Ár:</span></div>
+            <input [(ngModel)]="actualItem.price" type="text" aria-label="price" aria-describedby="inputGroup-sizing-default" class="form-control"/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-info">Close</button>
+          <button type="button" data-dismiss="modal" (click)="update()" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
