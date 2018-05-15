@@ -1,32 +1,4 @@
-<!-- <div class="container"> -->
-   <!--      <input type="text" class="form-control" >
-        <div class="row" *ngFor="let user of users">
-          <div class="input-group">
-            <input class="form-control" type="text" name="username" [(ngModel)]="newuser.username">
-            <input class="form-control" type="text" name="email" [(ngModel)]="newuser.email">
-            <select class="custom-select" name="userRole" [(ngModel)]="user.role">
-              <option value="admin">admin</option>
-              <option value="user">user</option>
-            </select>
-            <button class="btn btn-success" (click)="addUser()">Hozzáadás</button>
-          </div>
-        </div> -->
-
-    <!-- <div class="row" *ngFor="let user of users">
-      <div class="input-group">
-        <input class="form-control" type="text" name="username" [(ngModel)]="user.username">
-        <input class="form-control" type="text" name="email" [(ngModel)]="user.email">
-        <select class="custom-select" name="userRole" [(ngModel)]="user.role">
-          <option value="admin">admin</option>
-          <option value="user">user</option>
-        </select>
-        <button class="btn btn-danger" (click)="removeUser(user)">Törlés</button>
-        <button class="btn btn-warning" (click)="editUser(user)">Módosítások mentése</button>
-      </div>
-    </div>
-  </div> -->
-
-  <table class="table table-bordered text-center">
+ <table class="table table-bordered text-center">
         <thead>
           <th>username</th>
           <th>email</th>
@@ -36,25 +8,6 @@
         </thead>
         <tbody>
           <tr>
-           
-            <!-- <td>
-              <input type="text" class="form-control" name="" id="" [(ngModel)]="newUser.username">
-            </td>
-            <td>
-              <input type="text" class="form-control" name="" id="" [(ngModel)]="newUser.email">
-            </td>
-            <td>
-                    <select class="custom-select" name="userRole" [(ngModel)]="newUser.role">
-                            <option value="admin">admin</option>
-                            <option value="user">user</option>
-                          </select>
-            </td>
-            <td>
-                <input type="text" class="form-control" name="" id="" [(ngModel)]="newUser.password">
-            </td> 
-            <td>
-              <input type="button" class="btn btn-success" value="Create" name="create" id="" (click)="addUser()">
-            </td>-->
           </tr>
           <tr *ngFor="let user of users">
             <td>
