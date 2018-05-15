@@ -1,4 +1,5 @@
 const Order = require('../models/order-model.js');
+const User = require('../models/user.js');
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
@@ -13,13 +14,19 @@ module.exports = {
 
   find: (req, res) => {
     Order.findById(req.params.id)
+      .populate('user', 'username')
+      .populate('items.item', 'name price')
       .then(order => res.json(order))
       .catch(err => res.send(err));
   },
 
   create: (req, res) => {
     Order.create(req.body)
-      .then(order => res.send(order))
+      .then(order => {
+        User.findByIdAndUpdate("5afadd53bc72ea24b898b6e5")
+        .then((order) => {
+          $push: { orders: order._id; } })
+        .catch(err => res.send(err)); })
       .catch(err => res.send(err));
   },
 
