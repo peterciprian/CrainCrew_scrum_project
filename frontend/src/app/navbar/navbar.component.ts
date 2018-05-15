@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
 };
 options = new RequestOptions({ withCredentials: true });
 
-  constructor( 
+  constructor(
     private formBuilder: FormBuilder,
     public http: Http,
     private flashMessagesService: FlashMessagesService) { this.createForm(); }
@@ -51,15 +51,16 @@ options = new RequestOptions({ withCredentials: true });
         this.validatePassword
       ])],
       confirm: ['', Validators.required]
-    }, {validator: this.samePasswords('password', 'confirm')})
+    }, {validator: this.samePasswords('password', 'confirm')});
   }
 
   validateEmail(controls) {
+    // tslint:disable-next-line:max-line-length
     const regExp = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     if (regExp.test(controls.value)) {
       return null;
     } else {
-      return { 'validateEmail': true }
+      return { 'validateEmail': true };
     }
   }
 
@@ -68,7 +69,7 @@ options = new RequestOptions({ withCredentials: true });
     if (regExp.test(controls.value)) {
       return null;
     } else {
-      return { 'validateUsername': true }
+      return { 'validateUsername': true };
     }
   }
 
@@ -77,18 +78,19 @@ options = new RequestOptions({ withCredentials: true });
     if (regExp.test(controls.value)) {
       return null;
     } else {
-      return { 'validatePassword': true }
+      return { 'validatePassword': true };
     }
   }
 
   samePasswords(password, confirm) {
+    // tslint:disable-next-line:no-shadowed-variable
     return (group: FormGroup) => {
-      if(group.controls[password].value === group.controls[confirm].value) {
+      if (group.controls[password].value === group.controls[confirm].value) {
         return null;
       } else {
-        return {'samePasswords': true}
+        return {'samePasswords': true};
       }
-    }
+    };
   }
 
   login() {
@@ -105,6 +107,14 @@ options = new RequestOptions({ withCredentials: true });
         });
     this.flashMessagesService.show('Sikeres kilépés.', { cssClass: 'alert-success' });
 }
+
+  loggedIn(req, res, next) {
+    if (req.user) {
+      next();
+    } else {
+      res.redirect('/');
+    }
+  }
 
   ngOnInit() {
   }
