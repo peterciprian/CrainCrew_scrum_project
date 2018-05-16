@@ -1,6 +1,6 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
-import { ProductsComponent } from '../products/products.component';
+import { OrdersComponent } from '../orders/orders.component';
 import { Observable } from 'rxjs/Observable';
 
 
@@ -14,42 +14,52 @@ export class DashboardComponent implements OnInit {
   b = Math.floor(Math.random() * Math.floor(200));
   c = Math.floor(Math.random() * Math.floor(200));
   d = Math.floor(Math.random() * Math.floor(200));
-  productcat: any;
+  order: any;
   options = new RequestOptions({ withCredentials: true });
-  income: number;
+  orderPrice: number;
+  orderDate: Date ;
   pieChartData = {
-    chartType: 'ColumnChart',
+    chartType: 'LineChart',
     dataTable: [
       ['0', '0'],
-      ['Felhasználók', this.a],
-      ['Eladott termék', this.b],
-      ['Termék ára', this.d],
-      ['Nem vásárló felhasználók', (this.b - this.a) * (-1)],
-      ['Átlag', (this.c * this.d) / this.b]
+      ['date', this.a],
+      ['date', this.b],
+      ['date', this.c],
+      ['date', this.d],
     ],
     options: {
-      'title': 'Stat',
+      'title': 'E havi bevétel napokra bontva',
       legend: 'none'
     },
   };
   constructor(public http: Http) {
-    this.getProducts();
+    this.getOrders();
    }
   ngOnInit() {
   }
-  getProducts() {
-    this.http.get('http://localhost:8080/item', this.options)
-      .subscribe(getProducts => {
-        this.productcat = JSON.parse(getProducts['_body']);
-        console.log(this.productcat);
-        this.Income();
+  getOrders() {
+    this.http.get('http://localhost:8080/order', this.options)
+      .subscribe(getOrders => {
+        this.order = JSON.parse(getOrders['_body']);
+        console.log(this.order);
+        this.getOrdersPrice();
       });
   }
-  Income() {
-    this.income = 0;
-    for (let i = 0; i < (this.productcat).length; i++) {
-      this.income += ((this.productcat)[i]).price;
+  getOrdersPrice() {
+    this.orderPrice = 0;
+    for (let i = 0; i < (this.order).length; i++) {
+      this.orderPrice += ((this.order)[i]).price;
     }
-    console.log(this.income);
+    console.log(this.orderPrice);
   }
+  getOrdersDate() {
+    this.orderDate = ExapleDate;
+    for (let i = 0; i < (this.order).length; i++) {
+      this.orderDate += ((this.order)[i]).date;
+     }
+     console.log(this.orderDate);
+  }
+
+
 }
+

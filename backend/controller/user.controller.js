@@ -8,11 +8,11 @@ module.exports = {
   },
 
   list: (req, res) => {
-    User.find({}, (err, roles) => {
+    User.find({}, (err, data) => {
       if (err) {
         res.json(err);
       }
-      res.json(roles);
+      res.json(data);
     });
   },
 
