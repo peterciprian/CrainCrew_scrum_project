@@ -2,6 +2,7 @@ import { Component, OnInit, NgModule } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { OrdersComponent } from '../orders/orders.component';
 import { Observable } from 'rxjs/Observable';
+import { UsersComponent } from '../users/users.component';
 
 
 @Component({
