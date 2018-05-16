@@ -120,7 +120,7 @@ export class ProductsComponent implements OnInit {
         if (!this.items[0]) {
           this.searchSuccess = false;
         }
-      });
+      }));
     this.searchSuccess = true;
   }
 }
