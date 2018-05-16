@@ -1,3 +1,8 @@
 img#sm-thumbnail {
-  width: 60px;
+    width: 60px;
+
 }
+.sort-th {
+    cursor: pointer;
+    text-align: center;
+  }

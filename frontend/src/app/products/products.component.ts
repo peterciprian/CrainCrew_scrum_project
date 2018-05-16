@@ -38,6 +38,10 @@ export class ProductsComponent implements OnInit {
   searchSuccess = true;
   searchFor: string;
 
+  lastKey = '';
+  multiplier = 1;
+
+
   ngOnInit() {
   }
 
@@ -123,4 +127,23 @@ export class ProductsComponent implements OnInit {
       }));
     this.searchSuccess = true;
   }
+
+  sortTable(key: string) {
+
+    if (this.lastKey === key) {
+      this.multiplier *= -1;
+      }
+    this.items.sort((a, b) => {
+      a[key] = a[key] || '';
+      b[key] = b[key] || '';
+      this.lastKey = key;
+      if (key === 'price') {
+        return a[key] > (b[key]) * this.multiplier;
+      } else {
+        return a[key].localeCompare(b[key]) * this.multiplier;
+      }
+    });
+  }
+
+
 }
