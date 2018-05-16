@@ -7,3 +7,13 @@
 .navbar .navbar-nav>li>a:focus {
   color: #E0A800;
 }
+
+#logo {
+  color: red;
+  font-size: 1.5em;
+  padding-right: 10px;
+}
+
+#shop {
+  font-size: 1.5em;
+}
