@@ -22,10 +22,7 @@ export class DashboardComponent implements OnInit {
     chartType: 'LineChart',
     dataTable: [
       ['0', '0'],
-      ['date', this.a],
-      ['date', this.b],
-      ['date', this.c],
-      ['date', this.d],
+      ['date', this.orderPrice],
     ],
     options: {
       'title': 'E havi bevétel napokra bontva',
@@ -35,7 +32,7 @@ export class DashboardComponent implements OnInit {
   constructor(public http: Http) {
     this.getOrders();
     setTimeout(() => {
-      this.getOrdersPrice();
+      this.getAllOrdersPrice();
     }, 5000);
     setTimeout(() => {
       this.getOrdersDate();
@@ -50,7 +47,7 @@ export class DashboardComponent implements OnInit {
         console.log(this.order);
       });
   }
-  getOrdersPrice() {
+  getAllOrdersPrice() {
     this.orderPrice = 0;
     for (let i = 0; i < this.order.length; i++) {
       this.orderPrice += this.order[i].price;
