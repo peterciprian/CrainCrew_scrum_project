@@ -22,11 +22,11 @@ module.exports = {
 
   create: (req, res) => {
     Order.create(req.body)
-      .then(order => /*{
+      .then(order => /* {
         User.findByIdAndUpdate("5afadd53bc72ea24b898b6e5")
         .then((order) => {
           $push: { orders: order._id; } })
-        .catch(err => res.send(err));}*/ res.json(order))
+        .catch(err => res.send(err));} */ res.json(order))
       .catch(err => res.send(err));
   },
 
