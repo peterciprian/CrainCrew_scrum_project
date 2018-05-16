@@ -1,6 +1,6 @@
 import { Component, OnInit, group } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import {FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Http, RequestOptions } from '@angular/http';
 import { NgModule } from '@angular/core';
@@ -23,20 +23,36 @@ export class NavbarComponent implements OnInit {
   user: any = {
     username: '',
     password: ''
-};
-newuser: any = {
-    email : '',
+  };
+  newuser: any = {
+    email: '',
     username: '',
     password: ''
-};
+  };
 
-options = new RequestOptions({ withCredentials: true });
+  registerred = false;
+  longgedIn = false;
 
-  constructor( 
+  options = new RequestOptions({ withCredentials: true });
+
+  constructor(
     private formBuilder: FormBuilder,
     public http: Http,
     private router: Router,
-    private flashMessagesService: FlashMessagesService) { this.createForm(); }
+    private flashMessagesService: FlashMessagesService) { 
+      this.createForm();
+      this.isLoggedIn();
+     }
+
+  isLoggedIn() {
+    this.http.get(this.baseUrl + 'profile', this.options)
+      .subscribe(data => {
+        console.log(data['_body']);
+        if (data.ok) {
+          this.longgedIn = true;
+        }
+      });
+  }
 
   createForm() {
     this.form = this.formBuilder.group({
@@ -59,7 +75,7 @@ options = new RequestOptions({ withCredentials: true });
         this.validatePassword
       ])],
       confirm: ['', Validators.required]
-    }, {validator: this.samePasswords('password', 'confirm')})
+    }, { validator: this.samePasswords('password', 'confirm') })
   }
 
   validateEmail(controls) {
@@ -94,32 +110,47 @@ options = new RequestOptions({ withCredentials: true });
       if (group.controls[password].value === group.controls[confirm].value) {
         return null;
       } else {
-        return {'samePasswords': true}
+        return { 'samePasswords': true }
       }
     };
   }
 
   login() {
-    this.http.post(this.baseUrl + 'login', this.user, this.options)
-        .subscribe(data => {
-            console.log(data['_body']);
-        });
-    this.flashMessagesService.show('Sikeres belépés.', { cssClass: 'alert-success' });
-}
+    this.http.post(this.baseUrl + 'login', this.user, this.options).subscribe(data => {
+      if (data.ok) {
+        this.flashMessagesService.show('Sikeres belépés!', { cssClass: 'alert-success' });
+        this.longgedIn = true;
+        console.log(data['_body']);
+      } else {
+        this.flashMessagesService.show('Sikertelen belépés, ellenőrid adataid!', { cssClass: 'alert-danger' });
+      }
+      this.router.navigate(['dashbord']);
+    });
+  }
+
   logout() {
     this.http.get(this.baseUrl + 'logout', this.options)
-        .subscribe(data => {
-            console.log(data['_body']);
-        });
+      .subscribe(data => {
+        console.log(data['_body']);
+      });
     this.flashMessagesService.show('Sikeres kilépés.', { cssClass: 'alert-success' });
-}
+    this.registerred = false;
+    this.longgedIn = false;
+    this.router.navigate(['home']);
+  }
 
-register() {
-  this.http.post(this.baseUrl + 'register', this.newuser, this.options).subscribe(data => {
-    console.log(data['_body']);
-});
-this.flashMessagesService.show('Sikeres regisztráció.', { cssClass: 'alert-success' });
-}
+  register() {
+    this.http.post(this.baseUrl + 'register', this.newuser, this.options).subscribe(data => {
+      console.log(data.status);
+      if (data.ok) {
+        this.flashMessagesService.show('Sikeres regisztráció.', { cssClass: 'alert-success' });
+        console.log(data['_body']);
+        this.registerred = true;
+      } else {
+        console.log('error: ' + data.status);
+      }
+    });
+  }
 
   ngOnInit() {
   }
