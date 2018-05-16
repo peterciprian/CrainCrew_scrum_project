@@ -1,16 +1,11 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { OrdersComponent } from '../orders/orders.component';
-<<<<<<< HEAD
-//import { Observable } from 'rxjs/Observable';
-
-=======
 import { Observable } from 'rxjs/Observable';
 import { UsersComponent } from '../users/users.component';
 import { ProductsComponent } from '../products/products.component';
 import { ItemCrudService } from '../item-crud.service';
 import { Item } from '../item';
->>>>>>> cedc0ef26158df26d9dfff7a3a28c9271df02ed8
 
 @Component({
   selector: 'app-dashboard',
@@ -78,15 +73,9 @@ export class DashboardComponent implements OnInit {
     console.log(this.singleorderPrice);
   }
   getOrdersDate() {
-<<<<<<< HEAD
-    this.orderDate = 'ExampleDate';
-    for (let i = 0; i < (this.order).length; i++) {
-      this.orderDate += ((this.order)[i]).date;
-=======
     this.singleorderDate = Array<number>;
     for (let i = 0; i < this.order.length; i++) {
       this.singleorderDate.push(Number(this.order[i].createdAt.slice(8, 10)));
->>>>>>> cedc0ef26158df26d9dfff7a3a28c9271df02ed8
      }
      console.log(this.singleorderDate);
   }
