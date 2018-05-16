@@ -12,7 +12,7 @@ import { Item } from '../item';
 export class ProductsComponent implements OnInit {
 
   options = new RequestOptions({ withCredentials: true });
-  //baseUrl = 'https://api.mlab.com/api/1/databases/crane-crew/collections/items/?apiKey=IM0DBPnVxrZDK4-YxGS0hxzTSXVbKRED';
+  // baseUrl = 'https://api.mlab.com/api/1/databases/crane-crew/collections/items/?apiKey=IM0DBPnVxrZDK4-YxGS0hxzTSXVbKRED';
   baseUrl = 'http://localhost:8080/item/';
   items: Array<Item>;
   actualItem: Item = {
@@ -31,7 +31,7 @@ export class ProductsComponent implements OnInit {
     manufacturer: '',
     price: 0
   };
-  
+
   showThumbnail = true;
 
   searchValue = '';
@@ -48,7 +48,7 @@ export class ProductsComponent implements OnInit {
     this.list();
   }
 
-  showList(){
+  showList() {
     this.showThumbnail = false;
     this.list();
   }
@@ -93,7 +93,7 @@ export class ProductsComponent implements OnInit {
     this.http.put(this.baseUrl + this.actualItem['_id'], this.actualItem, this.options)
       .subscribe(data => {
         console.log(data);
-        this.list()
+        this.list();
       });
   }
 
@@ -103,7 +103,7 @@ export class ProductsComponent implements OnInit {
       this.http.delete(this.baseUrl + itemId, this.options)
         .subscribe(data => {
           console.log(data);
-          this.list()
+          this.list();
         });
     }
   }
@@ -113,7 +113,7 @@ export class ProductsComponent implements OnInit {
     this.http.get(this.baseUrl, this.options).subscribe(
       (data => {
         this.items = JSON.parse(data['_body']);
-        this.items = this.items.filter(item => 
+        this.items = this.items.filter(item =>
           ((item.name).toLocaleLowerCase().indexOf(this.searchFor) !== -1
           || (item.url).toLocaleLowerCase().indexOf(this.searchFor) !== -1
           || (item.manufacturer).toLocaleLowerCase().indexOf(this.searchFor) !== -1));

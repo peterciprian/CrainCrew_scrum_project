@@ -18,7 +18,9 @@ export class UsersComponent implements OnInit {
     password: '',
     role: '',
   };
-  constructor(public http: Http) {this.getUsers()}
+  constructor(public http: Http) {
+    this.getUsers();
+  }
 
   ngOnInit() {
   }
