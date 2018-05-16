@@ -46,6 +46,7 @@ export class OrdersComponent implements OnInit {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
         this.orders = JSON.parse(data['_body']);
+        console.log(this.orders);
       });
   }
   listUsers() {
@@ -100,6 +101,24 @@ export class OrdersComponent implements OnInit {
           this.listOrders();
         });
     }
+  }
+  addModalRow() {
+    this.actualOrder.items.push({
+      item: '',
+      quantity: '',
+    });
+  }
+   addRow() {
+    this.newOrder.items.push({
+      item: '',
+      quantity: ''
+    });
+    console.log(this.newOrder);
+   }
+
+  loadModalData(order) {
+    this.actualOrder = order;
+    console.log(this.actualOrder);
   }
 
 }
