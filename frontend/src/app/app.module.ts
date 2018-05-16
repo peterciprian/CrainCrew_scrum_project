@@ -18,10 +18,10 @@ import { AboutUsComponent } from './about-us/about-us.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'orders', component: OrdersComponent },
-  { path: 'products', component: ProductsComponent },
-  { path: 'users', component: UsersComponent },
-  { path: 'dashbord', component: DashboardComponent },
+  { path: 'dashboard/orders', component: OrdersComponent },
+  { path: 'dashboard/products', component: ProductsComponent },
+  { path: 'dashboard/users', component: UsersComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'home', component: HomeComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: '**', component: NotFoundComponent },
