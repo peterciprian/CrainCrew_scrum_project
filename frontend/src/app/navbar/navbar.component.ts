@@ -48,7 +48,7 @@ export class NavbarComponent implements OnInit {
     this.http.get(this.baseUrl + 'profile', this.options)
       .subscribe(data => {
         console.log(data['_body']);
-        if (data['user']) {
+        if (data.ok) {
           this.longgedIn = true;
         }
       });
