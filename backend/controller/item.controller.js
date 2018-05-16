@@ -19,7 +19,7 @@ module.exports = {
   },
 
   update: (req, res) => {
-    Item.findByIdAndUpdate(req.params.id, req.body)
+    Item.findByIdAndUpdate(req.params.id, req.body, { new: true })
       .then(item => res.json(item))
       .catch(err => res.send(err));
   },
