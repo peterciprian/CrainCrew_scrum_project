@@ -34,6 +34,12 @@ export class DashboardComponent implements OnInit {
   };
   constructor(public http: Http) {
     this.getOrders();
+    setTimeout(() => {
+      this.getOrdersPrice();
+    }, 5000);
+    setTimeout(() => {
+      this.getOrdersDate();
+    }, 5000);
    }
   ngOnInit() {
   }
@@ -42,20 +48,19 @@ export class DashboardComponent implements OnInit {
       .subscribe(getOrders => {
         this.order = JSON.parse(getOrders['_body']);
         console.log(this.order);
-        this.getOrdersPrice();
       });
   }
   getOrdersPrice() {
     this.orderPrice = 0;
-    for (let i = 0; i < (this.order).length; i++) {
-      this.orderPrice += ((this.order)[i]).price;
+    for (let i = 0; i < this.order.length; i++) {
+      this.orderPrice += this.order[i].price;
     }
     console.log(this.orderPrice);
   }
   getOrdersDate() {
-    this.orderDate = 'ExapleDate';
+    this.orderDate = '';
     for (let i = 0; i < (this.order).length; i++) {
-      this.orderDate += ((this.order)[i]).date;
+      this.orderDate += ((this.order)[i]).createdAt.slice(5, 10);
      }
      console.log(this.orderDate);
   }
