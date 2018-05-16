@@ -9,13 +9,13 @@ import { RequestOptions, Http } from '@angular/http';
 export class OrdersComponent implements OnInit {
 
   options = new RequestOptions({ withCredentials: true });
-  baseUrl = 'http://localhost:8080/item/';
+  baseUrl = 'http://localhost:8080/order/';
 
   orders: any;
   users: any;
   items: any;
 
-  actualOrder: object = {
+  actualOrder = {
     user : '',
     items : [
       {item : '', quantity : ''}
@@ -23,7 +23,7 @@ export class OrdersComponent implements OnInit {
     price : ''
   };
 
-  newOrder: object = {
+  newOrder = {
     user : '',
     items : [
       {item : '', quantity : ''}
@@ -31,11 +31,12 @@ export class OrdersComponent implements OnInit {
     price : ''
   };
 
+    price: any;
 
   constructor(public http: Http) {
     this.listOrders();
-    this.listItems();
     this.listUsers();
+    this.listItems();
   }
 
   ngOnInit() {
@@ -69,6 +70,12 @@ export class OrdersComponent implements OnInit {
   }
 
   create() {
+    // tslint:disable-next-line:prefer-const
+    // tslint:disable-next-line:forin
+    for (let i in this.newOrder.items) {
+      this.price += this.newOrder.items[i].item.price * this.newOrder.items[i].quantity;
+    }
+    this.newOrder.price = this.price;
     console.log(this.newOrder);
     this.http.post(this.baseUrl, this.newOrder, this.options)
       .subscribe(data => {
