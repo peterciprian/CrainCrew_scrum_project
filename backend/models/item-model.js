@@ -7,6 +7,9 @@ const ItemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  itemId: {
+    type: mongoose.Schema.Types.ObjectId,
+  },
   url: {
     type: String,
     required: true,
