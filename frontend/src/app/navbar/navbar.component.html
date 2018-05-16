@@ -96,7 +96,7 @@
           </div>
         </div> 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
-        <button [disabled]="!form.valid" type="button" class="btn btn-success" (click)="register()">Küldés</button>
+        <button [disabled]="!form.valid" type="button" class="btn btn-success" (click)="register()" data-dismiss="modal">Küldés</button>
       </div>
     </div>
   </div>
@@ -136,7 +136,7 @@
             </div>
           </div> 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
-        <button type="button" class="btn btn-success" (click)="login()">Belépés</button>
+        <button type="button" class="btn btn-success" (click)="login()" data-dismiss="modal">Belépés</button>
       </div>
     </div>
   </div>
