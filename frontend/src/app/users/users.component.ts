@@ -29,7 +29,7 @@ export class UsersComponent implements OnInit {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
         this.users = JSON.parse(data['_body']);
-        console.log(this.users);
+        console.log(this.users.length);
   });
   }
 
