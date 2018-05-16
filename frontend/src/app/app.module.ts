@@ -12,13 +12,19 @@ import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { UsersComponent } from './users/users.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { HomeComponent } from './home/home.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent, pathMatch: 'full' },
-  { path: 'orders', component: OrdersComponent },
-  { path: 'products', component: ProductsComponent },
-  { path: 'users', component: UsersComponent },
-  { path: '**', component: DashboardComponent }
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'dashboard/orders', component: OrdersComponent },
+  { path: 'dashboard/products', component: ProductsComponent },
+  { path: 'dashboard/users', component: UsersComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'aboutus', component: AboutUsComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
@@ -28,7 +34,10 @@ const routes: Routes = [
     OrdersComponent,
     ProductsComponent,
     UsersComponent,
-    DashboardComponent
+    DashboardComponent,
+    NotFoundComponent,
+    HomeComponent,
+    AboutUsComponent
 ],
   imports: [
     BrowserModule,
