@@ -30,6 +30,9 @@ newuser: any = {
     password: ''
 };
 
+registerred = false;
+longgedIn = false;
+
 options = new RequestOptions({ withCredentials: true });
 
   constructor( 
@@ -100,26 +103,41 @@ options = new RequestOptions({ withCredentials: true });
   }
 
   login() {
-    this.http.post(this.baseUrl + 'login', this.user, this.options)
-        .subscribe(data => {
-            console.log(data['_body']);
-        });
-    this.flashMessagesService.show('Sikeres belépés.', { cssClass: 'alert-success' });
-}
+    this.http.post(this.baseUrl + 'login', this.user, this.options).subscribe(data => {
+      if (data.ok) {
+        this.flashMessagesService.show('Sikeres belépés!', { cssClass: 'alert-success' });
+        this.longgedIn = true;
+        console.log(data['_body']);
+      } else {
+        this.flashMessagesService.show('Sikertelen belépés, ellenőrid adataid!', { cssClass: 'alert-danger' });
+      }
+      this.router.navigate(['dashbord']);
+      });
+  }
+
   logout() {
     this.http.get(this.baseUrl + 'logout', this.options)
-        .subscribe(data => {
-            console.log(data['_body']);
-        });
+      .subscribe(data => {
+        console.log(data['_body']);
+      });
     this.flashMessagesService.show('Sikeres kilépés.', { cssClass: 'alert-success' });
-}
+    this.registerred = false;
+    this.longgedIn = false;
+    this.router.navigate(['home']);
+  }
 
-register() {
-  this.http.post(this.baseUrl + 'register', this.newuser, this.options).subscribe(data => {
-    console.log(data['_body']);
-});
-this.flashMessagesService.show('Sikeres regisztráció.', { cssClass: 'alert-success' });
-}
+  register() {
+    this.http.post(this.baseUrl + 'register', this.newuser, this.options).subscribe(data => {
+      console.log(data.status);
+      if (data.ok) {
+        this.flashMessagesService.show('Sikeres regisztráció.', { cssClass: 'alert-success' });
+        console.log(data['_body']);
+        this.registerred = true;
+      } else {
+        console.log('error: ' + data.status);
+      }
+    });
+  }
 
   ngOnInit() {
   }

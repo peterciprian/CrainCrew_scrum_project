@@ -5,30 +5,30 @@
   </button>
   <div class="container">
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="#" id="blog-name">CC shop</a>
+      <a class="navbar-brand" routerLink="aboutus" routerLinkActive="active">CC shop</a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a routerLink="/" class="nav-link" href="#">Dashboard
+          <a *ngIf="(longgedIn)" routerLink="dashbord" routerLinkActive="active" class="nav-link">Dashboard
             <span class="sr-only">(current)</span>
           </a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul *ngIf="(longgedIn)" class="nav navbar-nav navbar-right">
         <li class="nav-item">
-          <a routerLink="orders" class="nav-link" href="#">Rendelések</a>
+          <a routerLinkActive="active" routerLink="orders" class="nav-link" >Rendelések</a>
         </li>
         <li class="nav-item">
-          <a routerLink="products" class="nav-link" href="#">Termékek</a>
+          <a routerLinkActive="active" routerLink="products" class="nav-link" >Termékek</a>
         </li>
         <li class="nav-item">
-          <a routerLink="users" class="nav-link" href="#">Felhasználók</a>
+          <a routerLinkActive="active" routerLink="users" class="nav-link" >Felhasználók</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <div class="button-group">
-          <button class="btn btn-danger my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModal">Regisztráció</button>
-          <button class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModalCenter">Belépés</button>
-          <button class="btn btn-warning my-2 my-sm-0" type="button" (click)="logout()">Kilépés</button>
+          <button *ngIf="(registerred == false && longgedIn == false)" class="btn btn-danger my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModal">Regisztráció</button>
+          <button *ngIf="(longgedIn == false)" class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModalCenter">Belépés</button>
+          <button *ngIf="(longgedIn)" class="btn btn-warning my-2 my-sm-0" type="button" (click)="logout()" routerLinkActive="active" routerLink="home">Kilépés</button>
         </div>
       </form>
     </div>
