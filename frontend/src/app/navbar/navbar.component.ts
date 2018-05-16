@@ -1,6 +1,6 @@
 import { Component, OnInit, group } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import {FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Http, RequestOptions } from '@angular/http';
 import { NgModule } from '@angular/core';
@@ -23,23 +23,36 @@ export class NavbarComponent implements OnInit {
   user: any = {
     username: '',
     password: ''
-};
-newuser: any = {
-    email : '',
+  };
+  newuser: any = {
+    email: '',
     username: '',
     password: ''
-};
+  };
 
-registerred = false;
-longgedIn = false;
+  registerred = false;
+  longgedIn = false;
 
-options = new RequestOptions({ withCredentials: true });
+  options = new RequestOptions({ withCredentials: true });
 
-  constructor( 
+  constructor(
     private formBuilder: FormBuilder,
     public http: Http,
     private router: Router,
-    private flashMessagesService: FlashMessagesService) { this.createForm(); }
+    private flashMessagesService: FlashMessagesService) { 
+      this.createForm();
+      this.isLoggedIn();
+     }
+
+  isLoggedIn() {
+    this.http.get(this.baseUrl + 'profile', this.options)
+      .subscribe(data => {
+        console.log(data['_body']);
+        if (data['user']) {
+          this.longgedIn = true;
+        }
+      });
+  }
 
   createForm() {
     this.form = this.formBuilder.group({
@@ -62,7 +75,7 @@ options = new RequestOptions({ withCredentials: true });
         this.validatePassword
       ])],
       confirm: ['', Validators.required]
-    }, {validator: this.samePasswords('password', 'confirm')})
+    }, { validator: this.samePasswords('password', 'confirm') })
   }
 
   validateEmail(controls) {
@@ -97,7 +110,7 @@ options = new RequestOptions({ withCredentials: true });
       if (group.controls[password].value === group.controls[confirm].value) {
         return null;
       } else {
-        return {'samePasswords': true}
+        return { 'samePasswords': true }
       }
     };
   }
@@ -112,7 +125,7 @@ options = new RequestOptions({ withCredentials: true });
         this.flashMessagesService.show('Sikertelen belépés, ellenőrid adataid!', { cssClass: 'alert-danger' });
       }
       this.router.navigate(['dashbord']);
-      });
+    });
   }
 
   logout() {
