@@ -82,11 +82,11 @@
           </datalist>
           <input class="form-control" type="number" name="quantityModal" id="quantityModal" min="0" placeholder="Quantity" [(ngModel)]="actualOrder.items[i].quantity">
         </div-->
-        <select name="users" id="usersModal" [(ngModel)]="actualOrder.user">
+        <select name="users" id="usersModal" class="form-control" [(ngModel)]="actualOrder.user" placeholder="Select User">
           <option *ngFor="let user of users" value="{{user['_id']}}">{{user.username}}</option>
         </select>
         <div *ngFor="let item of actualOrder.items; let i = index">
-          <select name="items" id="itemsModal" [(ngModel)]="actualOrder.items[i].item">
+          <select name="items" id="itemsModal" class="form-control" [(ngModel)]="actualOrder.items[i].item" placeholder="Select Item">
             <option *ngFor="let item of items" value="{{item['_id']}}" >{{item.name}}</option>
           </select>
           <input class="form-control" type="number" name="quantityModal" id="quantityModal" min="0" placeholder="Quantity" [(ngModel)]="actualOrder.items[i].quantity">
