@@ -4,6 +4,9 @@ const User = require('./user');
 
 const OrderSchema = new mongoose.Schema({
 
+  itemId: {
+    type: mongoose.Schema.Types.ObjectId,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
