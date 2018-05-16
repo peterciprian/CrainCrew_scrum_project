@@ -2,6 +2,7 @@ import { Component, OnInit, NgModule } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { OrdersComponent } from '../orders/orders.component';
 import { Observable } from 'rxjs/Observable';
+import { UsersComponent } from '../users/users.component';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class DashboardComponent implements OnInit {
   order: any;
   options = new RequestOptions({ withCredentials: true });
   orderPrice: number;
-  orderDate: Date ;
+  orderDate: string ;
   pieChartData = {
     chartType: 'LineChart',
     dataTable: [
@@ -53,7 +54,7 @@ export class DashboardComponent implements OnInit {
     console.log(this.orderPrice);
   }
   getOrdersDate() {
-    this.orderDate = ExapleDate;
+    this.orderDate = 'ExampleDate';
     for (let i = 0; i < (this.order).length; i++) {
       this.orderDate += ((this.order)[i]).date;
      }
