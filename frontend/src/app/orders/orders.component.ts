@@ -20,7 +20,7 @@ export class OrdersComponent implements OnInit {
     items : [
       {item : '', quantity : ''}
     ],
-    price : ''
+    price : 0
   };
 
   newOrder = {
@@ -28,10 +28,10 @@ export class OrdersComponent implements OnInit {
     items : [
       {item : '', quantity : ''}
     ],
-    price : ''
+    price: 0
   };
 
-    price: any;
+    price: number;
 
   constructor(public http: Http) {
     this.listOrders();
@@ -71,21 +71,17 @@ export class OrdersComponent implements OnInit {
   }
 
   create() {
-    // tslint:disable-next-line:prefer-const
-    // tslint:disable-next-line:forin
-    for (let i in this.newOrder.items) {
-      this.price += this.newOrder.items[i].item.price * this.newOrder.items[i].quantity;
-    }
-    this.newOrder.price = this.price;
-    console.log(this.newOrder);
+    /*for (let i = 0; i < this.newOrder.items.length; i++) {
+    this.price += Number(this.newOrder.items[i].item.price) + Number(this.newOrder.items[i].quantity);
+  }*/
+  this.newOrder.price = this.price;
     this.http.post(this.baseUrl, this.newOrder, this.options)
       .subscribe(data => {
         console.log(data);
         this.listOrders();
       });
   }
-  update(order) {
-    this.actualOrder = order;
+  update() {
     this.http.put(this.baseUrl + 'update/' + this.actualOrder['_id'], this.actualOrder, this.options)
       .subscribe(data => {
         console.log(data);
