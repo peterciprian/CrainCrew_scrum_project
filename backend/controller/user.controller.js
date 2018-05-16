@@ -8,17 +8,18 @@ module.exports = {
   },
 
   list: (req, res) => {
-    User.find({}, (err, data) => {
+    User.find({}, (err, roles) => {
       if (err) {
         res.json(err);
       }
-      res.json(data);
+      res.json(roles);
     });
   },
 
   register: (req, res) => {
     User.register(new User({
       username: req.body.username,
+      isAdmin: req.body.isAdmin,
       email: req.body.email,
     }), req.body.password)
       .then(() => res.json({

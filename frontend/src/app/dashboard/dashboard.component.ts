@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   order: any;
   options = new RequestOptions({ withCredentials: true });
   orderPrice: number;
-  orderDate: string ;
+  orderDate: string;
   pieChartData = {
     chartType: 'LineChart',
     dataTable: [
