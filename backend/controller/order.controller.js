@@ -22,16 +22,14 @@ module.exports = {
 
   create: (req, res) => {
     Order.create(req.body)
-      .then(order => /* {
-        User.findByIdAndUpdate("5afadd53bc72ea24b898b6e5")
-        .then((order) => {
-          $push: { orders: order._id; } })
-        .catch(err => res.send(err));} */ res.json(order))
+      .then(order => res.json(order))
       .catch(err => res.send(err));
   },
 
   update: (req, res) => {
-    Order.findByIdAndUpdate(req.params.id, req.body)
+    Order.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      .populate('user', 'username')
+      .populate('items.item', 'name price')
       .then(order => res.json(order))
       .catch(err => res.send(err));
   },
