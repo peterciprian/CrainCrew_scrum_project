@@ -9,13 +9,13 @@ import { RequestOptions, Http } from '@angular/http';
 export class OrdersComponent implements OnInit {
 
   options = new RequestOptions({ withCredentials: true });
-  baseUrl = 'http://localhost:8080/item/';
+  baseUrl = 'http://localhost:8080/order/';
 
   orders: any;
   users: any;
   items: any;
 
-  actualOrder: object = {
+  actualOrder = {
     user : '',
     items : [
       {item : '', quantity : ''}
@@ -23,7 +23,7 @@ export class OrdersComponent implements OnInit {
     price : ''
   };
 
-  newOrder: object = {
+  newOrder  = {
     user : '',
     items : [
       {item : '', quantity : ''}
@@ -34,8 +34,8 @@ export class OrdersComponent implements OnInit {
 
   constructor(public http: Http) {
     this.listOrders();
-    this.listItems();
     this.listUsers();
+    this.listItems();
   }
 
   ngOnInit() {
@@ -45,6 +45,7 @@ export class OrdersComponent implements OnInit {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
         this.orders = JSON.parse(data['_body']);
+        console.log(this.orders);
       });
   }
   listUsers() {
@@ -69,6 +70,7 @@ export class OrdersComponent implements OnInit {
   }
 
   create() {
+    this.newOrder.price = this.price;
     console.log(this.newOrder);
     this.http.post(this.baseUrl, this.newOrder, this.options)
       .subscribe(data => {
@@ -93,6 +95,24 @@ export class OrdersComponent implements OnInit {
           this.listOrders();
         });
     }
+  }
+  addModalRow() {
+    this.actualOrder.items.push({
+      item: '',
+      quantity: '',
+    });
+  }
+   addRow() {
+    this.newOrder.items.push({
+      item: '',
+      quantity: ''
+    });
+    console.log(this.newOrder);
+   }
+
+  loadModalData(order) {
+    this.actualOrder = order;
+    console.log(this.actualOrder);
   }
 
 }
