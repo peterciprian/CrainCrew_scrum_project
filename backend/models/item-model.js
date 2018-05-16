@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 // const Order = require('./order-model');
 
+/**
+ * ItemSchema schema
+ * @constructor Item
+ */
 const ItemSchema = new mongoose.Schema({
 
   name: {
