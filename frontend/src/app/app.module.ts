@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
+    Ng2GoogleChartsModule,
     RouterModule.forRoot(routes),
     FlashMessagesModule.forRoot()
   ],
