@@ -2,7 +2,10 @@ import { Component, OnInit, NgModule } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { OrdersComponent } from '../orders/orders.component';
 import { Observable } from 'rxjs/Observable';
-import { BaseChartDirective } from 'ng2-charts';
+import { UsersComponent } from '../users/users.component';
+import { ProductsComponent } from '../products/products.component';
+import { ItemCrudService } from '../item-crud.service';
+import { Item } from '../item';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,9 +29,17 @@ export class DashboardComponent implements OnInit {
       'title': 'E havi bevétel napokra bontva',
       legend: 'none',
       is3D: 'true',
+      chartArea: {width: '100%', height: '70%'},
     },
   };
-  constructor(public http: Http) {
+  users: any;
+  baseUrl = 'http://localhost:8080/user/users';
+  baseUrl2 = 'http://localhost:8080/item';
+  items: Array<Item>;
+
+  constructor(
+    public http: Http
+  ) {
     this.getOrders();
     setTimeout(() => {
       this.getAllOrdersPrice();
@@ -39,6 +50,8 @@ export class DashboardComponent implements OnInit {
      setTimeout(() => {
       this.fillDataTable();
     }, 3000);
+    this.getUsers();
+    this.listItems();
    }
   ngOnInit() {
   }
@@ -74,6 +87,21 @@ export class DashboardComponent implements OnInit {
   }
     console.log(this.pieChartData);
   }
+  getUsers() {
+    this.http.get(this.baseUrl, this.options)
+      .subscribe(data => {
+        this.users = JSON.parse(data['_body']);
+        console.log(this.users.length);
+  });
+  }
+  listItems() {
+    this.http.get(this.baseUrl2, this.options)
+      .subscribe(data => {
+        this.items = JSON.parse(data['_body']);
+        console.log(this.items.length);
+      });
+  }
+
 }
 
 
