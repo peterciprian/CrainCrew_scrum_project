@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fillDataTable() {
-    for (let i = 0; i < this.singleorderPrice.length; i++) { 
+    for (let i = 0; i < this.singleorderPrice.length; i++) {
       this.pieChartData.dataTable.push([this.singleorderDate[i], this.singleorderPrice[i]]);
       this.filltable = true;
   }

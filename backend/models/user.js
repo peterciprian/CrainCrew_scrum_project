@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
-const Order = require('./order-model');
+// const Order = require('./order-model');
+
+/**
+ * userSchema schema
+ * @constructor user
+ */
 
 const userSchema = mongoose.Schema({
   username: {

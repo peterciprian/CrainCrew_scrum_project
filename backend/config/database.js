@@ -18,6 +18,10 @@ db.createUser(
 // const password = 'toor';
 // const database = 'blog';
 
+/**
+ * Set up and export database
+ */
+
 module.exports = {
   uri: 'mongodb://crane-crew:crane-crew@ds119150.mlab.com:19150/crane-crew',
   options: {
