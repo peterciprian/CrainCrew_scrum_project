@@ -1,5 +1,8 @@
 # CC Webáruház
 
+## Telepítés
+Git repo klónozása, majd npm i frontend mappában, és backend mappában is.
+
 ## A folyamat
 Mivel a projekt leírása lentebb olvasható, erre nem fecsérelnék szót vagy betűket. A fejlesztési folyamat maga volt különösen érdekes számunkra, hisz SCRUM-os szisztémában még nem dolgoztunk csapatban (korábbi csapatos projektfeladataink időnként kissebfajta káoszba fordultak). Remekül követhető volt, hogy ki mit csinál, és egymástól 20 centire ülve, ha valaki elakadt volna, a segítség soha nem volt messze. Giten remekül követhető ki mit csinált, így erről sem beszélnék.
 Természetesen van még min fejlesztenünk, pl. Trello-n a feladatokat real-time kéne szerkesztenünk, és jelezni ki min dolgozik, de mivel, mint említettem, egymástól 20 centire ültünk, még a hangunkat sem kellett fölemelni, ha erre vonatkozó információkra volt szükségünk.
