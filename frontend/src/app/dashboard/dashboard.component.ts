@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   singleorderDate: Array<number>;
   orderDate: string;
   filltable: boolean;
-  pieChartData = {
+  pieChartData: any = {
     chartType: 'ColumnChart',
     dataTable: [
       ['0', '0'],
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
     options: {
       legend: 'none',
       is3D: 'true',
-      chartArea: {width: '100%', height: '70%'},
+      chartArea: {width: '90%', height: '70%'},
     },
   };
   users: any;

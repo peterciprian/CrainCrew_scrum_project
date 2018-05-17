@@ -1,3 +1,118 @@
 <br>
 <h2><i class="fas fa-box-open"></i> Rendelések</h2>
 <hr>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4 col-lg-4">
+      <input id="user" list="users" class="form-control tableinput" name="myUsers" type="text" placeholder="Felhasználó választás" [(ngModel)]="newOrder.user">
+      <datalist id="users">
+        <option *ngFor="let user of users" value="{{user['_id']}}">{{user.username}}</option>
+      </datalist>
+    </div>
+    <div class="col-xs-4 col-lg-4">
+        <div *ngFor="let item of newOrder.items; let i = index">
+          <div class="input-group">
+          <input list="items" class="form-control tableinput" name="myItems" type="text" placeholder="Termék választás" [(ngModel)]="newOrder.items[i].item">
+          <datalist id="items">
+            <option *ngFor="let item of items" value="{{item['_id']}}">{{item.name}}</option>
+          </datalist>
+          <input class="form-control" type="number" name="quantity" id="quantity" min="0" placeholder="Mennyiség" [(ngModel)]="newOrder.items[i].quantity">
+          </div>
+        </div>
+    </div>
+    <div class="col-xs-4 col-lg-4">
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="addRow()">Új termék</button>
+        <button class="btn btn-info" (click)="create()">Rögzítés</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div>&nbsp;</div>
+<table class="table table-bordered text-center">
+  <thead>
+    <th>#</th>
+    <th>ID</th>
+    <th>Felhasználónév</th>
+    <th>Darabszám</th>
+    <th>Művelet</th>
+  </thead>
+  <tbody *ngFor="let order of orders; let i = index">
+    <tr class="tr-user">
+      <td>{{i+1}}</td>
+      <td>
+
+        {{order.user['_id']}}
+      </td>
+      <td>
+        {{order.user.username}}
+      </td>
+      <td>
+        <input list="users" class="form-control tableinput" name="myUsers" type="text" [(ngModel)]="order.user['_id']">
+        <datalist id="users2">
+          <option *ngFor="let user of users" value="{{user['_id']}}">{{user.username}}</option>
+        </datalist>
+      </td>
+      <td>
+        <div class="btn-group">
+          <button class="btn btn-info" data-toggle="modal" data-target="#editOrderModal" (click)="loadModalData(order)">Módosít</button>
+          <button class="btn btn-danger" (click)="delete(order._id)">Töröl</button>
+        </div>
+      </td>
+    </tr>
+    <tr *ngFor="let item of order.items">
+      <td></td>
+      <td></td>
+      <td>
+        <strong>Termék megnevezése:</strong> {{item.item.name}}
+      </td>
+      <td>
+        {{item.quantity}} db
+      </td>
+      <td>
+          <strong>Egységár:</strong> {{item.item.price}}
+      </td>
+    </tr>
+    <!--tr>
+              <td>Rendelés végösszege: {{order.price}}</td>
+          </tr-->
+  </tbody>
+</table>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<!-- Modal -->
+<div class="modal fade" id="editOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Módosítás</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <!--p>{{actualOrder.user.username}}</p-->
+        <label for="usersModal">Felhasználó választás</label>
+        <select name="users" id="usersModal" class="form-control" [(ngModel)]="actualOrder.user" placeholder="Select User">
+          <option *ngFor="let user of users" value="{{user['_id']}}">{{user.username}}</option>
+        </select>
+        <div *ngFor="let item of actualOrder.items; let i = index">
+        <label for="itemsModal">Termék választás</label>
+          <select name="items" id="itemsModal" class="form-control" [(ngModel)]="actualOrder.items[i].item" placeholder="Select Item">
+            <option *ngFor="let item of items" value="{{item['_id']}}" >{{item.name}}</option>
+          </select>
+          <label for="quantityModal">Mennyiség</label>
+          <input class="form-control" type="number" name="quantityModal" id="quantityModal" min="0" placeholder="Quantity" [(ngModel)]="actualOrder.items[i].quantity">
+          <div>&nbsp;</div>
+          <button type="button" class="btn btn-danger" (click)="removeModalRow(actualOrder.items[i])">Töröl</button>
+          <div>&nbsp;</div>
+        </div>
+        <button class="btn btn-secondary" (click)="addModalRow()">Hozzáadás</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
+        <button type="button" class="btn btn-primary" (click)="update()">Mentés</button>
+      </div>
+    </div>
+  </div>
+</div>
