@@ -3,22 +3,31 @@
 <hr>
 <div class="container">
   <div class="row">
-    <input id="user" list="users" class="form-control tableinput" name="myUsers" type="text" placeholder="Select User" [(ngModel)]="newOrder.user">
-    <datalist id="users">
-      <option *ngFor="let user of users" value="{{user['_id']}}">{{user.username}}</option>
-    </datalist>
-    <div *ngFor="let item of newOrder.items; let i = index">
-      <input list="items" class="form-control tableinput" name="myItems" type="text" placeholder="Select Item" [(ngModel)]="newOrder.items[i].item">
-      <datalist id="items">
-        <option *ngFor="let item of items" value="{{item['_id']}}">{{item.name}}</option>
+    <div class="col-xs-4 col-lg-4">
+      <input id="user" list="users" class="form-control tableinput" name="myUsers" type="text" placeholder="Felhasználó választás" [(ngModel)]="newOrder.user">
+      <datalist id="users">
+        <option *ngFor="let user of users" value="{{user['_id']}}">{{user.username}}</option>
       </datalist>
-      <input class="form-control" type="number" name="quantity" id="quantity" min="0" placeholder="Quantity" [(ngModel)]="newOrder.items[i].quantity">
     </div>
-    <button class="btn btn-secondary" (click)="addRow()">Új termék</button>
-    <button class="btn btn-info" (click)="create()">Rögzítés</button>
+    <div class="col-xs-4 col-lg-4">
+        <div *ngFor="let item of newOrder.items; let i = index">
+          <div class="input-group">
+          <input list="items" class="form-control tableinput" name="myItems" type="text" placeholder="Termék választás" [(ngModel)]="newOrder.items[i].item">
+          <datalist id="items">
+            <option *ngFor="let item of items" value="{{item['_id']}}">{{item.name}}</option>
+          </datalist>
+          <input class="form-control" type="number" name="quantity" id="quantity" min="0" placeholder="Mennyiség" [(ngModel)]="newOrder.items[i].quantity">
+          </div>
+        </div>
+    </div>
+    <div class="col-xs-4 col-lg-4">
+      <div class="btn-group">
+        <button class="btn btn-secondary" (click)="addRow()">Új termék</button>
+        <button class="btn btn-info" (click)="create()">Rögzítés</button>
+      </div>
+    </div>
   </div>
 </div>
-<div>&nbsp;</div>
 <div>&nbsp;</div>
 <table class="table table-bordered text-center">
   <thead>
@@ -83,25 +92,26 @@
       </div>
       <div class="modal-body">
       <!--p>{{actualOrder.user.username}}</p-->
-        <label for="usersModal">Select User</label>
+        <label for="usersModal">Felhasználó választás</label>
         <select name="users" id="usersModal" class="form-control" [(ngModel)]="actualOrder.user" placeholder="Select User">
           <option *ngFor="let user of users" value="{{user['_id']}}">{{user.username}}</option>
         </select>
         <div *ngFor="let item of actualOrder.items; let i = index">
-        <label for="itemsModal">Select Item</label>
+        <label for="itemsModal">Termék választás</label>
           <select name="items" id="itemsModal" class="form-control" [(ngModel)]="actualOrder.items[i].item" placeholder="Select Item">
             <option *ngFor="let item of items" value="{{item['_id']}}" >{{item.name}}</option>
           </select>
-          <label for="quantityModal">Set amount</label>
+          <label for="quantityModal">Mennyiség</label>
           <input class="form-control" type="number" name="quantityModal" id="quantityModal" min="0" placeholder="Quantity" [(ngModel)]="actualOrder.items[i].quantity">
-          <button type="button" class="btn btn-danger" (click)="removeModalRow(actualOrder.items[i])">X</button>
+          <div>&nbsp;</div>
+          <button type="button" class="btn btn-danger" (click)="removeModalRow(actualOrder.items[i])">Töröl</button>
+          <div>&nbsp;</div>
         </div>
-
-        <button class="btn btn-secondary" (click)="addModalRow()">Add item</button>
+        <button class="btn btn-secondary" (click)="addModalRow()">Hozzáadás</button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="update()">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
+        <button type="button" class="btn btn-primary" (click)="update()">Mentés</button>
       </div>
     </div>
   </div>
