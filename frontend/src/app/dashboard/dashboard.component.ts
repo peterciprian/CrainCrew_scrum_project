@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
       ['0', '0'],
     ],
     options: {
+      vAxis: {format: 0},
       legend: 'none',
       is3D: 'true',
       chartArea: {width: '90%', height: '70%'},
