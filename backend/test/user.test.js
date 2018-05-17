@@ -79,7 +79,7 @@ describe('User', () => {
   describe('update user', () => {
     it('should update the user with given data', (done) => {
       chai.request(baseUrl)
-        .put('/update/5afc3404d964381824e3a31e')
+        .put('/update/5afd3f9eaf96550a6c31c6d4')
         .send({ role: 'admin' })
         .end((err, res) => {
           expect(res).to.have.status(200);
@@ -101,7 +101,7 @@ describe('User', () => {
   describe('delete user', () => {
     it('should delete the given user', (done) => {
       chai.request(baseUrl)
-        .delete('/5afc3404d964381824e3a31e')
+        .delete('/5afd3f9eaf96550a6c31c6d4')
         .end((err, res) => {
           expect(res).to.have.status(200);
           done();
