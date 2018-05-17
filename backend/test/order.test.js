@@ -75,7 +75,6 @@ describe('orders', () => {
         .set('Cookie', cookie)
         .end((err, res) => {
           expect(res).to.have.status(200);
-          res.body.should.be.a('Object');
           done();
         });
     });

@@ -1,3 +1,16 @@
+# CC Webáruház
+
+## A folyamat
+Mivel a projekt leírása lentebb olvasható, erre nem fecsérelnék szót vagy betűket. A fejlesztési folyamat maga volt különösen érdekes számunkra, hisz SCRUM-os szisztémában még nem dolgoztunk csapatban (korábbi csapatos projektfeladataink időnként kissebfajta káoszba fordultak). Remekül követhető volt, hogy ki mit csinál, és egymástól 20 centire ülve, ha valaki elakadt volna, a segítség soha nem volt messze. Giten remekül követhető ki mit csinált, így erről sem beszélnék.
+Természetesen van még min fejlesztenünk, pl. Trello-n a feladatokat real-time kéne szerkesztenünk, és jelezni ki min dolgozik, de mivel, mint említettem, egymástól 20 centire ültünk, még a hangunkat sem kellett fölemelni, ha erre vonatkozó információkra volt szükségünk.
+
+## A "kész" termék
+Tekintve, hogy ez még csak az első sprint vége, a kész termék kevéssé életszerű (bár 100%ban megfelel a követelményeknek), hisz kvázi admin jogosultsággal kell rendelkezni, ha valaki rendelni akar.
+Felhasználókat, termékeket és rendeléseket is lehet fölvinni, módosítani és törölni.
+Letisztult, energikus dizájnunk gyönyör a szemnek és léleknek, backendjünk tiszta, egyértelmű kódja a legerősebb embert is megríkatná. Ebben a pár napban effektív kis csapattá kovácsolódtunk, nagy álmokkal és célokkal, lelkesedésünk semmi nem törthette le, kitartóan és eltökélten küzdöttünk a kitűzött célok elérésért.
+Bátran mondhatom, hogy az elkészült termékünkre 70+%ban büszkék vagyunk, az általa megtestesített értékekkel 100%ban azonosulni tudunk.
+A második sprint végére ez pedig csak javulni fog.
+
 # TZPL (tanfolyam záró project leírás)
 
 ## A projekt megnevezése
