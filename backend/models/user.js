@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
-// const Order = require('./order-model');
 
 /**
  * userSchema schema
