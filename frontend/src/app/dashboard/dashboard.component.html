@@ -15,11 +15,11 @@
         <a routerLink="orders" class="nav-link" href="#">Rendelések</a>
         <span class="badge badge-success badge-pill">14</span>
       </li>
-      <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+      <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"  *ngIf="items !== undefined" >
           <a routerLink="products" class="nav-link" href="#">Termékek</a>
         <span class="badge badge-success badge-pill">{{items.length}}</span>
     </li>
-      <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+      <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" *ngIf="users !== undefined">
           <a routerLink="users" class="nav-link" href="#">Felhasználók</a>
           <span class="badge badge-success badge-pill">{{users.length}}</span>
         </li>
@@ -28,14 +28,14 @@
 <div class="col-xs-12 col-md-12 col-lg-9">
     <div class="card-group">
         <div class="card" >
-            <h1>
+            <h1 *ngIf="users !== undefined">
                 <i class="fas fa-users icon"></i> {{users.length}}</h1>
                 <div class="card-body">
                     <h5 class="card-title">Felhasználók</h5>
                 </div>
             </div>
       <div class="card">
-          <h1>
+          <h1 *ngIf="items !== undefined">
               <i class="fas fa-bicycle icon"></i> {{items.length}}</h1>
         <div class="card-body">
             <h5 class="card-title">Termékek</h5>
