@@ -45,13 +45,13 @@ export class DashboardComponent implements OnInit {
     this.getOrders();
     setTimeout(() => {
       this.getAllOrdersPrice();
-    }, 3000);
+    }, 1000);
     setTimeout(() => {
       this.getOrdersDate();
-    }, 3000);
+    }, 1000);
      setTimeout(() => {
       this.fillDataTable();
-    }, 3000);
+    }, 1000);
     this.getUsers();
     this.listItems();
     this.listOrders();
