@@ -33,8 +33,10 @@ export class DashboardComponent implements OnInit {
     },
   };
   users: any;
+  orders: any;
   baseUrl = 'http://localhost:8080/user/users';
   baseUrl2 = 'http://localhost:8080/item';
+  baseUrl3 = 'http://localhost:8080/order/';
   items: Array<Item>;
 
   constructor(
@@ -52,6 +54,7 @@ export class DashboardComponent implements OnInit {
     }, 3000);
     this.getUsers();
     this.listItems();
+    this.listOrders();
    }
   ngOnInit() {
   }
@@ -59,7 +62,7 @@ export class DashboardComponent implements OnInit {
     this.http.get('http://localhost:8080/order', this.options)
       .subscribe(getOrders => {
         this.order = JSON.parse(getOrders['_body']);
-        console.log(this.order);
+        console.log(this.order.length);
       });
   }
   getAllOrdersPrice() {
@@ -99,6 +102,14 @@ export class DashboardComponent implements OnInit {
       .subscribe(data => {
         this.items = JSON.parse(data['_body']);
         console.log(this.items.length);
+      });
+  }
+
+  listOrders() {
+    this.http.get(this.baseUrl3, this.options)
+      .subscribe(data => {
+        this.orders = JSON.parse(data['_body']);
+        console.log(this.orders.length);
       });
   }
 
