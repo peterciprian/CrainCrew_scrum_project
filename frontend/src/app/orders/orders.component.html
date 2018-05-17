@@ -15,14 +15,19 @@
       <input class="form-control" type="number" name="quantity" id="quantity" min="0" placeholder="Quantity" [(ngModel)]="newOrder.items[i].quantity">
     </div>
     <button class="btn btn-secondary" (click)="addRow()">Új termék</button>
-    <button class="btn btn-primary" (click)="create()">Rögzítés</button>
+    <button class="btn btn-info" (click)="create()">Rögzítés</button>
   </div>
 </div>
-<br>
-<br>
-<br>
-<table class="table">
-
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<table class="table table-bordered text-center">
+  <thead>
+    <th>#</th>
+    <th>ID</th>
+    <th>Felhasználónév</th>
+    <th>Darabszám</th>
+    <th>Művelet</th>
+  </thead>
   <tbody *ngFor="let order of orders; let i = index">
     <tr class="tr-user">
       <td>{{i+1}}</td>
@@ -40,26 +45,32 @@
         </datalist>
       </td>
       <td>
-        <button class="btn btn-warning" data-toggle="modal" data-target="#editOrderModal" (click)="loadModalData(order)">Módosít</button>
-        <button class="btn btn-danger" (click)="delete(order._id)">X</button>
+        <div class="btn-group">
+          <button class="btn btn-info" data-toggle="modal" data-target="#editOrderModal" (click)="loadModalData(order)">Módosít</button>
+          <button class="btn btn-danger" (click)="delete(order._id)">Töröl</button>
+        </div>
       </td>
     </tr>
     <tr *ngFor="let item of order.items">
       <td></td>
       <td></td>
       <td>
-        Termék megnevezése: {{item.item.name}}
+        <strong>Termék megnevezése:</strong> {{item.item.name}}
       </td>
       <td>
         {{item.quantity}} db
       </td>
-      <td>Egységár: {{item.item.price}}</td>
+      <td>
+          <strong>Egységár:</strong> {{item.item.price}}
+      </td>
     </tr>
     <!--tr>
               <td>Rendelés végösszege: {{order.price}}</td>
           </tr-->
   </tbody>
 </table>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
 <!-- Modal -->
 <div class="modal fade" id="editOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

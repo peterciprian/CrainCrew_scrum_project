@@ -6,11 +6,10 @@
 <div>&nbsp;</div>
 <table class="table table-bordered text-center">
   <thead>
-    <th>username</th>
-    <th>email</th>
-    <th>role</th>
-    <th>action</th>
-
+    <th>Felhasználónév</th>
+    <th>Email</th>
+    <th>Jogosultság</th>
+    <th>Művelet</th>
   </thead>
   <tbody>
     <tr>
@@ -30,8 +29,8 @@
       </td>
       <td>
         <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-info" (click)="editUser(user)">Update</button>
-          <button type="button" class="btn btn-sm btn-danger" (click)="removeUser(user)">Delete</button>
+          <button type="button" class="btn btn-info" (click)="editUser(user)">Módosít</button>
+          <button type="button" class="btn btn-danger" (click)="removeUser(user)">Töröl</button>
         </div>
       </td>
     </tr>
