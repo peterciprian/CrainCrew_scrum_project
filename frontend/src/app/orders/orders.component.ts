@@ -105,11 +105,10 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  removeModalRow(item) {
-    function filter(element) {
-      return (element !== item);
-   }
-    this.actualOrder.items.filter(filter);
+  removeModalRow(id) {
+    console.log(id);
+    this.actualOrder.items = this.actualOrder.items.filter(asd => asd._id === id);
+    console.log(this.actualOrder);
   }
 
    addRow() {
