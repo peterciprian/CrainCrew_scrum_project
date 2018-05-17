@@ -69,30 +69,22 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>{{actualOrder.user.username}}</p>
-        <!--input id="userModal" list="users" class="form-control tableinput" name="myUsersmodal" type="text" placeholder="Select User"
-          [(ngModel)]="actualOrder.user">
-        <datalist id="users">
-          <option *ngFor="let user of users" value="{{user['_id']}}">{{user.username}}</option>
-        </datalist>
-        <div *ngFor="let item of newOrder.items; let i = index">
-          <input list="items" class="form-control tableinput" name="myItemsModal" type="text" placeholder="Select Item" [(ngModel)]="actualOrder.items[i].item">
-          <datalist id="items">
-            <option *ngFor="let item of items" value="{{item['_id']}}">{{item.name}}</option>
-          </datalist>
-          <input class="form-control" type="number" name="quantityModal" id="quantityModal" min="0" placeholder="Quantity" [(ngModel)]="actualOrder.items[i].quantity">
-        </div-->
+      <!--p>{{actualOrder.user.username}}</p-->
+        <label for="usersModal">Select User</label>
         <select name="users" id="usersModal" class="form-control" [(ngModel)]="actualOrder.user" placeholder="Select User">
           <option *ngFor="let user of users" value="{{user['_id']}}">{{user.username}}</option>
         </select>
         <div *ngFor="let item of actualOrder.items; let i = index">
+        <label for="itemsModal">Select Item</label>
           <select name="items" id="itemsModal" class="form-control" [(ngModel)]="actualOrder.items[i].item" placeholder="Select Item">
             <option *ngFor="let item of items" value="{{item['_id']}}" >{{item.name}}</option>
           </select>
+          <label for="quantityModal">Set amount</label>
           <input class="form-control" type="number" name="quantityModal" id="quantityModal" min="0" placeholder="Quantity" [(ngModel)]="actualOrder.items[i].quantity">
+          <button type="button" class="btn btn-danger" (click)="removeModalRow(actualOrder.items[i])">X</button>
         </div>
 
-        <button class="btn btn-secondary" (click)="addModalRow()">Új termék</button>
+        <button class="btn btn-secondary" (click)="addModalRow()">Add item</button>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

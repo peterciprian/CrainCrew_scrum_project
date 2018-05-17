@@ -104,6 +104,14 @@ export class OrdersComponent implements OnInit {
       quantity: '',
     });
   }
+
+  removeModalRow(item) {
+    function filter(element) {
+      return (element !== item);
+   }
+    this.actualOrder.items.filter(filter);
+  }
+
    addRow() {
     this.newOrder.items.push({
       item: '',
