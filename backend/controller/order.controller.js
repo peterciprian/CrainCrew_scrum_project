@@ -1,5 +1,4 @@
 const Order = require('../models/order-model.js');
-// const User = require('../models/user.js');
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 

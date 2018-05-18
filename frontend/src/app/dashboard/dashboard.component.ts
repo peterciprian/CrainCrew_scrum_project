@@ -26,14 +26,17 @@ export class DashboardComponent implements OnInit {
       ['0', '0'],
     ],
     options: {
+      vAxis: {format: 0},
       legend: 'none',
       is3D: 'true',
       chartArea: {width: '90%', height: '70%'},
     },
   };
   users: any;
+  orders: any;
   baseUrl = 'http://localhost:8080/user/users';
   baseUrl2 = 'http://localhost:8080/item';
+  baseUrl3 = 'http://localhost:8080/order/';
   items: Array<Item>;
 
   constructor(
@@ -42,15 +45,16 @@ export class DashboardComponent implements OnInit {
     this.getOrders();
     setTimeout(() => {
       this.getAllOrdersPrice();
-    }, 3000);
+    }, 1000);
     setTimeout(() => {
       this.getOrdersDate();
-    }, 3000);
+    }, 1000);
      setTimeout(() => {
       this.fillDataTable();
-    }, 3000);
+    }, 1000);
     this.getUsers();
     this.listItems();
+    this.listOrders();
    }
   ngOnInit() {
   }
@@ -58,7 +62,7 @@ export class DashboardComponent implements OnInit {
     this.http.get('http://localhost:8080/order', this.options)
       .subscribe(getOrders => {
         this.order = JSON.parse(getOrders['_body']);
-        console.log(this.order);
+        console.log(this.order.length);
       });
   }
   getAllOrdersPrice() {
@@ -72,6 +76,7 @@ export class DashboardComponent implements OnInit {
     console.log(this.singleorderPrice);
   }
   getOrdersDate() {
+    this.singleorderDate = Array<number>();
     for (let i = 0; i < this.order.length; i++) {
       this.singleorderDate.push(Number(this.order[i].createdAt.slice(8, 10)));
      }
@@ -97,6 +102,14 @@ export class DashboardComponent implements OnInit {
       .subscribe(data => {
         this.items = JSON.parse(data['_body']);
         console.log(this.items.length);
+      });
+  }
+
+  listOrders() {
+    this.http.get(this.baseUrl3, this.options)
+      .subscribe(data => {
+        this.orders = JSON.parse(data['_body']);
+        console.log(this.orders.length);
       });
   }
 

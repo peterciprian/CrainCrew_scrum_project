@@ -1,22 +1,3 @@
-/*
-use blog
-db.createUser(
-   {
-     user: "root",
-     pwd: "toor",
-     roles:
-       [
-         { role: "readWrite", db: "blog" }
-       ]
-   }
-)
-*/
-
-// const host = 'localhost';
-// const port = 27017;
-// const user = 'root';
-// const password = 'toor';
-// const database = 'blog';
 
 /**
  * Set up and export database

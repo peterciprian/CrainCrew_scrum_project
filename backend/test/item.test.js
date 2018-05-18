@@ -45,7 +45,7 @@ describe('Items', () => {
   describe('list one item', () => {
     it('should list the given item', (done) => {
       chai.request(baseUrl)
-        .get('/5af99b8a449ad92ad03dd662')
+        .get('/5afd4420af96550a6c31c6d6')
         .set('Cookie', cookie)
         .end((err, res) => {
           expect(res).to.have.status(200);
@@ -55,7 +55,7 @@ describe('Items', () => {
     });
   });
   describe('create item', () => {
-    it('should create give item', (done) => {
+    it('should create given item', (done) => {
       chai.request(baseUrl)
         .post('/')
         .set('Cookie', cookie)
@@ -70,7 +70,7 @@ describe('Items', () => {
   describe('should update given item', () => {
     it('should update given items with given data', (done) => {
       chai.request(baseUrl)
-        .put('/5afb59eaa5f2392f7c43eb4f')
+        .put('/5afd4420af96550a6c31c6d6')
         .set('Cookie', cookie)
         .send({ name: 'Mountain Bike' })
         .end((err, res) => {
@@ -83,7 +83,7 @@ describe('Items', () => {
   describe('should delete given item', () => {
     it('should delete given item', (done) => {
       chai.request(baseUrl)
-        .delete('/5afc4670e336e10a40c01a55')
+        .delete('/5afd4420af96550a6c31c6d6')
         .set('Cookie', cookie)
         .end((err, res) => {
           expect(res).to.have.status(200);

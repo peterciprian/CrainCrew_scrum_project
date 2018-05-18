@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-// const Item = require('./item-model');
-// const User = require('./user');
 
 /**
  * OrderSchema schema
