@@ -79,5 +79,14 @@ app.use('/user/', userRouter);
 app.use('/item/', itemRouter);
 app.use('/order/', orderRouter);
 
+/**
+ * Use public folder for images
+ */
+app.use(express.static('public'));
+app.get('/img/:img', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/img/', req.params.img));
+});
+
+
 // Start server
 app.listen(port);
