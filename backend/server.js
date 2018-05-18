@@ -84,7 +84,9 @@ app.use('/order/', orderRouter);
  */
 app.use(express.static('public'));
 app.get('/img/:img', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/img/', req.params.img));
+  if (req.params.img) {
+    res.sendFile(path.join(__dirname, '/public/img/', req.params.img));
+  } 
 });
 
 

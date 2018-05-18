@@ -43,10 +43,13 @@ module.exports = {
     * @returns {Object}
     */
   create(req, res) {
-    const address = req.body.img;
-    const url = req.body.url;
-    req.body.img = `${url}.jpg`;
-    request(address).pipe(fs.createWriteStream(`public/img/${url}.jpg`)); 
+    if (req.body.img) {
+      const address = req.body.img;
+      const url = req.body.url;
+      req.body.img = `${url}.jpg`;
+      request(address).pipe(fs.createWriteStream(`public/img/${url}.jpg`)); 
+    }
+
     Item.create(req.body)
       .then(item => res.send(item))
       .catch(err => res.send(err));
