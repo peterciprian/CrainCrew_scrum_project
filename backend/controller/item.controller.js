@@ -102,7 +102,6 @@ module.exports = {
   update: (req, res) => {
     let body = JSON.stringify(req.body);
     body = JSON.parse(body);
-
     if (req.file) {
       body.img = `http://localhost:8080/${req.file.path.replace(/\\/, '/')}`;
     } else {
@@ -111,9 +110,7 @@ module.exports = {
 
     body.url = removeSpecChar(body.name);
 
-    Item.findByIdAndUpdate(req.params.id, body, {
-      new: true,
-    })
+    Item.findByIdAndUpdate(req.params.id, body)
       .then((item) => {
         if (item.img !== '') {
           const imgpath = `./${item.img.substring(22)}`;
@@ -141,7 +138,7 @@ module.exports = {
    */
   delete: (req, res) => {
     Item.findByIdAndRemove(req.params.id)
-      .then(item => {
+      .then((item) => {
         if (item.img) {
           const imgpath = `./${item.img.substring(22)}`;
           fs.unlink(imgpath, (err) => {
@@ -151,7 +148,7 @@ module.exports = {
             console.log('img was deleted');
           });
         }
-        res.json(item)
+        res.json(item);
       })
       .catch(err => res.send(err));
   },
