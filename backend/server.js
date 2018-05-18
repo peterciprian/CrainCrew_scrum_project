@@ -79,5 +79,8 @@ app.use('/user/', userRouter);
 app.use('/item/', itemRouter);
 app.use('/order/', orderRouter);
 
+// Product pictures folder
+app.use('/uploads', express.static('uploads'));
+
 // Start server
 app.listen(port);
