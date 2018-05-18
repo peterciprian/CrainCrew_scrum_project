@@ -72,7 +72,6 @@ export class DashboardComponent implements OnInit {
     console.log(this.singleorderPrice);
   }
   getOrdersDate() {
-    this.singleorderDate = Array<number>;
     for (let i = 0; i < this.order.length; i++) {
       this.singleorderDate.push(Number(this.order[i].createdAt.slice(8, 10)));
      }

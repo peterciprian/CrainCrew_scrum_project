@@ -15,6 +15,7 @@ const User = require('./models/user');
 const userRouter = require('./route/user.route');
 const itemRouter = require('./route/item.route');
 const orderRouter = require('./route/order.route');
+const permission = require('permission');
 
 const logDirectory = path.join(__dirname, 'log');
 const port = process.env.PORT || 8080;
