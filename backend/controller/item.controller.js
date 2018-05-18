@@ -1,4 +1,12 @@
 const Item = require('../models/item-model.js');
+const fs = require('fs');
+const request = require('request');
+
+const filePath = './public/img/';
+
+function deleteFile(fileName) {
+  fs.unlinkSync(filePath + fileName);
+}
 
 /**
  * @module Product
@@ -34,11 +42,21 @@ module.exports = {
     * @param {Object} - Http response object
     * @returns {Object}
     */
-  create: (req, res) => {
+  create(req, res) {
+    const address = req.body.img;
+    const url = req.body.url;
+    req.body.img = `${url}.jpg`;
+    request(address).pipe(fs.createWriteStream(`public/img/${url}.jpg`)); 
     Item.create(req.body)
       .then(item => res.send(item))
       .catch(err => res.send(err));
   },
+  /*
+  create: (req, res) => {
+    Item.create(req.body)
+      .then(item => res.send(item))
+      .catch(err => res.send(err));
+  }, */
   /**
     * Update function to update an existing product
     * @param {Object} - Http request object
