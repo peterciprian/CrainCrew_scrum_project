@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { ItemCrudService } from '../item-crud.service';
 import { Item } from '../item';
 
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -34,6 +37,8 @@ export class ProductsComponent implements OnInit {
     category: '',
   };
 
+  myForm: FormGroup;
+
   showThumbnail = true;
 
   searchValue = '';
@@ -45,9 +50,32 @@ export class ProductsComponent implements OnInit {
 
 
   ngOnInit() {
+    this.myForm = new FormGroup({
+      'name': new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      'manufacturer': new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      'url': new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      'price': new FormControl('', [
+        Validators.required,
+        Validators.min(1000),
+      ]),
+      'category': new FormControl('', Validators.required),
+      'img': new FormControl('')
+    });
   }
 
-  constructor(public http: Http) { this.list(); }
+  constructor(
+    public http: Http) {
+    this.list();
+  }
 
   showThumbnailSwitch() {
     this.showThumbnail = true;
@@ -82,6 +110,7 @@ export class ProductsComponent implements OnInit {
       });
   }
 
+
   create() {
     console.log(this.item);
     this.http.post(this.baseUrl, this.item, this.options)
@@ -96,6 +125,7 @@ export class ProductsComponent implements OnInit {
           category: '',
         };
         this.list();
+        this.myForm.reset();
       });
   }
 
