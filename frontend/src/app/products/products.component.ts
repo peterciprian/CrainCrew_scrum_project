@@ -59,6 +59,14 @@ export class ProductsComponent implements OnInit {
     this.list();
   }
 
+  showAdultTable() {
+
+  }
+
+  showKidTable() {
+
+  }
+
   list() {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
