@@ -1,5 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { RequestOptions, Http } from '@angular/http';
+
+@Pipe({ name: 'total' })
+export class TotalPipe implements PipeTransform {
+  transform(order: any) {
+    let total = 0;
+    console.log();
+    for (let i = 0; i < order.items.length; i++) {
+      total += order.items[i].item.price * order.items[i].quantity;
+    }
+    return `${total} HUF`;
+  }
+}
 
 @Component({
   selector: 'app-orders',
@@ -16,22 +28,22 @@ export class OrdersComponent implements OnInit {
   items: any;
 
   actualOrder = {
-    user : '',
-    items : [
-      {item : '', quantity : ''}
-    ],
-    price : 0
-  };
-
-  newOrder = {
-    user : '',
-    items : [
-      {item : '', quantity : ''}
+    user: '',
+    items: [
+      { item: '', quantity: '' }
     ],
     price: 0
   };
 
-    price: number;
+  newOrder = {
+    user: '',
+    items: [
+      { item: '', quantity: '' }
+    ],
+    price: 0
+  };
+
+  price: number;
 
   constructor(public http: Http) {
     this.listOrders();
@@ -59,6 +71,7 @@ export class OrdersComponent implements OnInit {
     this.http.get('http://localhost:8080/item/', this.options)
       .subscribe(data => {
         this.items = JSON.parse(data['_body']);
+        console.log(this.items);
       });
   }
 
@@ -70,18 +83,30 @@ export class OrdersComponent implements OnInit {
       });
   }
 
-  create() {
-    /*for (let i = 0; i < this.newOrder.items.length; i++) {
-    this.price += Number(this.newOrder.items[i].item.price) + Number(this.newOrder.items[i].quantity);
-  }*/
-  this.newOrder.price = this.price;
+  create(orderedItems) {
+    let sumPrice = 0;
+    for (let i = 0; i < orderedItems.length; i++) {
+      for (let j = 0; j < this.items.length; j++) {
+        if (orderedItems[i].item === this.items[j]['_id'] ) {
+          sumPrice += Number(this.items[j].price) * Number(orderedItems[i].quantity);
+        }
+    }}
+    this.newOrder.price = sumPrice;
     this.http.post(this.baseUrl, this.newOrder, this.options)
       .subscribe(data => {
         console.log(data);
         this.listOrders();
       });
   }
-  update() {
+  update(orderedItems) {
+    let sumPrice = 0;
+    for (let i = 0; i < orderedItems.length; i++) {
+      for (let j = 0; j < this.items.length; j++) {
+        if (orderedItems[i].item === this.items[j]['_id'] ) {
+          sumPrice += Number(this.items[j].price) * Number(orderedItems[i].quantity);
+        }
+    }}
+    this.actualOrder.price = sumPrice;
     this.http.put(this.baseUrl + 'update/' + this.actualOrder['_id'], this.actualOrder, this.options)
       .subscribe(data => {
         console.log(data);
@@ -107,17 +132,17 @@ export class OrdersComponent implements OnInit {
 
   removeModalRow(id) {
     console.log(id);
-    this.actualOrder.items = this.actualOrder.items.filter(asd => asd._id === id);
+    this.actualOrder.items = this.actualOrder.items.filter(asd => asd['_id'] !== id._id);
     console.log(this.actualOrder);
   }
 
-   addRow() {
+  addRow() {
     this.newOrder.items.push({
       item: '',
       quantity: ''
     });
     console.log(this.newOrder);
-   }
+  }
 
   loadModalData(order) {
     this.actualOrder = order;

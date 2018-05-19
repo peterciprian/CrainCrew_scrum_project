@@ -1,3 +1,4 @@
+import { TotalPipe } from './../orders/orders.component';
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { OrdersComponent } from '../orders/orders.component';
@@ -26,7 +27,6 @@ export class DashboardComponent implements OnInit {
       ['0', '0'],
     ],
     options: {
-      vAxis: {format: 0},
       legend: 'none',
       is3D: 'true',
       chartArea: {width: '90%', height: '70%'},
@@ -76,9 +76,9 @@ export class DashboardComponent implements OnInit {
     console.log(this.singleorderPrice);
   }
   getOrdersDate() {
-    this.singleorderDate = Array<number>;
+    this.singleorderDate = Array<number>();
     for (let i = 0; i < this.order.length; i++) {
-      this.singleorderDate.push(Number(this.order[i].createdAt.slice(8, 10)));
+      this.singleorderDate.push(Number(this.order[i].updatedAt.slice(8, 10)));
      }
      console.log(this.singleorderDate);
   }

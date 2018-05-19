@@ -5,10 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { OrdersComponent } from './orders/orders.component';
+import { OrdersComponent, TotalPipe } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { UsersComponent } from './users/users.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -37,7 +38,8 @@ const routes: Routes = [
     DashboardComponent,
     NotFoundComponent,
     HomeComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    TotalPipe
 ],
   imports: [
     BrowserModule,
@@ -46,7 +48,10 @@ const routes: Routes = [
     ReactiveFormsModule,
     Ng2GoogleChartsModule,
     RouterModule.forRoot(routes),
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC3Me_Mi8SqrA9OGTW8Q7AEMqTzfwcbM-w'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
