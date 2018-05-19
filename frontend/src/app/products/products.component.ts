@@ -95,7 +95,7 @@ export class ProductsComponent implements OnInit {
 
   /**
    * Ha van új link megadva: newImg, létrehoz egy oldImg tulajdonségot
-   * ami megkapja az eredeti img
+   * ami megkapja az eredeti img tulajdonság értékét, vagyis a file mentett nevét
    */
   update() {
     if (this.actualItem.oldImg) {
@@ -103,20 +103,17 @@ export class ProductsComponent implements OnInit {
     }
 
     if (this.actualItem.newImg) {
-      this.actualItem.oldImg = this.actualItem.img; 
+      this.actualItem.oldImg = this.actualItem.img ? this.actualItem.img : 'none';
       this.actualItem.img = this.actualItem.newImg;
-      delete this.actualItem.newImg;
     }
-/*
-    if (this.actualItem.img !== '' && this.actualItem.img && this.actualItem.img !== ' ') {
-      this.actualItem.oldImg = this.actualItem.img;
-      this.actualItem.img = this.actualItem.newImg;
-      delete this.actualItem.newImg;
-    }*/
+
     this.http.put(this.baseUrl + this.actualItem['_id'], this.actualItem, this.options)
       .subscribe(data => {
         console.log(data);
-        this.list();
+        setTimeout(() => {
+          this.list();
+        }, 1000);
+
       });
   }
 
@@ -138,8 +135,8 @@ export class ProductsComponent implements OnInit {
         this.items = JSON.parse(data['_body']);
         this.items = this.items.filter(item =>
           ((item.name).toLocaleLowerCase().indexOf(this.searchFor) !== -1
-          || (item.url).toLocaleLowerCase().indexOf(this.searchFor) !== -1
-          || (item.manufacturer).toLocaleLowerCase().indexOf(this.searchFor) !== -1));
+            || (item.url).toLocaleLowerCase().indexOf(this.searchFor) !== -1
+            || (item.manufacturer).toLocaleLowerCase().indexOf(this.searchFor) !== -1));
         if (!this.items[0]) {
           this.searchSuccess = false;
         }
@@ -151,8 +148,8 @@ export class ProductsComponent implements OnInit {
 
     if (this.lastKey === key) {
       this.multiplier *= -1;
-      }
-    this.items.sort((a , b): any => {
+    }
+    this.items.sort((a, b): any => {
       a[key] = a[key] || '';
       b[key] = b[key] || '';
       this.lastKey = key;
