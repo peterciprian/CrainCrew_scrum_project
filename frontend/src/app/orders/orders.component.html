@@ -13,7 +13,7 @@
       <input class="form-control" type="number" name="quantity" id="quantity" min="0" placeholder="Quantity" [(ngModel)]="newOrder.items[i].quantity">
     </div>
     <button class="btn btn-secondary" (click)="addRow()">Új termék</button>
-    <button class="btn btn-primary" (click)="create()">Rögzítés</button>
+    <button class="btn btn-primary" (click)="create(newOrder.items)">Rögzítés</button>
   </div>
 </div>
 <br>
@@ -92,7 +92,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="update()">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="update(actualOrder.items)">Save changes</button>
       </div>
     </div>
   </div>
