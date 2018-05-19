@@ -1,3 +1,4 @@
+import { TotalPipe } from './../orders/orders.component';
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { OrdersComponent } from '../orders/orders.component';

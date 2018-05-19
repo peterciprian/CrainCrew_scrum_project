@@ -51,15 +51,14 @@
       <td>
         {{item.quantity}} db
       </td>
-      <td *ngIf="item.item !== null">Egységár: {{item.item.price}}</td>
+      <td *ngIf="item.item !== null"><strong>Összeg:</strong> {{item.item.price * item.quantity }}</td>
     </tr>
     <tr>
         <td></td>
         <td></td>
-        <td>
-                Rendelés darabszám összeg: {{order.quantity}} db
-            </td>
-        <td>Rendelés végösszege: {{order.price}}</td>
+        <td></td>
+        <td></td>
+        <td><strong>Rendelés végösszege:</strong>{{order | total}}</td>
     </tr>
   </tbody>
 </table>

@@ -1,5 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform  } from '@angular/core';
 import { RequestOptions, Http } from '@angular/http';
+
+@Pipe({ name: 'total' })
+export class TotalPipe implements PipeTransform {
+  transform(order: any) {
+    let total = 0;
+    console.log();
+    for (let i = 0; i < order.items.length; i++) {
+      total += order.items[i].item.price * order.items[i].quantity;
+    }
+    return `${total} HUF`;
+  }
+}
 
 @Component({
   selector: 'app-orders',

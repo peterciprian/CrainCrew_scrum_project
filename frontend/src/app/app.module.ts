@@ -8,7 +8,7 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { OrdersComponent } from './orders/orders.component';
+import { OrdersComponent, TotalPipe } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { UsersComponent } from './users/users.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -37,7 +37,8 @@ const routes: Routes = [
     DashboardComponent,
     NotFoundComponent,
     HomeComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    TotalPipe
 ],
   imports: [
     BrowserModule,
