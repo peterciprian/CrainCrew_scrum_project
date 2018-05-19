@@ -93,7 +93,26 @@ export class ProductsComponent implements OnInit {
     this.actualItem = Object.assign({}, choosen); // a this.modal megkapja egy duplikációját a choosennen
   }
 
+  /**
+   * Ha van új link megadva: newImg, létrehoz egy oldImg tulajdonségot
+   * ami megkapja az eredeti img
+   */
   update() {
+    if (this.actualItem.oldImg) {
+      delete this.actualItem.oldImg;
+    }
+
+    if (this.actualItem.newImg) {
+      this.actualItem.oldImg = this.actualItem.img; 
+      this.actualItem.img = this.actualItem.newImg;
+      delete this.actualItem.newImg;
+    }
+/*
+    if (this.actualItem.img !== '' && this.actualItem.img && this.actualItem.img !== ' ') {
+      this.actualItem.oldImg = this.actualItem.img;
+      this.actualItem.img = this.actualItem.newImg;
+      delete this.actualItem.newImg;
+    }*/
     this.http.put(this.baseUrl + this.actualItem['_id'], this.actualItem, this.options)
       .subscribe(data => {
         console.log(data);
