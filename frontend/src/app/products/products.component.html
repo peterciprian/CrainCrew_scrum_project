@@ -1,5 +1,6 @@
 <br>
-<h2><i class="fas fa-bicycle"></i> Termékeink</h2>
+<h2>
+  <i class="fas fa-bicycle"></i> Termékeink</h2>
 <hr>
 
 <div class="row">
@@ -43,19 +44,22 @@
       <input [(ngModel)]="item.price" type="text" aria-label="price" aria-describedby="inputGroup-sizing-default" class="form-control"
       />
     </div>
+    <!-- *********** ez lesz a kereshető url, ezt menti el a file neveként .jpg-vel -->
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text">Kép név:</span>
       </div>
       <input [(ngModel)]="item.url" type="text" aria-label="url" aria-describedby="inputGroup-sizing-default" class="form-control"
-      />
+        placeholder="Add meg milyen néven szeretnéd elmenteni a képet" />
     </div>
+
+    <!-- *********** külső url,ahonnan lementjük a képet -->
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <span class="input-group-text">Kép link:</span>
+        <span class="input-group-text">Kép feltöltés:</span>
       </div>
       <input [(ngModel)]="item.img" type="text" aria-label="img" aria-describedby="inputGroup-sizing-default" class="form-control"
-      />
+        placeholder="Adj meg egy linket, ahonnan letölthető a kép" />
     </div>
 
     <br/>
@@ -90,10 +94,16 @@
   <table class="table table-striped" *ngIf="showThumbnail==false">
     <thead>
       <tr>
-        <th class="sort-th" (click)="sortTable('name')">Név</th>
+        <th>
+          <span>
+            <i *ngIf="multiplier === 1" class="far fa-arrow-alt-circle-up"></i>
+            <i *ngIf="multiplier === -1" class="far fa-arrow-alt-circle-down"></i>
+          </span>
+        </th>
+        <th class="sort-th" (click)="sortTable('name')">
+          Név</th>
         <th class="sort-th" (click)="sortTable('manufacturer')">Gyártó</th>
         <th class="sort-th" (click)="sortTable('price')">Ár</th>
-        <th scope="col">Url</th>
         <th scope="col">Kép</th>
         <th class="sort-th" (click)="sortTable('createdAt')">Feltöltve</th>
         <th class="sort-th" (click)="sortTable('updatedAt')">Módosítva</th>
@@ -103,13 +113,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of items">
+        <td></td>
         <td>{{item.name}}</td>
         <td>{{item.manufacturer}}</td>
         <td>{{item.price}}</td>
-        <td>{{item.url}}</td>
         <td>
-          <img id="sm-thumbnail" src="{{item.url}}" alt="bicikli kep">
-        </td>
+          <img *ngIf="item.img" class="sm-thumbnail" src="{{'http://localhost:8080/img/' + item.img}}" alt="bicikli kep">
+          <img *ngIf="!item.img" class="sm-thumbnail" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep"> </td>
         <td>{{item.createdAt | date:'short'}}</td>
         <td>{{item.updatedAt | date:'short'}}</td>
         <td>
@@ -145,13 +155,7 @@
           <input [(ngModel)]="actualItem.name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default" class="form-control"
           />
         </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Url:</span>
-          </div>
-          <input [(ngModel)]="actualItem.url" type="text" aria-label="url" aria-describedby="inputGroup-sizing-default" class="form-control"
-          />
-        </div>
+
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text">Gyártó:</span>
@@ -166,11 +170,26 @@
           <input [(ngModel)]="actualItem.price" type="text" aria-label="price" aria-describedby="inputGroup-sizing-default" class="form-control"
           />
         </div>
-        <br>
-        <div class="input-group">
-          <p> Kép csere: &nbsp;</p>
-          <input id="imageModal" type="file" class="input-control-file" />
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Kép név:</span>
+          </div>
+          <input [(ngModel)]="actualItem.url" type="text" aria-label="url" aria-describedby="inputGroup-sizing-default" class="form-control"
+          />
         </div>
+
+        <p>A kép mentett neve: {{actualItem.img}}</p>
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Link:</span>
+          </div>
+          <input [(ngModel)]="actualItem.newImg" type="text" aria-label="img" aria-describedby="inputGroup-sizing-default" class="form-control"
+            placeholder="A kép frissítéséhez adj meg új linket" />
+        </div>
+        <br>
+
       </div>
       <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-info">Close</button>
