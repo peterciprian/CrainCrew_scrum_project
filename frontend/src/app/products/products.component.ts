@@ -21,7 +21,8 @@ export class ProductsComponent implements OnInit {
     url: '',
     img: '',
     manufacturer: '',
-    price: 0
+    price: 0,
+    category: '',
   };
 
   item: Item = {
@@ -29,7 +30,8 @@ export class ProductsComponent implements OnInit {
     url: '',
     img: '',
     manufacturer: '',
-    price: 0
+    price: 0,
+    category: '',
   };
 
   showThumbnail = true;
@@ -82,7 +84,8 @@ export class ProductsComponent implements OnInit {
           url: '',
           img: '',
           manufacturer: '',
-          price: 0
+          price: 0,
+          category: '',
         };
         this.list();
       });

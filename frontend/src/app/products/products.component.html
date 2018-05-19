@@ -44,6 +44,15 @@
       <input [(ngModel)]="item.price" type="text" aria-label="price" aria-describedby="inputGroup-sizing-default" class="form-control"
       />
     </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Kategória:</span>
+      </div>
+        <select class="custom-select" name="userRole" [(ngModel)]="item.category">
+          <option value="felnőtt">Felnőtt</option>
+          <option value="gyerek">Gyerek</option>
+        </select>
+    </div>
     <!-- *********** ez lesz a kereshető url, ezt menti el a file neveként .jpg-vel -->
     <div class="input-group mb-3">
       <div class="input-group-prepend">
@@ -104,6 +113,7 @@
           Név</th>
         <th class="sort-th" (click)="sortTable('manufacturer')">Gyártó</th>
         <th class="sort-th" (click)="sortTable('price')">Ár</th>
+        <th class="sort-th" (click)="sortTable('category')">Kategória</th>
         <th scope="col">Kép</th>
         <th class="sort-th" (click)="sortTable('createdAt')">Feltöltve</th>
         <th class="sort-th" (click)="sortTable('updatedAt')">Módosítva</th>
@@ -117,6 +127,7 @@
         <td>{{item.name}}</td>
         <td>{{item.manufacturer}}</td>
         <td>{{item.price}}</td>
+        <td>{{item.category}}</td>
         <td>
           <img *ngIf="item.img" class="sm-thumbnail" src="{{'http://localhost:8080/img/' + item.img}}" alt="bicikli kep">
           <img *ngIf="!item.img" class="sm-thumbnail" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep"> </td>
@@ -170,7 +181,15 @@
           <input [(ngModel)]="actualItem.price" type="text" aria-label="price" aria-describedby="inputGroup-sizing-default" class="form-control"
           />
         </div>
-
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Kategória:</span>
+          </div>
+          <select class="custom-select" name="userRole" [(ngModel)]="actualItem.category">
+            <option value="felnőtt">Felnőtt</option>
+            <option value="gyerek">Gyerek</option>
+          </select>
+        </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">Kép név:</span>
