@@ -29,6 +29,11 @@ const ItemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  category: {
+    type: String,
+    required: true,
+    default: 'felnőtt',
+  },
 }, {
   timestamps: true,
 });
