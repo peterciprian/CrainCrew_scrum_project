@@ -25,14 +25,17 @@
   <div class="card card-body">
 
     <form [formGroup]="myForm" novalidate>
-
-      <div class="form-group input-group mb-3">
+      <div class="form-group input-group mb-3"> 
         <div class="input-group-prepend">
           <span class="input-group-text">Termék neve:</span>
         </div>
         <input [(ngModel)]="item.name" class="form-control" formControlName="name" 
         type="text" aria-label="name" aria-describedby="inputGroup-sizing-default"
-        />
+        [ngClass]="{
+          'is-valid': myForm.controls.name.valid && (myForm.controls.name.dirty || myForm.controls.name.touched), 
+          'is-invalid': myForm.controls.name.invalid && (myForm.controls.name.dirty || myForm.controls.name.touched)
+        }"/>
+        <div class="alert alert-danger" *ngIf="myForm.controls.name.invalid && (myForm.controls.name.dirty || myForm.controls.name.touched)">A mező kitöltése kötelező, minimum 3 karakter</div>
       </div>
 
       <div class="form-group input-group mb-3">
@@ -40,9 +43,12 @@
           <span class="input-group-text">Gyártó:</span>
         </div>
         <input [(ngModel)]="item.manufacturer" class="form-control" formControlName="manufacturer" 
-        type="text" aria-label="manufacturer" aria-describedby="inputGroup-sizing-default"/>
-
-        <pre>dirty? {{myForm.controls.manufacturer.dirty | json }}</pre>
+        type="text" aria-label="manufacturer" aria-describedby="inputGroup-sizing-default"
+        [ngClass]="{
+          'is-valid': myForm.controls.manufacturer.valid && (myForm.controls.manufacturer.dirty || myForm.controls.manufacturer.touched), 
+          'is-invalid': myForm.controls.manufacturer.invalid && (myForm.controls.manufacturer.dirty || myForm.controls.manufacturer.touched)
+        }"/>
+        <div class="alert alert-danger" *ngIf="myForm.controls.manufacturer.invalid && (myForm.controls.manufacturer.dirty || myForm.controls.manufacturer.touched)">A mező kitöltése kötelező, minimum 3 karakter</div>
       </div>
 
       <div class="form-group input-group mb-3">
@@ -50,7 +56,12 @@
           <span class="input-group-text">Ár:</span>
         </div>
         <input [(ngModel)]="item.price"  class="form-control" formControlName="price"
-        type="number" aria-label="price" aria-describedby="inputGroup-sizing-default"/>
+        type="number" aria-label="price" aria-describedby="inputGroup-sizing-default"
+        [ngClass]="{
+          'is-valid': myForm.controls.price.valid && (myForm.controls.price.dirty || myForm.controls.price.touched), 
+          'is-invalid': myForm.controls.price.invalid && (myForm.controls.price.dirty || myForm.controls.price.touched)
+        }"/>
+        <div class="alert alert-danger" *ngIf="myForm.controls.price.invalid && (myForm.controls.price.dirty || myForm.controls.price.touched)">A mező kitöltése kötelező, minimum 1000</div>
       </div>
 
       <!-- *********** ez lesz a kereshető url, ezt menti el a file neveként .jpg-vel -->
@@ -60,8 +71,12 @@
         </div>
         <input [(ngModel)]="item.url" class="form-control" formControlName="url" 
         type="text" aria-label="url" aria-describedby="inputGroup-sizing-default"  
-        placeholder="Add meg milyen néven szeretnéd elmenteni a képet"/>
-
+        placeholder="Add meg milyen néven szeretnéd elmenteni a képet"
+        [ngClass]="{
+          'is-valid': myForm.controls.url.valid && (myForm.controls.url.dirty || myForm.controls.url.touched), 
+          'is-invalid': myForm.controls.url.invalid && (myForm.controls.url.dirty || myForm.controls.url.touched)
+        }"/>
+        <div class="alert alert-danger" *ngIf="myForm.controls.url.invalid && (myForm.controls.url.dirty || myForm.controls.url.touched)">A mező kitöltése kötelező</div>
       </div>
 
       <!-- *********** külső url,ahonnan lementjük a képet -->
@@ -76,7 +91,7 @@
 
     </form>
 
-    <pre>{{myForm.value | json }}</pre>
+    <!--<pre>{{myForm.value | json }}</pre> -->
     <br/>
 
     <button [disabled]="!myForm.valid" type="sumbmit" (click)="create()" data-toggle="collapse" data-target="#addNew" aria-controls="collapseExample"

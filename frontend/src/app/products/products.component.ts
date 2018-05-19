@@ -49,23 +49,23 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = new FormGroup({
-      'name': new FormControl(this.item.name, [
+      'name': new FormControl('', [
         Validators.required,
         Validators.minLength(3),
       ]),
-      'manufacturer': new FormControl(this.item.manufacturer, [
+      'manufacturer': new FormControl('', [
         Validators.required,
         Validators.minLength(3),
       ]),
-      'url': new FormControl(this.item.url, [
+      'url': new FormControl('', [
         Validators.required,
         Validators.minLength(3),
       ]),
-      'price': new FormControl(this.item.price, [
+      'price': new FormControl('', [
         Validators.required,
-        Validators.minLength(3),
+        Validators.min(1000),
       ]),
-      'img': new FormControl(this.item.img)
+      'img': new FormControl('')
     });
   }
 
