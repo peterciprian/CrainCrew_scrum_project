@@ -3,6 +3,8 @@ export interface Item {
     name: string,
     url: string,
     img?: string,
+    oldImg?: string,
+    newImg?: string,
     manufacturer: string,
     price: number,
     createdAt?: Date,
