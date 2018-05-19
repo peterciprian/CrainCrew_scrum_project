@@ -4,7 +4,7 @@
 <hr>
 
 <div class="row">
-  <div class="col-md-12 col-lg-8">
+  <div class="col-md-12 col-lg-6">
     <div role="group" aria-label="Basic example" class="btn-group">
       <button type="button" data-toggle="collapse" data-target="#addNew" aria-expanded="false" aria-controls="collapseExample"
         class="btn btn-info">Új termék hozzáadása</button>
@@ -12,23 +12,33 @@
       <button type="button" (click)="showList()" class="btn btn-info">Lista nézet</button>
     </div>
   </div>
+  <div class="col-md-12 col-lg-2">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button">Action</button>
+        <button class="dropdown-item" type="button">Another action</button>
+        <button class="dropdown-item" type="button">Something else here</button>
+      </div>
+    </div>
+  </div>
   <div class="col-md-12 col-lg-4">
     <form class="form-inline">
-      <input name="searchValue" type="search" placeholder="keresés" aria-label="Search" [(ngModel)]="searchFor" class="form-control col-md-6"
-      />
+      <input name="searchValue" type="search" placeholder="keresés" aria-label="Search" [(ngModel)]="searchFor" class="form-control col-md-6"/>
       <button type="button" (click)="search()" class="btn btn-warning my-4 my-sm-0">Keres</button>
     </form>
+    <br>
   </div>
 </div>
-<br/>
 <div id="addNew" class="collapse">
   <div class="card card-body">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text">Termék neve:</span>
       </div>
-      <input [(ngModel)]="item.name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default" class="form-control"
-      />
+      <input [(ngModel)]="item.name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default" class="form-control"/>
     </div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
