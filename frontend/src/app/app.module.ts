@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -47,7 +48,10 @@ const routes: Routes = [
     ReactiveFormsModule,
     Ng2GoogleChartsModule,
     RouterModule.forRoot(routes),
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC3Me_Mi8SqrA9OGTW8Q7AEMqTzfwcbM-w'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
