@@ -152,7 +152,7 @@ export class ProductsComponent implements OnInit {
     if (this.lastKey === key) {
       this.multiplier *= -1;
       }
-    this.items.sort((a, b) => {
+    this.items.sort((a , b): any => {
       a[key] = a[key] || '';
       b[key] = b[key] || '';
       this.lastKey = key;
