@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
     private formBuilder: FormBuilder,
     public http: Http,
     private router: Router,
-    private flashMessagesService: FlashMessagesService) { 
+    private flashMessagesService: FlashMessagesService) {
       this.createForm();
       this.isLoggedIn();
      }
