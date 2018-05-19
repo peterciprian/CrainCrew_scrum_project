@@ -2,11 +2,11 @@ const Item = require('../models/item-model.js');
 const fs = require('fs');
 const request = require('request');
 
-const filePath = '../public/img/';
-/*
+const filePath = './public/img/';
+
 function deleteFile(fileName) {
   fs.unlinkSync(filePath + fileName);
-}*/
+}
 
 /**
  * @module Product
@@ -67,7 +67,7 @@ module.exports = {
       const urlcim = req.body.url;
       req.body.img = `${urlcim}.jpg`;
       request(address).pipe(fs.createWriteStream(`public/img/${urlcim}.jpg`));
-     // deleteFile(req.body.oldImg);
+      deleteFile(req.body.oldImg);
     }
     Item.findByIdAndUpdate(req.params.id, req.body, { new: true })
       .then(item => res.json(item))
@@ -81,7 +81,10 @@ module.exports = {
     */
   delete: (req, res) => {
     Item.findByIdAndRemove(req.params.id)
-      .then(item => res.json(item))
+      .then((item) => {
+        res.json(item);
+        deleteFile(item.img);
+      })
       .catch(err => res.send(err));
   },
 };
