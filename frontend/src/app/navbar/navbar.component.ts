@@ -1,4 +1,4 @@
-import { Component, OnInit, group } from '@angular/core';
+import { Component, OnInit, group, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,6 +14,10 @@ import { parse } from 'path';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  @Output() loggedInUser: any;
+  @Output() longgedIn = false;
+  @Output() isAdmin = false;
+
   form: FormGroup;
   message;
   messageClass;
@@ -36,7 +40,6 @@ export class NavbarComponent implements OnInit {
   registerred = false;
   longgedIn = false;
   isAdmin = false;
-  loggedInUser: any;
 
   options = new RequestOptions({ withCredentials: true });
 
@@ -46,7 +49,6 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private flashMessagesService: FlashMessagesService) {
     this.createForm();
-    this.isLoggedIn();
   }
 
   /** 
@@ -170,6 +172,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoggedIn();
   }
 
 }
