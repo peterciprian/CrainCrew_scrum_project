@@ -14,9 +14,6 @@ import { parse } from 'path';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  @Output() loggedInUser: any;
-  @Output() longgedIn = false;
-  @Output() isAdmin = false;
 
   form: FormGroup;
   message;
@@ -40,6 +37,8 @@ export class NavbarComponent implements OnInit {
   registerred = false;
   longgedIn = false;
   isAdmin = false;
+  loggedInUser: any;
+
 
   options = new RequestOptions({ withCredentials: true });
 
@@ -65,6 +64,9 @@ export class NavbarComponent implements OnInit {
         console.log(this.loggedInUser);
         if (this.loggedInUser.user) {
           this.longgedIn = true;
+          if (this.loggedInUser.user.role === 'admin') {
+            this.isAdmin = true;
+          }
         }
         console.log('Anyone logged in?:' + this.longgedIn);
       });
