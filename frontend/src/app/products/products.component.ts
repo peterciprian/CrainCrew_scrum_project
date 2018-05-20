@@ -126,7 +126,6 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-
   create() {
     console.log(this.item);
     this.http.post(this.baseUrl, this.item, this.options)
