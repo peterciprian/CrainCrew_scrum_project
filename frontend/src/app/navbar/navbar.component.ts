@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Http, RequestOptions } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { parse } from 'path';
+/* import { parse } from 'path'; */
 
 
 @Component({

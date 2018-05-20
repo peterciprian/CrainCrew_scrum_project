@@ -58,7 +58,7 @@ export class UsersComponent implements OnInit {
   setShippingAddress() {
     if (this.newUser.billingAddress !== undefined || this.selectedUser.billingAddress !== undefined) {
       this.newUser.shippingAddress = this.newUser.billingAddress;
-      this.selectedUser.shippingAddress = this.selectedUser.billingAddress;
+      /* this.selectedUser.shippingAddress = this.selectedUser.billingAddress; */
     }
   }
   addUser() {

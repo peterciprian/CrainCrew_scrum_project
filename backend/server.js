@@ -17,7 +17,7 @@ const itemRouter = require('./route/item.route');
 const orderRouter = require('./route/order.route');
 const permission = require('permission');
 const nodemailer = require('nodemailer');
-const request = require('request');
+/* const request = require('then-request'); */
 
 const logDirectory = path.join(__dirname, 'log');
 const port = process.env.PORT || 8080;
@@ -93,14 +93,9 @@ app.get('/img/:img', (req, res) => {
 });
 
 app.post('/sendemail', (req, res) => {
-  /* let mailadr = null;
-  request('http://localhost:8080/user/profile', { json: true }, (err, data, body) => {
-    if (err) {
-      return console.log(err);
-    }
-    mailadr = data.user.email;
-    console.log(mailadr);
-  }); */
+  const mailadr = req.body;
+  console.log(mailadr);
+  // mailadr.from = 'cranecrew.zsiga@gmail.com';
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -108,13 +103,13 @@ app.post('/sendemail', (req, res) => {
     auth: {
       user: 'cranecrew.zsiga@gmail.com',
       pass: 'Cc012345',
-    }
+    },
   });
   const mailOptions = {
-    from: 'sdsfsef@gmail.com',
+    from: mailadr.from,
     to: 'cranecrew.zsiga@gmail.com',
-    subject: req.body.subject,
-    text: req.body.body,
+    subject: mailadr.subject,
+    text: mailadr.body,
     html: '<b>Testing email function</b>',
   };
 
