@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Http, RequestOptions } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { parse } from 'path';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class NavbarComponent implements OnInit {
   message2;
   messageClass2;
   baseUrl = 'http://localhost:8080/user/';
+
+
   user: any = {
     username: '',
     password: ''
@@ -32,6 +35,8 @@ export class NavbarComponent implements OnInit {
 
   registerred = false;
   longgedIn = false;
+  isAdmin = false;
+  loggedInUser: any;
 
   options = new RequestOptions({ withCredentials: true });
 
@@ -40,17 +45,19 @@ export class NavbarComponent implements OnInit {
     public http: Http,
     private router: Router,
     private flashMessagesService: FlashMessagesService) {
-      this.createForm();
-      this.isLoggedIn();
-     }
+    this.createForm();
+    this.isLoggedIn();
+  }
 
   isLoggedIn() {
     this.http.get(this.baseUrl + 'profile', this.options)
       .subscribe(data => {
-        console.log(data['_body']);
-        if (data.ok) {
+        this.loggedInUser = JSON.parse(data['_body']);
+        console.log(this.loggedInUser);
+        if (this.loggedInUser.user) {
           this.longgedIn = true;
         }
+        console.log('Anyone logged in?:' + this.longgedIn);
       });
   }
 
@@ -126,6 +133,9 @@ export class NavbarComponent implements OnInit {
       }
       this.router.navigate(['dashboard']);
     });
+    setTimeout(() => {
+      this.isLoggedIn();
+    }, 2000);
   }
 
   logout() {
