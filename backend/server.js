@@ -94,11 +94,11 @@ app.get('/img/:img', (req, res) => {
 
 app.post('/sendemail', (req, res) => {
   /* let mailadr = null;
-  request('http://localhost:8080/user/profile', { json: true }, (err, response, body) => {
+  request('http://localhost:8080/user/profile', { json: true }, (err, data, body) => {
     if (err) {
       return console.log(err);
     }
-    mailadr = response.user.email;
+    mailadr = data.user.email;
     console.log(mailadr);
   }); */
   const transporter = nodemailer.createTransport({
@@ -111,7 +111,7 @@ app.post('/sendemail', (req, res) => {
     }
   });
   const mailOptions = {
-    from: 'obeseegsge@gmail.com',
+    from: 'sdsfsef@gmail.com',
     to: 'cranecrew.zsiga@gmail.com',
     subject: req.body.subject,
     text: req.body.body,
@@ -119,9 +119,9 @@ app.post('/sendemail', (req, res) => {
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
-   /*  if (error) {
+    if (error) {
       return console.log(error);
-    } */
+    }
     console.log('Message %s sent: %s', info.messageId, info.response);
     res.render('index');
   });

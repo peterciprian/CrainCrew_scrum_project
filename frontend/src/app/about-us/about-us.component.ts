@@ -21,6 +21,6 @@ export class AboutUsComponent implements OnInit {
   }
 
   sendmailform() {
-
+    console.log('object');
   }
 }
