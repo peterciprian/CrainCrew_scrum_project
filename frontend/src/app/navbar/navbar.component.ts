@@ -1,11 +1,11 @@
-import { Component, OnInit, group } from '@angular/core';
+import { Component, OnInit, group, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Http, RequestOptions } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { parse } from 'path';
+/* import { parse } from 'path'; */
 
 
 @Component({
@@ -14,6 +14,7 @@ import { parse } from 'path';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
   form: FormGroup;
   message;
   messageClass;
@@ -38,6 +39,7 @@ export class NavbarComponent implements OnInit {
   isAdmin = false;
   loggedInUser: any;
 
+
   options = new RequestOptions({ withCredentials: true });
 
   constructor(
@@ -46,7 +48,6 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private flashMessagesService: FlashMessagesService) {
     this.createForm();
-    this.isLoggedIn();
   }
 
   /** 
@@ -63,6 +64,9 @@ export class NavbarComponent implements OnInit {
         console.log(this.loggedInUser);
         if (this.loggedInUser.user) {
           this.longgedIn = true;
+          if (this.loggedInUser.user.role === 'admin') {
+            this.isAdmin = true;
+          }
         }
         console.log('Anyone logged in?:' + this.longgedIn);
       });
@@ -142,7 +146,7 @@ export class NavbarComponent implements OnInit {
     });
     setTimeout(() => {
       this.isLoggedIn();
-    }, 2000);
+    }, 1000);
   }
 
   logout() {
@@ -153,6 +157,7 @@ export class NavbarComponent implements OnInit {
     this.flashMessagesService.show('Sikeres kilépés.', { cssClass: 'alert-success' });
     this.registerred = false;
     this.longgedIn = false;
+    this.isAdmin = false;
     this.router.navigate(['home']);
   }
 
@@ -170,6 +175,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoggedIn();
   }
 
 }

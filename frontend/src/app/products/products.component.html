@@ -6,7 +6,7 @@
 <div class="row">
   <div class="col-md-12 col-lg-6">
     <div role="group" aria-label="Basic example" class="btn-group">
-      <button type="button" data-toggle="collapse" data-target="#addNew" aria-expanded="false" aria-controls="collapseExample"
+      <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="collapse" data-target="#addNew" aria-expanded="false" aria-controls="collapseExample"
         class="btn btn-info">Új termék hozzáadása</button>
       <button type="button" (click)="showThumbnailSwitch()" class="btn btn-info">Nagyképes nézet</button>
       <button type="button" (click)="showList()" class="btn btn-info">Lista nézet</button>
@@ -31,7 +31,7 @@
     <br>
   </div>
 </div>
-<div id="addNew" class="collapse">
+<div *ngIf="(longgedIn && isAdmin)" id="addNew" class="collapse">
   <div class="card card-body">
 
     <form [formGroup]="myForm" novalidate>
@@ -137,8 +137,9 @@
         <p class="card-text">Fogyasztói ár: {{item.price | currency:'HUF '}} </p>
       </div>
       <div class="card-footer">
-        <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek / Módosítás</button>
-        <button type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törles</button>
+        <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek</button>
+        <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Módosítás</button>
+        <button *ngIf="(longgedIn && isAdmin)" type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törles</button>
       </div>
     </div>
   </div>
@@ -163,8 +164,8 @@
         <th class="sort-th" (click)="sortTable('price')">Ár</th>
         <th class="sort-th" (click)="sortTable('category')">Kategória</th>
         <th scope="col">Kép</th>
-        <th class="sort-th" (click)="sortTable('createdAt')">Feltöltve</th>
-        <th class="sort-th" (click)="sortTable('updatedAt')">Módosítva</th>
+        <th *ngIf="(longgedIn && isAdmin)" class="sort-th" (click)="sortTable('createdAt')">Feltöltve</th>
+        <th *ngIf="(longgedIn && isAdmin)" class="sort-th" (click)="sortTable('updatedAt')">Módosítva</th>
         <th></th>
         <th></th>
       </tr>
@@ -179,13 +180,13 @@
         <td>
           <img *ngIf="item.img" class="sm-thumbnail" src="{{'http://localhost:8080/img/' + item.img}}" alt="bicikli kep">
           <img *ngIf="!item.img" class="sm-thumbnail" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep"> </td>
-        <td>{{item.createdAt | date:'short'}}</td>
-        <td>{{item.updatedAt | date:'short'}}</td>
+        <td *ngIf="(longgedIn && isAdmin)"> {{item.createdAt | date:'short'}}</td>
+        <td *ngIf="(longgedIn && isAdmin)"> {{item.updatedAt | date:'short'}}</td>
         <td>
           <div class="btn-group">
             <!-- Button trigger modal-->
-            <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Módosítás</button>
-            <button type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törlés</button>
+            <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Módosítás</button>
+            <button *ngIf="(longgedIn && isAdmin)" type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törlés</button>
           </div>
         </td>
       </tr>

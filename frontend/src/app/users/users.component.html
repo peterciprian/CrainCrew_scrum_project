@@ -9,6 +9,9 @@
     <th>Felhasználónév</th>
     <th>Email</th>
     <th>Jogosultság</th>
+    <th>Számlázási cím</th>
+    <th>Szállítási cím</th>
+    <th>Telefonszám</th>
     <th>Művelet</th>
   </thead>
   <tbody>
@@ -26,6 +29,15 @@
           <option value="admin">admin</option>
           <option value="user">user</option>
         </select>
+      </td>
+      <td>
+          <input type="text" class="form-control" [(ngModel)]="user.billingAddress">
+      </td>
+      <td>
+          <input type="text" class="form-control" [(ngModel)]="user.shippingAddress">
+      </td>
+      <td>
+          <input type="text" class="form-control" [(ngModel)]="user.phoneNumber">
       </td>
       <td>
         <div class="btn-group">
@@ -58,6 +70,15 @@
         <br>
         <label for="password">Jelszó</label>
         <input type="text" class="form-control" name="password" id="newUserPassword" [(ngModel)]="newUser.password">
+        <br>
+        <label for="billindAddress">Számlázási cím</label>
+        <input type="text" class="form-control" name="billindAddress" id="newUserbillingAddress" [(ngModel)]="newUser.billingAddress">
+        <br>
+        <label for="shippingAddress">Szállítási cím(amennyiben megegyezik a számlázási címmel hagyja szabadon)</label>
+        <input type="text" class="form-control" name="shippingAddress" [(ngModel)]="newUser.shippingAddress">
+        <br>
+        <label for="phoneNumber">Telefonszám</label>
+        <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="newUser.phoneNumber">
       </div>
       <div class="modal-footer">
         <div class="row show-hide-message">

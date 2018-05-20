@@ -16,6 +16,9 @@ export class UsersComponent implements OnInit {
     username: '',
     email: '',
     password: '',
+    billingAddress: '',
+    shippingAddress: '',
+    phoneNumber: 0,
     role: '',
   };
   constructor(public http: Http) {
@@ -30,14 +33,17 @@ export class UsersComponent implements OnInit {
       .subscribe(data => {
         this.users = JSON.parse(data['_body']);
         console.log(this.users.length);
+        console.log(this.users);
   });
   }
 
   editUser(user) {
     this.selectedUser = user;
+    /* this.setShippingAddress(), */
     this.http.put(`http://localhost:8080/user/update/${this.selectedUser['_id']}`, this.selectedUser, this.options)
       .subscribe(data => {
         console.log(data);
+        console.log(user);
         setTimeout(this.getUsers(), 300);
       });
   }
@@ -49,7 +55,14 @@ export class UsersComponent implements OnInit {
         setTimeout(this.getUsers(), 300);
       });
   }
+  setShippingAddress() {
+    if (this.newUser.billingAddress !== undefined || this.selectedUser.billingAddress !== undefined) {
+      this.newUser.shippingAddress = this.newUser.billingAddress;
+      /* this.selectedUser.shippingAddress = this.selectedUser.billingAddress; */
+    }
+  }
   addUser() {
+    this.setShippingAddress(),
     this.http.post(`http://localhost:8080/user/register`, this.newUser, this.options)
     .subscribe(data => {
       console.log(data['_body']);

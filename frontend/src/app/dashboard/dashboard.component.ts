@@ -70,15 +70,15 @@ export class DashboardComponent implements OnInit {
     this.singleorderPrice = [];
     for (let i = 0; i < this.order.length; i++) {
       this.orderPrice += this.order[i].price;
-      this.singleorderPrice.push(Number(this.order[i].price));
+      this.singleorderPrice.push(this.order[i].price);
     }
     console.log(this.orderPrice);
     console.log(this.singleorderPrice);
   }
   getOrdersDate() {
-    this.singleorderDate = Array<number>;
+    this.singleorderDate = [];
     for (let i = 0; i < this.order.length; i++) {
-      this.singleorderDate.push(Number(this.order[i].updatedAt.slice(8, 10)));
+      this.singleorderDate.push(this.order[i].updatedAt.slice(8, 10));
      }
      console.log(this.singleorderDate);
   }

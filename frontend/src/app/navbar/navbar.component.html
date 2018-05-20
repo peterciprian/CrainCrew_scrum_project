@@ -8,20 +8,20 @@
       <a class="navbar-brand" routerLink="aboutus" routerLinkActive="active" id="shop"><i id="logo" class="fab fa-gitlab"></i> Crane Crew</a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a *ngIf="(longgedIn)" routerLink="dashboard" routerLinkActive="active" class="nav-link">Dashboard
+          <a *ngIf="(longgedIn && isAdmin)" routerLink="dashboard" routerLinkActive="active" class="nav-link">Dashboard
             <span class="sr-only">(current)</span>
           </a>
         </li>
       </ul>
-      <ul *ngIf="(longgedIn)" class="nav navbar-nav navbar-right">
+      <ul  class="nav navbar-nav navbar-right">
         <li class="nav-item">
-          <a routerLinkActive="active" routerLink="dashboard/orders" class="nav-link" >Rendelések</a>
+          <a *ngIf="(longgedIn && isAdmin)" routerLinkActive="active" routerLink="dashboard/orders" class="nav-link" >Rendelések</a>
         </li>
         <li class="nav-item">
           <a routerLinkActive="active" routerLink="dashboard/products" class="nav-link" >Termékek</a>
         </li>
         <li class="nav-item">
-          <a routerLinkActive="active" routerLink="dashboard/users" class="nav-link" >Felhasználók</a>
+          <a *ngIf="(longgedIn && isAdmin)" routerLinkActive="active" routerLink="dashboard/users" class="nav-link" >Felhasználók</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -119,10 +119,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" (keyup.enter)="login()">
           <form [formGroup]="form">
               <div class="form-group">
-                <label for="username">Felhasználónév</label>
+                <label for="username">E-mail cím:</label>
                 <div>
                   <input type="text" name="username" class="form-control" placeholder="Felhasználónév" formControlName="username" [(ngModel)]="user.username">
                   <div class="alert alert-danger" *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">A mező kitöltése kötelező</div>

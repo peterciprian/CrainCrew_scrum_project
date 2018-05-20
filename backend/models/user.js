@@ -21,6 +21,16 @@ const userSchema = mongoose.Schema({
     required: true,
     default: 'user',
   },
+  billingAddress: {
+    type: String,
+    required: true,
+  },
+  shippingAddress: {
+    type: String,
+  },
+  phoneNumber: {
+    type: Number,
+  },
   orders: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Order',
