@@ -21,7 +21,11 @@ export class ProfileComponent implements OnInit {
   baseUrlOrders = 'http://localhost:8080/order/';
   loggedInUser: any;
   longgedIn = false;
-  ordersByUser: any;
+  setPassword: Object = {
+    oldPassword: '',
+    newPassword: '',
+    newPassword2: ''
+  };
   constructor(
     public http: Http,
     private router: Router,
@@ -117,6 +121,23 @@ export class ProfileComponent implements OnInit {
       { validator: this.samePasswords('password', 'confirm') }
     );
   }
+
+  updatePassword() {
+    if (this.setPassword['newPassword'] === this.setPassword['newPassword2'] && this.setPassword['newPassword'].length > 8) {
+      this.http.post(`http://localhost:8080/user/update/${this.loggedInUser['_id']}`, this.setPassword, this.options)
+        .subscribe(data => {
+          if (data.ok === true) {
+            console.log('success', 'Sikeres jelszómódosítás');
+          } else {
+            console.log('error');
+          }
+        }, error => {
+          console.log('upsz');
+        });
+    } else { this.passwordValidationError(); }
+  }
+
+  passwordValidationError() {console.log('Something bad happened'); }
 
   ngOnInit() {}
 }

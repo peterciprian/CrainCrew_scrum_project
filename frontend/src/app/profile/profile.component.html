@@ -9,7 +9,7 @@
           <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Rendelések</a>
         </li>
         <li class="nav-item">
-          <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Szerkesztés</a>
+          <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Adatok szerkesztése</a>
         </li>
       </ul>
       <div class="tab-content py-4">
@@ -22,14 +22,15 @@
                 Felhasználónév: {{loggedInUser.user.username}}
                 <br> Email: {{loggedInUser.user.email}}
                 <br> Regisztrált: {{loggedInUser.user.createdAt | date}}
+                <br> Telefonszám: {{loggedInUser.user.phoneNumber}}
               </p>
               <h6>Szállítási cím</h6>
               <p>
                 {{loggedInUser.user.shippingAddress}}
-                </p>
+              </p>
               <h6>Számlázási cím</h6>
               <p>
-              {{loggedInUser.user.billingAddress}}
+                {{loggedInUser.user.billingAddress}}
               </p>
             </div>
           </div>
@@ -70,13 +71,13 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Szállítási Cím</label>
+              <label class="col-lg-3 col-form-label form-control-label">Szállítási cím</label>
               <div class="col-lg-9">
                 <input class="form-control" type="text" value="{{loggedInUser.user.shippingAddress}}" name="currentusershipping" [(ngModel)]="loggedInUser.user.shippingAddress">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Számlázási Cím</label>
+              <label class="col-lg-3 col-form-label form-control-label">Számlázási cím</label>
               <div class="col-lg-9">
                 <input class="form-control" type="text" value="{{loggedInUser.user.billingAddress}}" name="currentuserbilling" [(ngModel)]="loggedInUser.user.billingAddress">
               </div>
@@ -88,22 +89,11 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Jelszó</label>
-              <div class="col-lg-9">
-                <input class="form-control" type="password" value="loggedInUser.user.password" name="currentuserpassword" [(ngModel)]="loggedInUser.user.password">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label">Jelszó újra</label>
-              <div class="col-lg-9">
-                <input class="form-control" type="password" value="loggedInUser.user.password">
-              </div>
-            </div>
-            <div class="form-group row">
               <label class="col-lg-3 col-form-label form-control-label"></label>
               <div class="col-lg-9">
                 <input type="reset" class="btn btn-secondary" value="Mégsem">
                 <input type="button" class="btn btn-primary" (click)="editUser(loggedInUser.user)" value="Mentés">
+                <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#password-modal" value="Jelszó megváltoztatása">
               </div>
             </div>
           </form>
@@ -112,3 +102,47 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="password-modal" tabindex="-1" role="dialog" aria-labelledby="password-modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="password-modalLabel">Jelszó megváltoztatása</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <div class="form-group">
+            <label for="password">Régi jelszó</label>
+            <div>
+              <input type="password" name="oldpassword" class="form-control" placeholder="Régi jelszó" [(ngModel)]='setPassword.oldpassword'>
+            </div>
+            <div class="form-group">
+              <label for="password">Új jelszó</label>
+              <div>
+                <input type="password" name="password" class="form-control" placeholder="Új jelszó" [(ngModel)]='setPassword.newPassword'>
+              </div>
+              <div class="form-group">
+                <label for="confirm">Új jelszó ismét</label>
+                <div>
+                  <input type="password" name="password2" class="form-control" placeholder="Új jelszó ismét" [(ngModel)]='setPassword.newPassword2'>
+                </div>
+              </div>
+            </div>
+            </div>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <div class="row show-hide-message">
+            <div [ngClass]="messageClass">
+              {{message}}
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
+          <button type="button" class="btn btn-success" (click)="updatePassword()" data-dismiss="modal">Változtatás</button>
+        </div>
+      </div>
+    </div>
+  </div>

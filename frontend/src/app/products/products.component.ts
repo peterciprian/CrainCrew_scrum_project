@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
-import { ItemCrudService } from '../item-crud.service';
 import { Item } from '../item';
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -9,8 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
-  // tslint:disable-next-line:use-input-property-decorator
-  inputs: ['loggedInUser', 'longgedIn', 'isAdmin'],
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
@@ -137,6 +133,7 @@ export class ProductsComponent implements OnInit {
       .subscribe(data => {
         this.items = JSON.parse(data['_body']);
       });
+
   }
 
   listAdult() {
