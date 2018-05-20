@@ -47,14 +47,14 @@ module.exports = {
       const address = req.body.img;
       const url = req.body.url;
       req.body.img = `${url}.jpg`;
-      request(address).pipe(fs.createWriteStream(`public/img/${url}.jpg`)); 
+      request(address).pipe(fs.createWriteStream(`public/img/${url}.jpg`));
     }
 
     Item.create(req.body)
       .then(item => res.send(item))
       .catch(err => res.send(err));
   },
-  
+
   /**
     * Update function to update an existing product
     * @param {Object} - Http request object

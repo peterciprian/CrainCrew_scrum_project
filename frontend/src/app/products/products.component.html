@@ -4,66 +4,123 @@
 <hr>
 
 <div class="row">
-  <div class="col-md-12 col-lg-8">
+  <div class="col-md-12 col-lg-6">
     <div role="group" aria-label="Basic example" class="btn-group">
-      <button type="button" data-toggle="collapse" data-target="#addNew" aria-expanded="false" aria-controls="collapseExample"
+      <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="collapse" data-target="#addNew" aria-expanded="false" aria-controls="collapseExample"
         class="btn btn-info">Új termék hozzáadása</button>
       <button type="button" (click)="showThumbnailSwitch()" class="btn btn-info">Nagyképes nézet</button>
       <button type="button" (click)="showList()" class="btn btn-info">Lista nézet</button>
     </div>
   </div>
+  <div class="col-md-12 col-lg-2">
+    <div class="dropdown">
+      <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Kategóriák
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" (click)="showAdultTable()" type="button">Felnőtt</button>
+        <button class="dropdown-item" (click)="showKidTable()" type="button">Gyerek</button>
+      </div>
+    </div>
+  </div>
   <div class="col-md-12 col-lg-4">
     <form class="form-inline">
-      <input name="searchValue" type="search" placeholder="keresés" aria-label="Search" [(ngModel)]="searchFor" class="form-control col-md-6"
-      />
+      <input name="searchValue" type="search" placeholder="keresés" aria-label="Search" [(ngModel)]="searchFor" class="form-control col-md-6"/>
       <button type="button" (click)="search()" class="btn btn-warning my-4 my-sm-0">Keres</button>
     </form>
+    <br>
   </div>
 </div>
-<br/>
-<div id="addNew" class="collapse">
+<div *ngIf="(longgedIn && isAdmin)" id="addNew" class="collapse">
   <div class="card card-body">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Termék neve:</span>
-      </div>
-      <input [(ngModel)]="item.name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default" class="form-control"
-      />
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Gyártó:</span>
-      </div>
-      <input [(ngModel)]="item.manufacturer" type="text" aria-label="manufacturer" aria-describedby="inputGroup-sizing-default"
-        class="form-control" />
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Ár:</span>
-      </div>
-      <input [(ngModel)]="item.price" type="text" aria-label="price" aria-describedby="inputGroup-sizing-default" class="form-control"
-      />
-    </div>
-    <!-- *********** ez lesz a kereshető url, ezt menti el a file neveként .jpg-vel -->
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Kép név:</span>
-      </div>
-      <input [(ngModel)]="item.url" type="text" aria-label="url" aria-describedby="inputGroup-sizing-default" class="form-control"
-        placeholder="Add meg milyen néven szeretnéd elmenteni a képet" />
-    </div>
 
-    <!-- *********** külső url,ahonnan lementjük a képet -->
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Kép feltöltés:</span>
+    <form [formGroup]="myForm" novalidate>
+      <div class="form-group input-group mb-3"> 
+        <div class="input-group-prepend">
+          <span class="input-group-text">Termék neve:</span>
+        </div>
+        <input [(ngModel)]="item.name" class="form-control" formControlName="name" 
+        type="text" aria-label="name" aria-describedby="inputGroup-sizing-default"
+        [ngClass]="{
+          'is-valid': myForm.controls.name.valid && (myForm.controls.name.dirty || myForm.controls.name.touched), 
+          'is-invalid': myForm.controls.name.invalid && (myForm.controls.name.dirty || myForm.controls.name.touched)
+        }"/>
+        <div class="alert alert-danger" *ngIf="myForm.controls.name.invalid && (myForm.controls.name.dirty || myForm.controls.name.touched)">A mező kitöltése kötelező, minimum 3 karakter</div>
       </div>
-      <input [(ngModel)]="item.img" type="text" aria-label="img" aria-describedby="inputGroup-sizing-default" class="form-control"
+
+      <div class="form-group input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Gyártó:</span>
+        </div>
+        <input [(ngModel)]="item.manufacturer" class="form-control" formControlName="manufacturer" 
+        type="text" aria-label="manufacturer" aria-describedby="inputGroup-sizing-default"
+        [ngClass]="{
+          'is-valid': myForm.controls.manufacturer.valid && (myForm.controls.manufacturer.dirty || myForm.controls.manufacturer.touched), 
+          'is-invalid': myForm.controls.manufacturer.invalid && (myForm.controls.manufacturer.dirty || myForm.controls.manufacturer.touched)
+        }"/>
+        <div class="alert alert-danger" *ngIf="myForm.controls.manufacturer.invalid && (myForm.controls.manufacturer.dirty || myForm.controls.manufacturer.touched)">A mező kitöltése kötelező, minimum 3 karakter</div>
+      </div>
+
+      <div class="form-group input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Ár:</span>
+        </div>
+        <input [(ngModel)]="item.price"  class="form-control" formControlName="price"
+        type="number" aria-label="price" aria-describedby="inputGroup-sizing-default"
+        [ngClass]="{
+          'is-valid': myForm.controls.price.valid && (myForm.controls.price.dirty || myForm.controls.price.touched), 
+          'is-invalid': myForm.controls.price.invalid && (myForm.controls.price.dirty || myForm.controls.price.touched)
+        }"/>
+        <div class="alert alert-danger" *ngIf="myForm.controls.price.invalid && (myForm.controls.price.dirty || myForm.controls.price.touched)">A mező kitöltése kötelező, minimum 1000</div>
+      </div>
+
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Kategória:</span>
+          </div>
+            <select class="custom-select" name="userRole" [(ngModel)]="item.category" 
+            class="form-control" formControlName="category" 
+            [ngClass]="{
+              'is-valid': myForm.controls.category.valid && (myForm.controls.category.dirty || myForm.controls.category.touched), 
+              'is-invalid': myForm.controls.category.invalid && (myForm.controls.category.dirty || myForm.controls.category.touched)
+            }">
+              <option selected value="felnott">Felnőtt</option>
+              <option value="gyerek">Gyerek</option>
+            </select>
+      </div>
+
+      <!-- *********** ez lesz a kereshető url, ezt menti el a file neveként .jpg-vel -->
+      <div class="form-group input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Kép név:</span>
+        </div>
+        <input [(ngModel)]="item.url" class="form-control" formControlName="url" 
+        type="text" aria-label="url" aria-describedby="inputGroup-sizing-default"  
+        placeholder="Add meg milyen néven szeretnéd elmenteni a képet"
+        [ngClass]="{
+          'is-valid': myForm.controls.url.valid && (myForm.controls.url.dirty || myForm.controls.url.touched), 
+          'is-invalid': myForm.controls.url.invalid && (myForm.controls.url.dirty || myForm.controls.url.touched)
+        }"/>
+        <div class="alert alert-danger" *ngIf="myForm.controls.url.invalid && (myForm.controls.url.dirty || myForm.controls.url.touched)">A mező kitöltése kötelező</div>
+      </div>
+
+      <!-- *********** külső url,ahonnan lementjük a képet -->
+      <div class="form-group input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Kép feltöltés:</span>
+        </div>
+        <input [(ngModel)]="item.img" class="form-control" formControlName="img" 
+        type="text" aria-label="img" aria-describedby="inputGroup-sizing-default" 
         placeholder="Adj meg egy linket, ahonnan letölthető a kép" />
-    </div>
+      </div>
 
+    </form>
+
+    <!--<pre>{{myForm.value | json }}</pre> -->
     <br/>
-    <button type="sumbmit" (click)="create()" data-toggle="collapse" data-target="#addNew" aria-controls="collapseExample" class="btn btn-info">Hozzáad</button>
+
+    <button [disabled]="!myForm.valid" type="sumbmit" (click)="create()" data-toggle="collapse" data-target="#addNew" aria-controls="collapseExample"
+      class="btn btn-info">Hozzáad</button>
     <button type="button" data-toggle="collapse" data-target="#addNew" aria-controls="collapseExample" class="btn btn-light">Mégsem</button>
   </div>
 </div>
@@ -80,8 +137,9 @@
         <p class="card-text">Fogyasztói ár: {{item.price | currency:'HUF '}} </p>
       </div>
       <div class="card-footer">
-        <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek / Módosítás</button>
-        <button type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törles</button>
+        <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek</button>
+        <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Módosítás</button>
+        <button *ngIf="(longgedIn && isAdmin)" type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törles</button>
       </div>
     </div>
   </div>
@@ -104,9 +162,10 @@
           Név</th>
         <th class="sort-th" (click)="sortTable('manufacturer')">Gyártó</th>
         <th class="sort-th" (click)="sortTable('price')">Ár</th>
+        <th class="sort-th" (click)="sortTable('category')">Kategória</th>
         <th scope="col">Kép</th>
-        <th class="sort-th" (click)="sortTable('createdAt')">Feltöltve</th>
-        <th class="sort-th" (click)="sortTable('updatedAt')">Módosítva</th>
+        <th *ngIf="(longgedIn && isAdmin)" class="sort-th" (click)="sortTable('createdAt')">Feltöltve</th>
+        <th *ngIf="(longgedIn && isAdmin)" class="sort-th" (click)="sortTable('updatedAt')">Módosítva</th>
         <th></th>
         <th></th>
       </tr>
@@ -117,16 +176,17 @@
         <td>{{item.name}}</td>
         <td>{{item.manufacturer}}</td>
         <td>{{item.price}}</td>
+        <td>{{item.category}}</td>
         <td>
           <img *ngIf="item.img" class="sm-thumbnail" src="{{'http://localhost:8080/img/' + item.img}}" alt="bicikli kep">
           <img *ngIf="!item.img" class="sm-thumbnail" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep"> </td>
-        <td>{{item.createdAt | date:'short'}}</td>
-        <td>{{item.updatedAt | date:'short'}}</td>
+        <td *ngIf="(longgedIn && isAdmin)"> {{item.createdAt | date:'short'}}</td>
+        <td *ngIf="(longgedIn && isAdmin)"> {{item.updatedAt | date:'short'}}</td>
         <td>
           <div class="btn-group">
             <!-- Button trigger modal-->
-            <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Módosítás</button>
-            <button type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törlés</button>
+            <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Módosítás</button>
+            <button *ngIf="(longgedIn && isAdmin)" type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törlés</button>
           </div>
         </td>
       </tr>
@@ -170,7 +230,15 @@
           <input [(ngModel)]="actualItem.price" type="text" aria-label="price" aria-describedby="inputGroup-sizing-default" class="form-control"
           />
         </div>
-
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Kategória:</span>
+          </div>
+          <select class="custom-select" name="userRole" [(ngModel)]="actualItem.category">
+            <option value="felnőtt">Felnőtt</option>
+            <option value="gyerek">Gyerek</option>
+          </select>
+        </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">Kép név:</span>

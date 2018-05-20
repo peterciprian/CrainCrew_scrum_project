@@ -1,4 +1,25 @@
 <br>
 <h2> Üdvözlöm!</h2>
-<h2> Kérem jelentkezzen be!</h2>
+<p clss="lead"> Kérem jelentkezzen be!</p>
 <hr>
+
+
+<!-- *********** Picture view -->
+<div class="container">
+        <div class="card-columns" *ngIf="showThumbnail==true">
+          <div class="card" *ngFor='let item of items'>
+            <img *ngIf="item.img" class="card-img-top" src="{{'http://localhost:8080/img/' + item.img}}" alt="bicikli kep">
+            <img *ngIf="!item.img" class="card-img-top" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep">
+            <div class="card-body">
+              <h5 class="card-title">Termék neve: {{item.name}}</h5>
+              <p class="card-text">Fogyasztói ár: {{item.price | currency:'HUF '}} </p>
+            </div>
+            <div class="card-footer">
+              <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek / Módosítás</button>
+              <button type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törles</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
