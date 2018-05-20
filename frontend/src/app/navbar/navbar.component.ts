@@ -142,7 +142,7 @@ export class NavbarComponent implements OnInit {
       } else {
         this.flashMessagesService.show('Sikertelen belépés, ellenőrid adataid!', { cssClass: 'alert-danger' });
       }
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['dashboard/products']);
     });
     setTimeout(() => {
       this.isLoggedIn();
