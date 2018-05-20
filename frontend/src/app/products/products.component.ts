@@ -88,17 +88,33 @@ export class ProductsComponent implements OnInit {
   }
 
   showAdultTable() {
-
+    this.showThumbnail = false;
+    this.listAdult();
   }
 
   showKidTable() {
-
+    this.showThumbnail = false;
+    this.listKid();
   }
 
   list() {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
         this.items = JSON.parse(data['_body']);
+      });
+  }
+
+  listAdult() {
+    this.http.get(this.baseUrl, this.options)
+      .subscribe(data => {
+        this.items = JSON.parse(data['_body']).filter(item => item.category === 'felnőtt');
+      });
+  }
+
+  listKid() {
+    this.http.get(this.baseUrl, this.options)
+      .subscribe(data => {
+        this.items = JSON.parse(data['_body']).filter(item => item.category === 'gyerek');
       });
   }
 
@@ -109,7 +125,6 @@ export class ProductsComponent implements OnInit {
         console.log(this.items);
       });
   }
-
 
   create() {
     console.log(this.item);
