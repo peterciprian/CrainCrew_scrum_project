@@ -6,6 +6,8 @@ import { Item } from '../item';
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { ConsoleReporter } from 'jasmine';
 
 
 @Component({
@@ -56,6 +58,7 @@ export class ProductsComponent implements OnInit {
   isAdmin = false;
   loggedInUser: any;
 
+  cart = [];
 
   ngOnInit() {
     this.isLoggedIn();
@@ -83,7 +86,8 @@ export class ProductsComponent implements OnInit {
   }
 
   constructor(
-    public http: Http) {
+    public http: Http,
+    private flashMessagesService: FlashMessagesService) {
     this.list();
   }
 
@@ -249,6 +253,12 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
+
+  selectedItem(item) {
+    this.cart.push(item);
+    this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' });
+  }
+
 
 
 }

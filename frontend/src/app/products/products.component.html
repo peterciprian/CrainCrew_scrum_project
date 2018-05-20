@@ -32,6 +32,13 @@
   </div>
 </div>
 <div *ngIf="(longgedIn && isAdmin)" id="addNew" class="collapse">
+
+Kosár:
+<ul>
+  <li *ngFor="let item of cart">{{item.name}}</li>
+</ul>
+
+<div id="addNew" class="collapse">
   <div class="card card-body">
 
     <form [formGroup]="myForm" novalidate>
@@ -137,9 +144,15 @@
         <p class="card-text">Fogyasztói ár: {{item.price | currency:'HUF '}} </p>
       </div>
       <div class="card-footer">
+<<<<<<< HEAD
         <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek</button>
         <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Módosítás</button>
         <button *ngIf="(longgedIn && isAdmin)" type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törles</button>
+=======
+        <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek / Módosítás</button>
+        <button type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törles</button>
+        <button type="button"(click)="selectedItem(item)" class="btn btn-sm btn-warning"><i class="fas fa-shopping-cart"></i></button>
+>>>>>>> develop-balazs
       </div>
     </div>
   </div>

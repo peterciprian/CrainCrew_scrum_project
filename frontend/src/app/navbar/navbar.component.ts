@@ -140,7 +140,7 @@ export class NavbarComponent implements OnInit {
         this.longgedIn = true;
         console.log(data['_body']);
       } else {
-        this.flashMessagesService.show('Sikertelen belépés, ellenőrid adataid!', { cssClass: 'alert-danger' });
+        this.flashMessagesService.show('Sikertelen belépés, ellenőrizd adataid!', { cssClass: 'alert-danger' });
       }
       this.router.navigate(['dashboard']);
     });
