@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="row my-2">
+    <div class="col-lg-8 order-lg-2">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profil</a>
+        </li>
+        <li class="nav-item">
+          <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Rendelések</a>
+        </li>
+        <li class="nav-item">
+          <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Szerkesztés</a>
+        </li>
+      </ul>
+      <div class="tab-content py-4">
+        <div class="tab-pane active" id="profile">
+          <h5 class="mb-3">Felhasználói profil</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Alap adatok</h6>
+              <p>
+                Felhasználónév: {{loggedInUser.user.username}}
+                <br> Email: {{loggedInUser.user.email}}
+                <br> Regisztrált: {{loggedInUser.user.createdAt | date}}
+              </p>
+              <h6>Szállítási cím</h6>
+              <p>
+                Ország: {{loggedInUser.user.country}}
+                <br> Város: {{loggedInUser.user.city}}
+                <br> Utca/házszám: {{loggedInUser.user.street}}
+                <br>
+              </p>
+              <h6>Számlázási cím</h6>
+              <p>
+                Ország: {{loggedInUser.user.country}}
+                <br> Város: {{loggedInUser.user.city}}
+                <br> Utca/házszám: {{loggedInUser.user.street}}
+              </p>
+            </div>
+          </div>
+          <!--/row-->
+        </div>
+        <div class="tab-pane" id="messages">
+          <table class="table table-bordered text-center">
+            <thead>
+              <th>ID</th>
+              <th>Felhasználó</th>
+              <th>Termék</th>
+              <th>Darabszám</th>
+              <th>Mikor</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orders">
+                <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order['_id']}}</td>
+                <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order.user.username}}</td>
+                <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order.items[0].item.name}}</td>
+                <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order.items[0].quantity}}</td>
+                <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order.createdAt | date}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="edit">
+          <form role="form">
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Username</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="text" value="{{loggedInUser.user.username}}" name="currentuserusername" [(ngModel)]="loggedInUser.user.username">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Email</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="email" name="currentuseremail" value="{{loggedInUser.user.email}}" [(ngModel)]="loggedInUser.user.email">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Szállítási Cím</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="text" value="" placeholder="Ország">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"></label>
+              <div class="col-lg-6">
+                <input class="form-control" type="text" value="" placeholder="Város">
+              </div>
+              <div class="col-lg-3">
+                <input class="form-control" type="text" value="" placeholder="Utca">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Számlázási Cím</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="text" value="" placeholder="Ország">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"></label>
+              <div class="col-lg-6">
+                <input class="form-control" type="text" value="" placeholder="Város">
+              </div>
+              <div class="col-lg-3">
+                <input class="form-control" type="text" value="" placeholder="Utca">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Jelszó</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="password" value="loggedInUser.user.password" name="currentuserpassword" [(ngModel)]="loggedInUser.user.password">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Jelszó újra</label>
+              <div class="col-lg-9">
+                <input class="form-control" type="password" value="loggedInUser.user.password">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"></label>
+              <div class="col-lg-9">
+                <input type="reset" class="btn btn-secondary" value="Mégsem">
+                <input type="button" class="btn btn-primary" (click)="editUser(loggedInUser.user)" value="Mentés">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
