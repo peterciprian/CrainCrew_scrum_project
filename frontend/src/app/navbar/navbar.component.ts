@@ -49,6 +49,13 @@ export class NavbarComponent implements OnInit {
     this.isLoggedIn();
   }
 
+  /** 
+   * Bekéri a szerveről, az aktuálisan belépett user adatait
+   * először az OnInit hívja meg, ill login() metódus végé is meghívjuk
+   * ha nincs senki belépve, üres objectummal tér vissza
+   * Ha van user, egy user objectumot ad vissza: loggedInUser változóba
+   * Ha van user megnézi a role tulajdonságát, ha admin, az isAdmi változót "true"-ra állítja
+  */
   isLoggedIn() {
     this.http.get(this.baseUrl + 'profile', this.options)
       .subscribe(data => {
