@@ -146,7 +146,7 @@ export class NavbarComponent implements OnInit {
     });
     setTimeout(() => {
       this.isLoggedIn();
-    }, 2000);
+    }, 1000);
   }
 
   logout() {
@@ -157,6 +157,7 @@ export class NavbarComponent implements OnInit {
     this.flashMessagesService.show('Sikeres kilépés.', { cssClass: 'alert-success' });
     this.registerred = false;
     this.longgedIn = false;
+    this.isAdmin = false;
     this.router.navigate(['home']);
   }
 
