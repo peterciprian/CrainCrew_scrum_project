@@ -13,3 +13,43 @@
 <agm-map [latitude]="lat" [longitude]="lng">
   <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 </agm-map>
+
+<div class="container"><br />
+  <h1>Send The Email</h1><br />
+  <form action="/sendemail" method="post">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="form-group col-md-4">
+        <label for="to">To:</label>
+        <input type="email" class="form-control" name="to">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="form-group col-md-4">
+        <label for="subject">Subject:</label>
+        <input type="text" class="form-control" name="subject">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4"></div>
+        <div class="form-group col-md-4">
+          <label for="body">Body:</label>
+          <textarea cols="5" rows="5"class="form-control" name="body"></textarea>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="form-group col-md-4">
+        <button type="submit" class="btn btn-success">Send</button>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    </div>
+  </form>
+</div>

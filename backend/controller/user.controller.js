@@ -47,6 +47,9 @@ module.exports = {
       username: req.body.username,
       isAdmin: req.body.isAdmin,
       email: req.body.email,
+      billingAddress: req.body.billingAddress,
+      shippingAddress: req.body.billingAddress,
+      phoneNumber: req.body.phoneNumber,
     }), req.body.password)
       .then(() => res.json({
         success: 'Sikeres regisztráció',
