@@ -7,8 +7,6 @@ import { Item } from '../item';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { ConsoleReporter } from 'jasmine';
-
 
 @Component({
   // tslint:disable-next-line:use-input-property-decorator

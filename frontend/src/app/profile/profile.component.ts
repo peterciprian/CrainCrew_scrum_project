@@ -71,6 +71,7 @@ export class ProfileComponent implements OnInit {
   }
 
   samePasswords(password, confirm) {
+    // tslint:disable-next-line:no-shadowed-variable
     return (group: FormGroup) => {
       if (group.controls[password].value === group.controls[confirm].value) {
         return null;
@@ -81,6 +82,7 @@ export class ProfileComponent implements OnInit {
   }
   validateEmail(controls) {
     const regExp = new RegExp(
+      // tslint:disable-next-line:max-line-length
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
     if (regExp.test(controls.value)) {
@@ -115,5 +117,6 @@ export class ProfileComponent implements OnInit {
       { validator: this.samePasswords('password', 'confirm') }
     );
   }
+
   ngOnInit() {}
 }

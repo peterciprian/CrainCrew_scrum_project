@@ -28,8 +28,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: '**', component: NotFoundComponent },
-  { path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({
