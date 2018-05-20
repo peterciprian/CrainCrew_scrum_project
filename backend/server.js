@@ -87,7 +87,7 @@ app.use(express.static('public'));
 app.get('/img/:img', (req, res) => {
   if (req.params.img) {
     res.sendFile(path.join(__dirname, '/public/img/', req.params.img));
-  } 
+  }
 });
 
 

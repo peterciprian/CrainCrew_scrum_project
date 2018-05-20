@@ -31,6 +31,12 @@
     <br>
   </div>
 </div>
+
+Kosár:
+<ul>
+  <li *ngFor="let item of cart">{{item.name}}</li>
+</ul>
+
 <div id="addNew" class="collapse">
   <div class="card card-body">
 
@@ -139,6 +145,7 @@
       <div class="card-footer">
         <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek / Módosítás</button>
         <button type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törles</button>
+        <button type="button"(click)="selectedItem(item)" class="btn btn-sm btn-warning"><i class="fas fa-shopping-cart"></i></button>
       </div>
     </div>
   </div>
