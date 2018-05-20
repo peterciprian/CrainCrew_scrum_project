@@ -16,8 +16,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { CartComponent } from './cart/cart.component';
 import { ProfileComponent } from './profile/profile.component';
-import { Profile } from 'selenium-webdriver/firefox';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -27,8 +27,9 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'home', component: HomeComponent },
   { path: 'aboutus', component: AboutUsComponent },
-  { path: 'profile', component: ProfileComponent}
+  { path: 'cart', component: CartComponent },
   { path: '**', component: NotFoundComponent },
+  { path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({
@@ -43,6 +44,7 @@ const routes: Routes = [
     HomeComponent,
     AboutUsComponent,
     TotalPipe,
+    CartComponent,
     ProfileComponent
 ],
   imports: [

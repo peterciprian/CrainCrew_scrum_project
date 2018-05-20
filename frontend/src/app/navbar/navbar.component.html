@@ -15,6 +15,9 @@
       </ul>
       <ul  class="nav navbar-nav navbar-right">
         <li class="nav-item">
+          <a routerLinkActive="active" routerLink="cart" class="nav-link" ><i class="fas fa-shopping-cart"></i></a>
+        </li>
+        <li class="nav-item">
           <a *ngIf="(longgedIn && isAdmin)" routerLinkActive="active" routerLink="dashboard/orders" class="nav-link" >Rendelések</a>
         </li>
         <li class="nav-item">
