@@ -9,9 +9,14 @@ const CategSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  sequence: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'user',
     required: true,
   },
 }, {

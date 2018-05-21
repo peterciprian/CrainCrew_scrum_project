@@ -47,6 +47,7 @@ module.exports = {
     * @returns {Object}
     */
   update: (req, res) => {
+    req.body.updatedAt = new Date();
     Categ.findByIdAndUpdate(req.params.id, req.body, { new: true })
       .then(categ => res.json(categ))
       .catch(err => res.send(err));

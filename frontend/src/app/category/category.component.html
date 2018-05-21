@@ -1,0 +1,128 @@
+<br>
+<h2>
+  <i class="fas fa-bicycle"></i> Termék kategóriák adminisztrációs felülete</h2>
+<hr>
+
+
+
+<div class="row">
+  <div class="col-md-12 col-lg-6">
+    <div role="group" aria-label="Basic example" class="btn-group">
+      <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="collapse" data-target="#addNew" aria-expanded="false" aria-controls="collapseExample"
+        class="btn btn-info">Új Kategória hozzáadása</button>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="(longgedIn && isAdmin)" id="addNew" class="collapse">
+
+  <div class="card card-body">
+
+    <form [formGroup]="myForm" novalidate>
+      <div class="form-group input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Kategória neve:</span>
+        </div>
+        <input [(ngModel)]="categ.name" class="form-control" formControlName="name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default"
+          [ngClass]="{
+            'is-valid': myForm.controls.name.valid && (myForm.controls.name.dirty || myForm.controls.name.touched), 
+            'is-invalid': myForm.controls.name.invalid && (myForm.controls.name.dirty || myForm.controls.name.touched)
+          }" />
+        <div class="alert alert-danger" *ngIf="myForm.controls.name.invalid && (myForm.controls.name.dirty || myForm.controls.name.touched)">A mező kitöltése kötelező, minimum 3 karakter</div>
+      </div>
+
+      <div class="form-group input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Megjelenési sorrend:</span>
+        </div>
+        <input [(ngModel)]="categ.sequence" class="form-control" formControlName="sequence" type="number" aria-label="sequence" aria-describedby="inputGroup-sizing-default"
+          [ngClass]="{
+            'is-valid': myForm.controls.sequence.valid && (myForm.controls.sequence.dirty || myForm.controls.sequence.touched), 
+            'is-invalid': myForm.controls.sequence.invalid && (myForm.controls.sequence.dirty || myForm.controls.sequence.touched)
+          }" />
+        <div class="alert alert-danger" *ngIf="myForm.controls.sequence.invalid && (myForm.controls.sequence.dirty || myForm.controls.sequence.touched)">A mező kitöltése kötelező, minimum 1 max 99</div>
+      </div>
+
+      <button [disabled]="!myForm.valid" type="sumbmit" (click)="create()" data-toggle="collapse" data-target="#addNew" aria-controls="collapseExample"
+        class="btn btn-info">Hozzáad</button>
+      <button type="button" data-toggle="collapse" data-target="#addNew" aria-controls="collapseExample" class="btn btn-light">Mégsem</button>
+
+    </form>
+
+  </div>
+  <br/>
+</div>
+
+
+<div *ngIf="(longgedIn && isAdmin)" class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Katergória neve:</th>
+        <th>Megjelenési sorrend:</th>
+        <th>Létrehozta:</th>
+        <th>Feltöltve:</th>
+        <th>Módosítva:</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let categ of categs">
+        <td>{{categ.name}}</td>
+        <td>{{categ.sequence}}</td>
+        <td>{{categ.user}}</td>
+        <td>{{categ.createdAt | date:'short'}}</td>
+        <td>{{categ.updatedAt | date:'short'}}</td>
+        <td>
+          <div class="btn-group">
+            <!-- Button trigger modal-->
+            <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(categ._id)" class="btn btn-sm btn-info">Módosítás</button>
+            <button type="button" (click)="delete(categ._id)" class="btn btn-sm btn-danger">Törlés</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+
+<!-- *********** MODAL FOR UPDATE CATEGORY -->
+<div id="updatePost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade">
+  <div role="document" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="exampleModalLabel" class="modal-title">ID: {{actualCateg._id}}</h5>
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>A módosításhoz csak írja át a változtatni kívánt részt!</p>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Kategória neve:</span>
+          </div>
+          <input [(ngModel)]="actualCateg.name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default" class="form-control"
+          />
+        </div>
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Megjelenési sorrend:</span>
+          </div>
+          <input [(ngModel)]="actualCateg.sequence" type="text" aria-label="sequence" aria-describedby="inputGroup-sizing-default"
+            class="form-control" />
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-info">Mégsem</button>
+        <button type="button" data-dismiss="modal" (click)="update()" class="btn btn-primary">Ment</button>
+      </div>
+    </div>
+  </div>
+</div>
