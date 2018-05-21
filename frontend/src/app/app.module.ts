@@ -17,6 +17,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { CategoryComponent } from './category/category.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
@@ -28,6 +30,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'categ', component: CategoryComponent },
   { path: 'profile', component: ProfileComponent },
   { path: '**', component: NotFoundComponent },
 ];
@@ -45,6 +49,8 @@ const routes: Routes = [
     AboutUsComponent,
     TotalPipe,
     CartComponent,
+    CheckoutComponent,
+    CategoryComponent,
     ProfileComponent
 ],
   imports: [

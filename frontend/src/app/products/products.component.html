@@ -14,7 +14,8 @@
   </div>
   <div class="col-md-12 col-lg-2">
     <div class="dropdown">
-      <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
         Kategóriák
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -25,7 +26,8 @@
   </div>
   <div class="col-md-12 col-lg-4">
     <form class="form-inline">
-      <input name="searchValue" type="search" placeholder="keresés" aria-label="Search" [(ngModel)]="searchFor" class="form-control col-md-6"/>
+      <input name="searchValue" type="search" placeholder="keresés" aria-label="Search" [(ngModel)]="searchFor" class="form-control col-md-6"
+      />
       <button type="button" (click)="search()" class="btn btn-warning my-4 my-sm-0">Keres</button>
     </form>
     <br>
@@ -33,28 +35,19 @@
 </div>
 
 <div *ngIf="(longgedIn && isAdmin)" id="addNew" class="collapse">
-  
-<!-- ez a kosár nincs jó heyen itt , ettől behalt
-Kosár:
-<ul>
-  <li *ngFor="let item of cart">{{item.name}}</li>
-</ul>
 
-<div id="addNew" class="collapse">
-  -->
   <div class="card card-body">
 
     <form [formGroup]="myForm" novalidate>
-      <div class="form-group input-group mb-3"> 
+      <div class="form-group input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text">Termék neve:</span>
         </div>
-        <input [(ngModel)]="item.name" class="form-control" formControlName="name" 
-        type="text" aria-label="name" aria-describedby="inputGroup-sizing-default"
-        [ngClass]="{
+        <input [(ngModel)]="item.name" class="form-control" formControlName="name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default"
+          [ngClass]="{
           'is-valid': myForm.controls.name.valid && (myForm.controls.name.dirty || myForm.controls.name.touched), 
           'is-invalid': myForm.controls.name.invalid && (myForm.controls.name.dirty || myForm.controls.name.touched)
-        }"/>
+        }" />
         <div class="alert alert-danger" *ngIf="myForm.controls.name.invalid && (myForm.controls.name.dirty || myForm.controls.name.touched)">A mező kitöltése kötelező, minimum 3 karakter</div>
       </div>
 
@@ -62,12 +55,11 @@ Kosár:
         <div class="input-group-prepend">
           <span class="input-group-text">Gyártó:</span>
         </div>
-        <input [(ngModel)]="item.manufacturer" class="form-control" formControlName="manufacturer" 
-        type="text" aria-label="manufacturer" aria-describedby="inputGroup-sizing-default"
-        [ngClass]="{
+        <input [(ngModel)]="item.manufacturer" class="form-control" formControlName="manufacturer" type="text" aria-label="manufacturer"
+          aria-describedby="inputGroup-sizing-default" [ngClass]="{
           'is-valid': myForm.controls.manufacturer.valid && (myForm.controls.manufacturer.dirty || myForm.controls.manufacturer.touched), 
           'is-invalid': myForm.controls.manufacturer.invalid && (myForm.controls.manufacturer.dirty || myForm.controls.manufacturer.touched)
-        }"/>
+        }" />
         <div class="alert alert-danger" *ngIf="myForm.controls.manufacturer.invalid && (myForm.controls.manufacturer.dirty || myForm.controls.manufacturer.touched)">A mező kitöltése kötelező, minimum 3 karakter</div>
       </div>
 
@@ -75,28 +67,26 @@ Kosár:
         <div class="input-group-prepend">
           <span class="input-group-text">Ár:</span>
         </div>
-        <input [(ngModel)]="item.price"  class="form-control" formControlName="price"
-        type="number" aria-label="price" aria-describedby="inputGroup-sizing-default"
-        [ngClass]="{
+        <input [(ngModel)]="item.price" class="form-control" formControlName="price" type="number" aria-label="price" aria-describedby="inputGroup-sizing-default"
+          [ngClass]="{
           'is-valid': myForm.controls.price.valid && (myForm.controls.price.dirty || myForm.controls.price.touched), 
           'is-invalid': myForm.controls.price.invalid && (myForm.controls.price.dirty || myForm.controls.price.touched)
-        }"/>
+        }" />
         <div class="alert alert-danger" *ngIf="myForm.controls.price.invalid && (myForm.controls.price.dirty || myForm.controls.price.touched)">A mező kitöltése kötelező, minimum 1000</div>
       </div>
 
       <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Kategória:</span>
-          </div>
-            <select class="custom-select" name="userRole" [(ngModel)]="item.category" 
-            class="form-control" formControlName="category" 
-            [ngClass]="{
+        <div class="input-group-prepend">
+          <span class="input-group-text">Kategória:</span>
+        </div>
+        <select class="custom-select" name="userRole" [(ngModel)]="item.category" class="form-control" formControlName="category"
+          [ngClass]="{
               'is-valid': myForm.controls.category.valid && (myForm.controls.category.dirty || myForm.controls.category.touched), 
               'is-invalid': myForm.controls.category.invalid && (myForm.controls.category.dirty || myForm.controls.category.touched)
             }">
-              <option selected value="felnott">Felnőtt</option>
-              <option value="gyerek">Gyerek</option>
-            </select>
+          <option selected value="felnott">Felnőtt</option>
+          <option value="gyerek">Gyerek</option>
+        </select>
       </div>
 
       <!-- *********** ez lesz a kereshető url, ezt menti el a file neveként .jpg-vel -->
@@ -104,13 +94,11 @@ Kosár:
         <div class="input-group-prepend">
           <span class="input-group-text">Kép név:</span>
         </div>
-        <input [(ngModel)]="item.url" class="form-control" formControlName="url" 
-        type="text" aria-label="url" aria-describedby="inputGroup-sizing-default"  
-        placeholder="Add meg milyen néven szeretnéd elmenteni a képet"
-        [ngClass]="{
+        <input [(ngModel)]="item.url" class="form-control" formControlName="url" type="text" aria-label="url" aria-describedby="inputGroup-sizing-default"
+          placeholder="Add meg milyen néven szeretnéd elmenteni a képet" [ngClass]="{
           'is-valid': myForm.controls.url.valid && (myForm.controls.url.dirty || myForm.controls.url.touched), 
           'is-invalid': myForm.controls.url.invalid && (myForm.controls.url.dirty || myForm.controls.url.touched)
-        }"/>
+        }" />
         <div class="alert alert-danger" *ngIf="myForm.controls.url.invalid && (myForm.controls.url.dirty || myForm.controls.url.touched)">A mező kitöltése kötelező</div>
       </div>
 
@@ -119,9 +107,8 @@ Kosár:
         <div class="input-group-prepend">
           <span class="input-group-text">Kép feltöltés:</span>
         </div>
-        <input [(ngModel)]="item.img" class="form-control" formControlName="img" 
-        type="text" aria-label="img" aria-describedby="inputGroup-sizing-default" 
-        placeholder="Adj meg egy linket, ahonnan letölthető a kép" />
+        <input [(ngModel)]="item.img" class="form-control" formControlName="img" type="text" aria-label="img" aria-describedby="inputGroup-sizing-default"
+          placeholder="Adj meg egy linket, ahonnan letölthető a kép" />
       </div>
 
     </form>
@@ -147,10 +134,13 @@ Kosár:
         <p class="card-text">Fogyasztói ár: {{item.price | currency:'HUF '}} </p>
       </div>
       <div class="card-footer">
-        <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek</button>
-        <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Módosítás</button>
+        <button type="button" data-toggle="modal" data-target="#details" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek</button>
+        <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)"
+          class="btn btn-sm btn-info">Módosítás</button>
         <button *ngIf="(longgedIn && isAdmin)" type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törlés</button>
-        <button type="button"(click)="selectedItem(item)" class="btn btn-sm btn-warning"><i class="fas fa-shopping-cart"></i></button>
+        <button type="button" (click)="selectedItem(item)" class="btn btn-sm btn-warning">
+          <i class="fas fa-shopping-cart"></i>
+        </button>
       </div>
     </div>
   </div>
@@ -196,8 +186,14 @@ Kosár:
         <td>
           <div class="btn-group">
             <!-- Button trigger modal-->
-            <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Módosítás</button>
+            <button type="button" data-toggle="modal" data-target="#details" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek</button>
+            <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)"
+              class="btn btn-sm btn-info">Módosítás</button>
             <button *ngIf="(longgedIn && isAdmin)" type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törlés</button>
+            <button type="button" (click)="selectedItem(item)" class="btn btn-sm btn-warning">
+              <i class="fas fa-shopping-cart"></i>
+            </button>
+
           </div>
         </td>
       </tr>
@@ -207,7 +203,7 @@ Kosár:
 <div>&nbsp;</div>
 <div>&nbsp;</div>
 
-<!-- *********** MODAL FOR SHOW DETAILS / UPDATE ITEM -->
+<!-- *********** MODAL FOR UPDATE ITEM -->
 <div id="updatePost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade">
   <div role="document" class="modal-dialog">
     <div class="modal-content">
@@ -273,6 +269,62 @@ Kosár:
       <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-info">Close</button>
         <button type="button" data-dismiss="modal" (click)="update()" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FOR SHOW DETAILS -->
+<div id="details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade">
+  <div role="document" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="exampleModalLabel" class="modal-title"> {{actualItem.name}}</h5>
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img *ngIf="actualItem.img" class="card-img-top" src="{{'http://localhost:8080/img/' + actualItem.img}}" alt="bicikli kep">
+        <img *ngIf="!actualItem.img" class="card-img-top" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Termék név:</span>
+          </div>
+          <span class="form-control">{{actualItem.name}}</span>
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Kategória:</span>
+          </div>
+          <span class="form-control">{{actualItem.category}}</span>
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Gyártó:</span>
+          </div>
+          <span class="form-control">{{actualItem.manufacturer}}</span>
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Ár:</span>
+          </div>
+          <span class="form-control">{{actualItem.price}}</span>
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Értékelések:</span>
+          </div>
+          <ul>
+            <!--li *ngFor="comment of comments" class="form-control"><span>{{comment}}</span></li-->
+          </ul>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-sm btn-info">Close</button>
+        <button type="button" (click)="selectedItem(actualItem)" class="btn btn-sm btn-warning">
+            <i class="fas fa-shopping-cart"></i></button>
       </div>
     </div>
   </div>

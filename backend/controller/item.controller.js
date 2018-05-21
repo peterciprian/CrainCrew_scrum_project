@@ -62,6 +62,7 @@ module.exports = {
     * @returns {Object}
     */
   update: (req, res) => {
+    req.body.updatedAt = new Date();
     if (req.body.oldImg) {
       const address = req.body.img;
       const urlcim = req.body.url;

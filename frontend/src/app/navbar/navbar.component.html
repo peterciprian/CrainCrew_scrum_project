@@ -5,8 +5,13 @@
   </button>
   <div class="container">
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" routerLink="aboutus" routerLinkActive="active" id="shop"><i id="logo" class="fab fa-gitlab"></i> Crane Crew</a>
+      <a class="navbar-brand" routerLink="home" routerLinkActive="active" id="shop"><i id="logo" class="fab fa-gitlab"></i> Crane Crew</a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a routerLink="aboutus" routerLinkActive="active" class="nav-link">Elérhetőség
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
         <li class="nav-item active">
           <a *ngIf="(longgedIn && isAdmin)" routerLink="dashboard" routerLinkActive="active" class="nav-link">Dashboard
             <span class="sr-only">(current)</span>
@@ -15,7 +20,7 @@
       </ul>
       <ul  class="nav navbar-nav navbar-right">
         <li class="nav-item">
-          <a routerLinkActive="active" routerLink="cart" class="nav-link" ><i class="fas fa-shopping-cart"></i></a>
+          <a routerLinkActive="active" routerLink="cart" class="nav-link" ><i class="fas fa-shopping-cart"></i><span class="badge badge-success badge-pill">{{cart.length}}</span></a>
         </li>
         <li>
             <a *ngIf="(longgedIn)" routerLinkActive="active" routerLink="profile" class="nav-link" >{{loggedInUser.user.username}}</a>
@@ -25,6 +30,9 @@
         </li>
         <li class="nav-item">
           <a routerLinkActive="active" routerLink="dashboard/products" class="nav-link" >Termékek</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="(longgedIn && isAdmin)" routerLinkActive="active" routerLink="categ" class="nav-link" >Kategóriák</a>
         </li>
         <li class="nav-item">
           <a *ngIf="(longgedIn && isAdmin)" routerLinkActive="active" routerLink="dashboard/users" class="nav-link" >Felhasználók</a>

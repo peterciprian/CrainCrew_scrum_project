@@ -85,7 +85,7 @@ export class ProductsComponent implements OnInit {
     this.list();
   }
 
-    /** 
+    /**
    * Bekéri a szerveről, az aktuálisan belépett user adatait
    * először az OnInit hívja meg, ill login() metódus végé is meghívjuk
    * ha nincs senki belépve, üres objectummal tér vissza
@@ -250,8 +250,14 @@ export class ProductsComponent implements OnInit {
   }
 
   selectedItem(item) {
-    this.cart.push(item);
-    this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' });
+    this.cart = (localStorage.cartItems ? JSON.parse(localStorage.cartItems) : []);
+    const find = this.cart.findIndex(i => i['_id'] === item['_id']);
+
+    if (find !== -1) {
+        this.flashMessagesService.show('A termék már szerepel a kosárban!', { cssClass: 'alert-warning' });
+      } else {this.cart.push(item);
+    this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' }); }
+    localStorage.cartItems = JSON.stringify(this.cart);
   }
 
 

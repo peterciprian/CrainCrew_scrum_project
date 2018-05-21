@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  public cart = JSON.parse(localStorage.getItem('cartItems'));
+
+  constructor(private flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
+  }
+
+  removeFromCart(item) {
+    console.log(item);
+    this.cart = this.cart.filter(asd => asd['_id'] !== item._id);
+    this.flashMessagesService.show('A termék kikerült a kosárból!', { cssClass: 'alert-success' });
+    localStorage.cartItems = JSON.stringify(this.cart);
+  }
+
+  cartSum() {
+    let sum = 0;
+    this.cart.forEach(item => {
+      sum += item.price;
+    });
+    return sum;
+  }
+
+  emptyCart() {
+    this.cart = [];
+    localStorage.clear();
   }
 
 }
