@@ -180,6 +180,7 @@ export class ProductsComponent implements OnInit {
   modalChange(id) {
     const choosen = this.items.filter(item => item._id === id)[0];
     this.actualItem = Object.assign({}, choosen); // a this.modal megkapja egy duplikációját a choosennen
+    console.log(this.actualItem.img);
   }
 
   /**
