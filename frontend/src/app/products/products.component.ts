@@ -252,8 +252,12 @@ export class ProductsComponent implements OnInit {
 
   selectedItem(item) {
     this.cart = (localStorage.cartItems ? JSON.parse(localStorage.cartItems) : []);
-    this.cart.push(item);
-    this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' });
+    const find = this.cart.findIndex(i => i['_id'] === item['_id']);
+
+    if (find !== -1) {
+        this.flashMessagesService.show('A termék már szerepel a kosárban!', { cssClass: 'alert-warning' });
+      } else {this.cart.push(item);
+    this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' }); }
     localStorage.cartItems = JSON.stringify(this.cart);
   }
 
