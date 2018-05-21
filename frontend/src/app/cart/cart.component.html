@@ -9,6 +9,7 @@
     <thead>
       <th>Név</th>
       <th>Ár</th>
+      <th>Művelet</th>
     </thead>
     <tbody>
       <tr *ngFor="let item of cart">
@@ -20,10 +21,11 @@
       <tr>
         <td><strong>Összesen:</strong></td>
         <td>{{cartSum() | currency: 'Ft '}}</td>
-        <td><a routerLink="../dashboard/products" class="btn btn-sm btn-success">Vissza a boltba</a></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
 </div>
-<div>&nbsp;</div>
+<br>
+<a routerLink="../dashboard/products" class="btn btn-success">Vissza a boltba</a>
 <button class="btn btn-danger" (click)="emptyCart()">Kosár ürítése</button>
