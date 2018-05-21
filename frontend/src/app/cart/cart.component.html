@@ -5,9 +5,6 @@
 <hr>
 
 <div class="col-xs-12 col-lg-6">
-  <!-- <ul class="list-group">
-    <li *ngFor="let item of cart" class="list-group-item">{{item.name}}&nbsp;&nbsp;&nbsp;{{item.price}}</li>
-  </ul> -->
   <table class="table table-bordered text-center">
     <thead>
       <th>Név</th>
@@ -27,3 +24,5 @@
     </tbody>
   </table>
 </div>
+<div>&nbsp;</div>
+<button class="btn btn-danger" (click)="emptyCart()">Kosár ürítése</button>

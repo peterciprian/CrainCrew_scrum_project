@@ -30,4 +30,9 @@ export class CartComponent implements OnInit {
     return sum;
   }
 
+  emptyCart() {
+    this.cart = [];
+    localStorage.clear();
+  }
+
 }
