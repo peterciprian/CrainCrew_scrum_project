@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
   list() {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
-        this.items = JSON.parse(data['_body']);
+        this.items = JSON.parse(data['_body']).reverse();
       });
   }
 
