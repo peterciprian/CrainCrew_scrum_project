@@ -3,3 +3,25 @@
   <i class="fas fa-shopping-cart"></i> Kosár
 </h2>
 <hr>
+
+<div class="col-xs-12 col-lg-6">
+  <!-- <ul class="list-group">
+    <li *ngFor="let item of cart" class="list-group-item">{{item.name}}&nbsp;&nbsp;&nbsp;{{item.price}}</li>
+  </ul> -->
+  <table class="table table-bordered text-center">
+    <thead>
+      <th>Név</th>
+      <th>Ár</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cart">
+        <td>{{item.name}}</td>
+        <td>{{item.price | currency: 'Ft '}}</td>
+      </tr>
+      <tr>
+        <td><strong>Összesen:</strong></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
