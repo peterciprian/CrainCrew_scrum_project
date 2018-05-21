@@ -17,6 +17,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CartComponent } from './cart/cart.component';
+import { CategoryComponent } from './category/category.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'categ', component: CategoryComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
@@ -42,7 +44,8 @@ const routes: Routes = [
     HomeComponent,
     AboutUsComponent,
     TotalPipe,
-    CartComponent
+    CartComponent,
+    CategoryComponent
 ],
   imports: [
     BrowserModule,
