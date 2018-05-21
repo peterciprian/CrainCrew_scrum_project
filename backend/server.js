@@ -15,6 +15,7 @@ const User = require('./models/user');
 const userRouter = require('./route/user.route');
 const itemRouter = require('./route/item.route');
 const orderRouter = require('./route/order.route');
+const categRouter = require('./route/categ.route');
 const permission = require('permission');
 const nodemailer = require('nodemailer');
 /* const request = require('then-request'); */
@@ -81,6 +82,7 @@ app.use(cors({
 app.use('/user/', userRouter);
 app.use('/item/', itemRouter);
 app.use('/order/', orderRouter);
+app.use('/categ/', categRouter);
 
 /**
  * Use public folder for images
