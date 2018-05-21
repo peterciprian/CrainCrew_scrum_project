@@ -180,7 +180,6 @@ export class ProductsComponent implements OnInit {
   modalChange(id) {
     const choosen = this.items.filter(item => item._id === id)[0];
     this.actualItem = Object.assign({}, choosen); // a this.modal megkapja egy duplikációját a choosennen
-    console.log(this.actualItem.img);
   }
 
   /**
@@ -252,6 +251,7 @@ export class ProductsComponent implements OnInit {
   }
 
   selectedItem(item) {
+    this.cart = (localStorage.cartItems ? JSON.parse(localStorage.cartItems) : []);
     this.cart.push(item);
     this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' });
     localStorage.cartItems = JSON.stringify(this.cart);
