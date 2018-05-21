@@ -57,5 +57,14 @@ export class CheckoutComponent implements OnInit {
         console.log(data);
       });*/
   }
+  addOneMore(index) {
+    this.newOrder.items[index].quantity++;
+    console.log(index);
+  }
+
+  removeOne(index) {
+    if (this.newOrder.items[index].quantity > 0) { this.newOrder.items[index].quantity--; }
+    console.log(index);
+  }
 
 }

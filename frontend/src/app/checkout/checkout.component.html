@@ -19,9 +19,9 @@
             <td>{{item.price | currency: 'Ft '}}</td>
             <td>
               <div class="btn-group">
-                <button class="btn btn-light">-</button>
-                <input type="text" value="1" class="text-center" size="1" [(ngModel)]="newOrder.items[i].quantity">
-                <button class="btn btn-info">+</button>
+                <button class="btn btn-light" (click)="removeOne(i)">-</button>
+                <input type="text" value="1" class="text-center" min="0" size="1" [(ngModel)]="newOrder.items[i].quantity">
+                <button class="btn btn-info" (click)="addOneMore(i)">+</button>
               </div>
             </td>
           </tr>
