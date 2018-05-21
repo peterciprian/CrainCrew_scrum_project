@@ -39,6 +39,7 @@ export class NavbarComponent implements OnInit {
   isAdmin = false;
   loggedInUser: any;
 
+  public cart = JSON.parse(localStorage.getItem('cartItems'));
 
   options = new RequestOptions({ withCredentials: true });
 
