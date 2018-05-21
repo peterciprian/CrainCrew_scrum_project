@@ -117,4 +117,20 @@ module.exports = {
       }
     });
   },
+  changePass: (req, res) => {
+    if (req.user) {
+      if (req.user['_id'] == req.params.id) {
+        User.findById(req.params.id).then((user) => {
+          user.changePassword(req.body.oldPassword, req.body.newPassword, (passwordErr) => {
+            if (passwordErr) {
+              res.status(401).json({ err: 'Rossz jelszó' });
+            } else {
+              user.save();
+              res.status(200).json({ success: 'Jelszó sikeresen megváltozott' });
+            }
+          });
+        });
+      } else { res.status(403).json({ err: 'Tiltott művelet' }); }
+    } else { res.status(401).json({ err: 'Nincs bejelentkezve' }); }
+  },
 };

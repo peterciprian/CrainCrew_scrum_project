@@ -124,7 +124,8 @@ export class ProfileComponent implements OnInit {
 
   updatePassword() {
     if (this.setPassword['newPassword'] === this.setPassword['newPassword2'] && this.setPassword['newPassword'].length > 8) {
-      this.http.post(`http://localhost:8080/user/update/${this.loggedInUser['_id']}`, this.setPassword, this.options)
+      console.log(this.loggedInUser.user['_id']);
+      this.http.post(`http://localhost:8080/user/change/${this.loggedInUser.user['_id']}`, this.setPassword, this.options)
         .subscribe(data => {
           if (data.ok === true) {
             console.log('success', 'Sikeres jelszómódosítás');

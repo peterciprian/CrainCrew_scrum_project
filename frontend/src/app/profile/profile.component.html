@@ -44,6 +44,7 @@
               <th>Termék</th>
               <th>Darabszám</th>
               <th>Mikor</th>
+              <th>Végösszeg</th>
             </thead>
             <tbody>
               <tr *ngFor="let order of orders">
@@ -52,6 +53,7 @@
                 <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order.items[0].item.name}}</td>
                 <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order.items[0].quantity}}</td>
                 <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order.createdAt | date}}</td>
+                <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order.price}} Ft</td>
               </tr>
             </tbody>
           </table>
@@ -117,7 +119,7 @@
           <div class="form-group">
             <label for="password">Régi jelszó</label>
             <div>
-              <input type="password" name="oldpassword" class="form-control" placeholder="Régi jelszó" [(ngModel)]='setPassword.oldpassword'>
+              <input type="password" name="oldpassword" class="form-control" placeholder="Régi jelszó" [(ngModel)]='setPassword.oldPassword'>
             </div>
             <div class="form-group">
               <label for="password">Új jelszó</label>
@@ -141,7 +143,7 @@
             </div>
           </div>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
-          <button type="button" class="btn btn-success" (click)="updatePassword()" data-dismiss="modal">Változtatás</button>
+          <button type="button" class="btn btn-success" (click)="updatePassword(setPassword)" data-dismiss="modal">Változtatás</button>
         </div>
       </div>
     </div>

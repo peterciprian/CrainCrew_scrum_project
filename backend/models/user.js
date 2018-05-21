@@ -23,7 +23,6 @@ const userSchema = mongoose.Schema({
   },
   billingAddress: {
     type: String,
-    required: true,
   },
   shippingAddress: {
     type: String,
@@ -38,6 +37,7 @@ const userSchema = mongoose.Schema({
 }, {
   timestamps: true,
 });
+
 
 userSchema.plugin(passportLocalMongoose, {
   maxAttempts: 5,
