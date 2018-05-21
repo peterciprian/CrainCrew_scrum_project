@@ -22,6 +22,14 @@ export class CartComponent implements OnInit {
     localStorage.cartItems = JSON.stringify(this.cart);
   }
 
+  cartSum() {
+    let sum = 0;
+    this.cart.forEach(item => {
+      sum += item.price;
+    });
+    return sum;
+  }
+
   updateCart(item) {
     console.log(item);
   }
