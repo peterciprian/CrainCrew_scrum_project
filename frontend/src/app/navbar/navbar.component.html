@@ -29,8 +29,8 @@
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <div class="button-group">
-          <button *ngIf="(registerred == false && longgedIn == false)" class="btn btn-danger my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModal">Regisztráció</button>
-          <button *ngIf="(longgedIn == false)" class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModalCenter">Belépés</button>
+          <button *ngIf="(!registerred && !longgedIn)" class="btn btn-danger my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModal">Regisztráció</button>
+          <button *ngIf="(!longgedIn)" class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModalCenter">Belépés</button>
           <button *ngIf="(longgedIn)" class="btn btn-warning my-2 my-sm-0" type="button" (click)="logout()" routerLinkActive="active" routerLink="home">Kilépés</button>
         </div>
       </form>
