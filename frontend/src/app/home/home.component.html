@@ -1,4 +1,54 @@
 <br>
-<h2> Üdvözlöm!</h2>
-<h2> Kérem jelentkezzen be!</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h2 *ngIf="(!longgedIn)"> Üdvözlöm!</h2>
+            <p  *ngIf="(!longgedIn)" class="lead"> Kérem jelentkezzen be!</p>
+        </div>
+        <div class="col-4">
+          <h2> Legújabb termékeink:</h2>
+          <p class="lead"> Tekintse meg őket</p>
+        </div>
+      </div>
+</div>
 <hr>
+
+
+<!-- *********** oldalsó katagoria link -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <nav class="nav flex-column">
+        <a routerLink="../dashboard/products" routerLinkActive="active" class="nav-link active" >Gyerek</a>
+        <a routerLink="../dashboard/products" routerLinkActive="active" class="nav-link" >Felnőtt</a>
+        <a class="nav-link disabled" href="#">Mountain bike</a>
+        <a class="nav-link disabled" href="#">Városi</a>
+        <a class="nav-link disabled" href="#">Női</a>
+        <a class="nav-link disabled" href="#">Férfi</a>
+      </nav>
+    </div>
+
+    
+<!-- *********** termékek  -->
+    <div class="col-10">
+      <div class="container">
+        <div class="card-columns">
+          <div class="card" *ngFor='let item of items | slice:0:10'>
+            <img *ngIf="item.img" class="card-img-top" src="{{'http://localhost:8080/img/' + item.img}}" alt="bicikli kep">
+            <img *ngIf="!item.img" class="card-img-top" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep">
+            <div class="card-body">
+              <h5 class="card-title">Termék neve: {{item.name}}</h5>
+              <p class="card-text">Fogyasztói ár: {{item.price | currency:'HUF '}} </p>
+            </div>
+            <div class="card-footer">
+              <button type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+    </div>
+  </div>
+</div>

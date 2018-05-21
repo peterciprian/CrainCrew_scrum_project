@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
-import { ItemCrudService } from '../item-crud.service';
 import { Item } from '../item';
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlashMessagesService } from 'angular2-flash-messages';
+
 
 @Component({
   selector: 'app-products',
@@ -48,8 +48,16 @@ export class ProductsComponent implements OnInit {
   lastKey = '';
   multiplier = 1;
 
+  registerred = false;
+  longgedIn = false;
+  isAdmin = false;
+  loggedInUser: any;
+
+  cart = [];
 
   ngOnInit() {
+    this.isLoggedIn();
+
     this.myForm = new FormGroup({
       'name': new FormControl('', [
         Validators.required,
@@ -73,9 +81,33 @@ export class ProductsComponent implements OnInit {
   }
 
   constructor(
-    public http: Http) {
+    public http: Http,
+    private flashMessagesService: FlashMessagesService) {
     this.list();
   }
+
+    /** 
+   * Bekéri a szerveről, az aktuálisan belépett user adatait
+   * először az OnInit hívja meg, ill login() metódus végé is meghívjuk
+   * ha nincs senki belépve, üres objectummal tér vissza
+   * Ha van user, egy user objectumot ad vissza: loggedInUser változóba
+   * Ha van user megnézi a role tulajdonságát, ha admin, az isAdmi változót "true"-ra állítja
+  */
+ isLoggedIn() {
+  this.http.get('http://localhost:8080/user/profile', this.options)
+    .subscribe(data => {
+      this.loggedInUser = JSON.parse(data['_body']);
+      console.log(this.loggedInUser);
+      if (this.loggedInUser.user) {
+        this.longgedIn = true;
+        if (this.loggedInUser.user.role === 'admin') {
+          this.isAdmin = true;
+        }
+      }
+      console.log('Anyone logged in? - product component:' + this.longgedIn);
+      console.log('Is admin:' + this.isAdmin);
+    });
+}
 
   showThumbnailSwitch() {
     this.showThumbnail = true;
@@ -102,6 +134,7 @@ export class ProductsComponent implements OnInit {
       .subscribe(data => {
         this.items = JSON.parse(data['_body']);
       });
+
   }
 
   listAdult() {
@@ -216,6 +249,12 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
+
+  selectedItem(item) {
+    this.cart.push(item);
+    this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' });
+  }
+
 
 
 }
