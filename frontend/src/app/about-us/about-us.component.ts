@@ -18,7 +18,6 @@ export class AboutUsComponent implements OnInit {
     from: '',
     to: '',
     subject: '',
-    content: '',
     html: '',
   };
   constructor(public http: Http,

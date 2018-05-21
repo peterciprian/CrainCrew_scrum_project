@@ -112,7 +112,6 @@ app.post('/sendemail', (req, res) => {
     to: 'cranecrew.zsiga@gmail.com',
     from: mailadr.from,
     subject: mailadr.subject,
-    content: mailadr.content,
     html: `<i>${mailadr.html}</i>`,
   };
 
