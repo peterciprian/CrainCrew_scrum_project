@@ -86,7 +86,7 @@ export class ProductsComponent implements OnInit {
     this.list();
   }
 
-    /** 
+    /**
    * Bekéri a szerveről, az aktuálisan belépett user adatait
    * először az OnInit hívja meg, ill login() metódus végé is meghívjuk
    * ha nincs senki belépve, üres objectummal tér vissza
@@ -253,6 +253,7 @@ export class ProductsComponent implements OnInit {
   selectedItem(item) {
     this.cart.push(item);
     this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' });
+    localStorage.cartItems = JSON.stringify(this.cart);
   }
 
 
