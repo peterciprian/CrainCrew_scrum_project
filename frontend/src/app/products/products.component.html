@@ -186,9 +186,14 @@
         <td>
           <div class="btn-group">
             <!-- Button trigger modal-->
+            <button type="button" data-toggle="modal" data-target="#details" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek</button>
             <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)"
               class="btn btn-sm btn-info">Módosítás</button>
             <button *ngIf="(longgedIn && isAdmin)" type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törlés</button>
+            <button type="button" (click)="selectedItem(item)" class="btn btn-sm btn-warning">
+              <i class="fas fa-shopping-cart"></i>
+            </button>
+
           </div>
         </td>
       </tr>
