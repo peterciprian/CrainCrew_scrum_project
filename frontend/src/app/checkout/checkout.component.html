@@ -1,0 +1,62 @@
+<br>
+<h2>
+  <i class="fas fa-money-bill-alt"></i> Fizetés
+</h2>
+<hr>
+
+<div class="container">
+  <div class="row">
+      <div class="col-xs-12 col-lg-6">
+      <table class="table table-bordered text-center">
+        <thead>
+          <th>Név</th>
+          <th>Ár</th>
+          <th>Művelet</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cart">
+            <td>{{item.name}}</td>
+            <td>{{item.price | currency: 'Ft '}}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-danger">-</button>
+                <input type="text" value="1" class="text-center" size="1">
+                <button class="btn btn-success">+</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Összesen:</strong></td>
+            <td>{{cartSum() | currency: 'Ft '}}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xs-12 col-lg-6">
+      <div class="form-group">
+        <label for="name">Név</label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="phone">Telefonszám</label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="phone">Számlázási cím</label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="phone">Szállítási cím</label>
+        <input type="text" class="form-control">
+      </div>
+      <a routerLink="../cart" class="btn btn-success">Vissza a kosárba</a>
+      <button class="btn btn-info">Megrendelés</button>
+  </div>
+  </div>
+</div>
+
