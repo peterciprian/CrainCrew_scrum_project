@@ -20,8 +20,8 @@
   <div class="row">
     <div class="col-2">
       <nav class="nav flex-column">
-        <a class="nav-link active" href="#">Gyerek</a>
-        <a class="nav-link" href="#">Felnőtt</a>
+        <a routerLink="../dashboard/products" routerLinkActive="active" class="nav-link active" >Gyerek</a>
+        <a routerLink="../dashboard/products" routerLinkActive="active" class="nav-link" >Felnőtt</a>
         <a class="nav-link disabled" href="#">Mountain bike</a>
         <a class="nav-link disabled" href="#">Városi</a>
         <a class="nav-link disabled" href="#">Női</a>
@@ -34,7 +34,7 @@
     <div class="col-10">
       <div class="container">
         <div class="card-columns">
-          <div class="card" *ngFor='let item of items'>
+          <div class="card" *ngFor='let item of items | slice:0:10'>
             <img *ngIf="item.img" class="card-img-top" src="{{'http://localhost:8080/img/' + item.img}}" alt="bicikli kep">
             <img *ngIf="!item.img" class="card-img-top" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep">
             <div class="card-body">
