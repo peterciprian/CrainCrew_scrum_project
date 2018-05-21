@@ -17,6 +17,10 @@
       <tr *ngFor="let item of cart">
         <td>{{item.name}}</td>
         <td>{{item.price | currency: 'Ft '}}</td>
+        <td><div class="btn-group">
+            <button type="button" class="btn btn-sm btn-info" (click)="removeModalRow(item)">Módosít</button>
+            <button type="button" class="btn btn-sm btn-danger" (click)="removeFromCart(item)">Töröl</button>
+        </div></td>
       </tr>
       <tr>
         <td><strong>Összesen:</strong></td>
