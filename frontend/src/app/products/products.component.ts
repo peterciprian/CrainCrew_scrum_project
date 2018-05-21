@@ -89,9 +89,10 @@ export class ProductsComponent implements OnInit {
     public http: Http,
     private flashMessagesService: FlashMessagesService) {
     this.list();
+    this.list();
   }
 
-    /** 
+    /**
    * Bekéri a szerveről, az aktuálisan belépett user adatait
    * először az OnInit hívja meg, ill login() metódus végé is meghívjuk
    * ha nincs senki belépve, üres objectummal tér vissza
