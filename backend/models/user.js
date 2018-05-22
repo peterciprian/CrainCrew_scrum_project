@@ -37,7 +37,7 @@ const userSchema = mongoose.Schema({
     },
   },
 
-  shippingAddress:{
+  shippingAddress: {
     Country: {
       type: String,
       default: 'Hungary',

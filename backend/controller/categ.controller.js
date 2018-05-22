@@ -35,6 +35,7 @@ module.exports = {
     * @returns {Object}
     */
   create(req, res) {
+    req.body.name = req.body.name.toLowerCase();
     Categ.create(req.body)
       .then(categ => res.send(categ))
       .catch(err => res.send(err));
