@@ -23,15 +23,15 @@ import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'dashboard/orders', component: OrdersComponent },
-  { path: 'dashboard/products', component: ProductsComponent },
-  { path: 'dashboard/users', component: UsersComponent },
+  { path: 'orders', component: OrdersComponent },
+  { path: 'products', component: ProductsComponent },
+  { path: 'users', component: UsersComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'home', component: HomeComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'categ', component: CategoryComponent },
+  { path: 'category', component: CategoryComponent },
   { path: 'profile', component: ProfileComponent },
   { path: '**', component: NotFoundComponent },
 ];
