@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Item } from '../item';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,16 @@ export class HomeComponent implements OnInit {
   baseUrl = 'http://localhost:8080/item/';
   items: Array<Item>;
 
+  actualItem: Item = {
+    _id: '',
+    name: '',
+    url: '',
+    img: '',
+    manufacturer: '',
+    price: 0,
+    category: '',
+  };
+
   item: Item = {
     name: '',
     url: '',
@@ -24,6 +35,8 @@ export class HomeComponent implements OnInit {
   };
 
 
+  cart = [];
+  
   registerred = false;
   longgedIn = false;
   isAdmin = false;
@@ -33,12 +46,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.list();
     this.isLoggedIn();
-    // this.sortTable('createdAt');
-    // this.items.splice(10);
   }
 
   constructor(
-    public http: Http) {
+    public http: Http,
+    private flashMessagesService: FlashMessagesService) {
   }
 
   list() {
@@ -48,13 +60,6 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  sortTable(key: string) {
-    this.items.sort((a, b): any => {
-      a[key] = a[key] || '';
-      b[key] = b[key] || '';
-      return a[key].localeCompare(b[key]);
-    });
-  }
 
       /** 
    * Bekéri a szerveről, az aktuálisan belépett user adatait
@@ -79,4 +84,21 @@ export class HomeComponent implements OnInit {
     });
 }
 
+modalChange(id) {
+  const choosen = this.items.filter(item => item._id === id)[0];
+  this.actualItem = Object.assign({}, choosen); // a this.modal megkapja egy duplikációját a choosennen
 }
+
+selectedItem(item) {
+  this.cart = (localStorage.cartItems ? JSON.parse(localStorage.cartItems) : []);
+  const find = this.cart.findIndex(i => i['_id'] === item['_id']);
+
+  if (find !== -1) {
+      this.flashMessagesService.show('A termék már szerepel a kosárban!', { cssClass: 'alert-warning' });
+    } else {this.cart.push(item);
+  this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' }); }
+  localStorage.cartItems = JSON.stringify(this.cart);
+}
+
+}
+
