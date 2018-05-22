@@ -1,80 +1,77 @@
 const Comment = require('../models/comment-model.js');
-const request = require('request');
+const User = require('../models/user');
+const Item = require('../models/item-model');
 
+/**
+ * @module Comment
+ */
 module.exports = {
-
-  /**
-   * List function to get all product
+/**
+   * List function to get all orders, populated with the correct user and product ID's
    * @param {Object} - Http request object
    * @param {Object} - Http response object
    * @returns {Object}
    */
+
   list: (req, res) => {
     Comment.find({})
-      .populate('comments', 'comment')
-      .then(item => res.json(item))
+      .populate('user', 'username')
+      .then(comments => res.json(comments))
       .catch(err => res.send(err));
-
   },
 
   /**
-    * Find function to get a specific product
-    * @param {Object} - Http request object
-    * @param {Object} - Http response object
-    * @returns {Object}
-    */
+   * Find function to get a specific order, populated with the correct user and product ID's
+   * @param {Object} - Http request object
+   * @param {Object} - Http response object
+   * @returns {Object}
+   */
+
   find: (req, res) => {
     Comment.findById(req.params.id)
+      .populate('user', 'username')
       .then(comment => res.json(comment))
       .catch(err => res.send(err));
   },
 
   /**
-    * Create function to create a new product
-    * @param {Object} - Http request object
-    * @param {Object} - Http response object
-    * @returns {Object}
-    */
-  create(req, res) {
-    if (req.body.img) {
-      const address = req.body.img;
-      const url = req.body.url;
-      req.body.img = `${url}.jpg`;
-      request(address).pipe(fs.createWriteStream(`public/img/${url}.jpg`));
-    }
+   * Create function to create a new order
+   * @param {Object} - Http request object
+   * @param {Object} - Http response object
+   * @returns {Object}
+   */
 
+  create: (req, res) => {
     Comment.create(req.body)
-      .then(item => res.send(item))
+      .then(comment => res.json(comment))
       .catch(err => res.send(err));
   },
 
   /**
-    * Update function to update an existing product
-    * @param {Object} - Http request object
-    * @param {Object} - Http response object
-    * @returns {Object}
-    */
+   * Update function to update a specific order, populated with the correct user and product ID's
+   * @param {Object} - Http request object
+   * @param {Object} - Http response object
+   * @returns {Object}
+   */
+
   update: (req, res) => {
-    req.body.updatedAt = new Date();
-    if (req.body.oldImg) {
-      const address = req.body.img;
-      const urlcim = req.body.url;
-    }
     Comment.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      .populate('user', 'username')
       .then(comment => res.json(comment))
       .catch(err => res.send(err));
   },
+
   /**
-    * Delete function to delete a specific product, identified by productID
-    * @param {Object} - Http request object
-    * @param {Object} - Http response object
-    * @returns {Object}
-    */
+   * Delete function to delete a specific order, identified by orderID
+   * @param {Object} - Http request object
+   * @param {Object} - Http response object
+   * @returns {Object}
+   */
+
   delete: (req, res) => {
     Comment.findByIdAndRemove(req.params.id)
-      .then((comment) => {
-        res.json(comment);
-      })
+      .then(comment => res.json(comment))
       .catch(err => res.send(err));
   },
+
 };

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Comment = require('./comment-model');
 
 /**
  * ItemSchema schema
@@ -34,11 +33,6 @@ const ItemSchema = new mongoose.Schema({
     required: true,
     default: 'felnőtt',
   },
-  comments: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Comment',
-    /* required: true, */
-  }],
 }, {
   timestamps: true,
 });

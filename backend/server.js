@@ -16,6 +16,7 @@ const userRouter = require('./route/user.route');
 const itemRouter = require('./route/item.route');
 const orderRouter = require('./route/order.route');
 const categRouter = require('./route/categ.route');
+const commentRouter = require('./route/comment.route');
 const permission = require('permission');
 const nodemailer = require('nodemailer');
 /* const request = require('then-request'); */
@@ -83,6 +84,7 @@ app.use('/user/', userRouter);
 app.use('/item/', itemRouter);
 app.use('/order/', orderRouter);
 app.use('/categ/', categRouter);
+app.use('/comment/', commentRouter);
 
 /**
  * Use public folder for images
