@@ -21,6 +21,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { CategoryComponent } from './category/category.component';
 import { ProfileComponent } from './profile/profile.component';
 
+
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'orders', component: OrdersComponent },
@@ -52,7 +53,7 @@ const routes: Routes = [
     CheckoutComponent,
     CategoryComponent,
     ProfileComponent
-],
+  ],
   imports: [
     BrowserModule,
     HttpModule,

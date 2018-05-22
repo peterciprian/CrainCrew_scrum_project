@@ -24,7 +24,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Kategória neve:</span>
         </div>
-        <input [(ngModel)]="categ.name" class="form-control" formControlName="name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default"
+        <input [(ngModel)]="categ.name"  class="form-control" formControlName="name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default"
           [ngClass]="{
             'is-valid': myForm.controls.name.valid && (myForm.controls.name.dirty || myForm.controls.name.touched), 
             'is-invalid': myForm.controls.name.invalid && (myForm.controls.name.dirty || myForm.controls.name.touched)
