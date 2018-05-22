@@ -36,24 +36,25 @@
     <div class="col-xs-12 col-lg-6">
       <div class="form-group">
         <label for="name">Név</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.username">
+        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.username" required>
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.email">
+        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.email" required>
       </div>
       <div class="form-group">
         <label for="phone">Telefonszám</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.phoneNumber">
+        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.phoneNumber" required>
       </div>
       <div class="form-group">
         <label for="phone">Számlázási cím</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.billingAddress">
+        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.billingAddress" required>
       </div>
       <div class="form-group">
         <label for="phone">Szállítási cím</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.shippingAddress">
+        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.shippingAddress" required>
       </div>
+      <button class="btn btn-secondary" (click)="editUser()"> Adatok módosítása</button>
       <a routerLink="../cart"><button class="btn btn-info">Vissza a kosárba</button></a>
       <button class="btn btn-success" (click)="createOrder(cart)" [disabled]="newOrder.price === 0" >Megrendelés</button>
   </div>

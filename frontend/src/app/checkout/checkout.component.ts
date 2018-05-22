@@ -34,6 +34,7 @@ export class CheckoutComponent implements OnInit {
     this.http.get('http://localhost:8080/user/profile', this.options)
       .subscribe(data => {
         this.loggedInUser = JSON.parse(data['_body']);
+        console.log(this.loggedInUser);
         this.newOrder.user = this.loggedInUser.user['_id'];
       });
     this.newOrder.price = this.cartSum();
@@ -91,6 +92,18 @@ export class CheckoutComponent implements OnInit {
     if (this.newOrder.items[index].quantity > 1) { this.newOrder.items[index].quantity--;
       this.countCartPrice();
     }
+  }
+  editUser() {
+    console.log(this.loggedInUser['_id']);
+    this.http
+      .put(
+        `http://localhost:8080/user/update/${this.loggedInUser.user['_id']}`,
+        this.loggedInUser.user,
+        this.options
+      )
+      .subscribe(data => {
+        console.log(data);
+      });
   }
 
 }
