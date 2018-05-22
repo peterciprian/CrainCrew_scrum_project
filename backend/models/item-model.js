@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// const Order = require('./order-model');
+const Comment = require('./comment-model');
 
 /**
  * ItemSchema schema
@@ -37,7 +37,7 @@ const ItemSchema = new mongoose.Schema({
   comments: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Comment',
-    required: true,
+    /* required: true, */
   }],
 }, {
   timestamps: true,

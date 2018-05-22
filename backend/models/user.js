@@ -22,10 +22,35 @@ const userSchema = mongoose.Schema({
     default: 'user',
   },
   billingAddress: {
-    type: String,
+    Country: {
+      type: String,
+      default: 'Hungary',
+    },
+    City: {
+      type: String,
+    },
+    Street: {
+      type: String,
+    },
+    Zipcode: {
+      type: Number,
+    },
   },
-  shippingAddress: {
-    type: String,
+
+  shippingAddress:{
+    Country: {
+      type: String,
+      default: 'Hungary',
+    },
+    City: {
+      type: String,
+    },
+    Street: {
+      type: String,
+    },
+    Zipcode: {
+      type: Number,
+    },
   },
   phoneNumber: {
     type: Number,
