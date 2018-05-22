@@ -20,6 +20,7 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CategoryComponent } from './category/category.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SelectproductComponent } from './selectproduct/selectproduct.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
   { path: 'category', component: CategoryComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'product', component: SelectproductComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
@@ -52,7 +54,8 @@ const routes: Routes = [
     CartComponent,
     CheckoutComponent,
     CategoryComponent,
-    ProfileComponent
+    ProfileComponent,
+    SelectproductComponent
   ],
   imports: [
     BrowserModule,
