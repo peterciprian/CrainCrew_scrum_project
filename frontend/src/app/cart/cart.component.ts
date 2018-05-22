@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-cart',
@@ -9,8 +10,10 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class CartComponent implements OnInit {
 
   public cart = JSON.parse(localStorage.getItem('cartItems'));
+  loggedInUser: any;
+  loggedIn: any;
 
-  constructor(private flashMessagesService: FlashMessagesService) { }
+  constructor(private flashMessagesService: FlashMessagesService,  public http: Http, ) { }
 
   ngOnInit() {
   }
@@ -32,7 +35,7 @@ export class CartComponent implements OnInit {
 
   emptyCart() {
     this.cart = [];
-    localStorage.clear();
+    localStorage.cartItems = [];
   }
 
 }

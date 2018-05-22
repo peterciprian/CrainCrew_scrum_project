@@ -29,5 +29,6 @@
 <br>
 <a routerLink="../dashboard/products" class="btn btn-info">Vissza a boltba</a>
 <button class="btn btn-danger" (click)="emptyCart()">Kosár ürítése</button>
-<a routerLink="../checkout" class="btn btn-success">Tovább a fizetéshez</a>
-
+<a routerLink="../checkout"> <button class="btn btn-success" >Tovább a fizetéshez</button></a>
+<!-- *ngIf="loggedIn"
+  [disabled]="!loggedIn"-->
