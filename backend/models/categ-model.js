@@ -8,11 +8,12 @@ const CategSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   sequence: {
     type: Number,
     required: true,
-    default: 1,
+    unique: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
