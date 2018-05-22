@@ -83,6 +83,7 @@ export class ProductsComponent implements OnInit {
     public http: Http,
     private flashMessagesService: FlashMessagesService) {
     this.list();
+    this.list();
   }
 
     /**

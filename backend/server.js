@@ -94,11 +94,14 @@ app.get('/img/:img', (req, res) => {
   }
 });
 
+/* nodemailer email küldés */
+
 app.post('/sendemail', (req, res) => {
   const mailadr = req.body;
   console.log(mailadr);
   // mailadr.from = 'cranecrew.zsiga@gmail.com';
   const transporter = nodemailer.createTransport({
+    service: 'gmail',
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
@@ -108,14 +111,16 @@ app.post('/sendemail', (req, res) => {
     },
   });
   const mailOptions = {
-    from: mailadr.from,
     to: 'cranecrew.zsiga@gmail.com',
+    from: mailadr.from,
     subject: mailadr.subject,
-    text: mailadr.body,
-    html: '<b>Testing email function</b>',
+    html: `<p><strong>${mailadr.html}</strong> 
+              <br>
+              FROM: ${mailadr.from}</p>`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
+    console.log(mailOptions);
     if (error) {
       return console.log(error);
     }

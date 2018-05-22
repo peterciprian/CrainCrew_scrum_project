@@ -16,9 +16,9 @@ export class AboutUsComponent implements OnInit {
   lng = 153.428557;
   mailform = {
     from: '',
-    to: 'cranecrew.zsiga@gmail.com',
+    to: '',
     subject: '',
-    body: '',
+    html: '',
   };
   constructor(public http: Http,
     private flashMessagesService: FlashMessagesService) { }
