@@ -6,14 +6,10 @@ const chaiHttp = require('chai-http');
 const baseUrl = 'http://localhost:8080/order/';
 chai.use(chaiHttp);
 const theAccount = {
-  username: 'zsombor@zsombor.hu',
-  password: 'zsombor00',
+  username: 'zsomboragain@zsombor.hu',
+  password: 'zsombor11',
 };
-const buyThisItem = {
-  user: 'zsombor@zsombor.hu',
-  items: [{ item: '5afc59828465e11ea8003663', quantity: 1 }],
-  price: 10000,
-};
+const buyThisItem = {"user":{"_id":"5b01f40e9a74901c2c812d03"},"price":123,"items":[{"item":{"_id":"5b0034cf99f94416d86ff713"},"quantity":2}]};
 
 let cookie;
 
@@ -45,11 +41,14 @@ describe('orders', () => {
   describe('/GET', () => {
     it('should return 1 order', (done) => {
       chai.request(baseUrl)
-        .get('/:5afc326e7661a105b48ac3e2')
+        .get('/5b0034cf99f94416d86ff712')
         .set('Cookie', cookie)
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
+          expect(res.body._id).be.eql('5b0034cf99f94416d86ff712');
+          expect(res.body.price).be.eql(266664);
+          expect(res.body.user.username).be.eql('zsombor');
           done();
         });
     });
@@ -63,6 +62,7 @@ describe('orders', () => {
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
+          expect(res.body.user).should.be.eql('5b01f40e9a74901c2c812d03');
           done();
         });
     });
@@ -70,11 +70,15 @@ describe('orders', () => {
   describe('/PUT order', () => {
     it('should modify order', (done) => {
       chai.request(baseUrl)
-        .put('/update/5afc326e7661a105b48ac3e2')
-        .send({ price: 130 })
+        .put('/update/5b03fb8d06b04a17a4c873eb')
+        .send({
+          price: 1300,
+        })
         .set('Cookie', cookie)
         .end((err, res) => {
           expect(res).to.have.status(200);
+          expect(res.body['_id']).be.eql('5b03fb8d06b04a17a4c873eb');
+          expect(res.body.price).be.eql(1300);
           done();
         });
     });
@@ -82,10 +86,11 @@ describe('orders', () => {
   describe('/DEL', () => {
     it('should delete order', (done) => {
       chai.request(baseUrl)
-        .delete('/delete/5afc32d77661a105b48ac3e4')
+        .delete('/delete/5b03fc121e3e62088897de8a')
         .set('Cookie', cookie)
         .end((err, res) => {
           expect(res).to.have.status(200);
+          expect(res.body['_id']).be.eql('5b03fc121e3e62088897de8a');
           done();
         });
     });

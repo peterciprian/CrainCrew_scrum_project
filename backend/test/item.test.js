@@ -6,14 +6,14 @@ const chaiHttp = require('chai-http');
 const baseUrl = 'http://localhost:8080/item/';
 chai.use(chaiHttp);
 const theAccount = {
-  username: 'zsombor@zsombor.hu',
-  password: 'zsombor00',
+  username: 'zsomboragain@zsombor.hu',
+  password: 'zsombor11',
 };
 const registerItem = {
-  name: 'testBike',
-  url: 'testUrl',
-  manufacturer: 'testManufacturer',
-  price: 100000,
+  name: 'TestBike2000',
+  url: 'http://images.lemans88.com/images/products/1397647047-24125700.jpg',
+  manufacturer: 'testmanufacturer',
+  price: 123456789,
 };
 let cookie;
 
@@ -45,11 +45,15 @@ describe('Items', () => {
   describe('list one item', () => {
     it('should list the given item', (done) => {
       chai.request(baseUrl)
-        .get('/5afd4420af96550a6c31c6d6')
+        .get('/5afb48d4ca191f28fc991de3')
         .set('Cookie', cookie)
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
+          expect(res.body['_id']).be.eql('5afb48d4ca191f28fc991de3');
+          expect(res.body.name).be.eql('NeoBike');
+          expect(res.body.manufacturer).be.eql('Neo');
+          expect(res.body.price).be.eql(78000);
           done();
         });
     });
@@ -63,6 +67,9 @@ describe('Items', () => {
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
+          expect(res.body.name).be.eql(registerItem.name);
+          expect(res.body.price).be.eql(registerItem.price);
+          expect(res.body.manufacturer).be.eql(registerItem.manufacturer);
           done();
         });
     });
@@ -70,12 +77,14 @@ describe('Items', () => {
   describe('should update given item', () => {
     it('should update given items with given data', (done) => {
       chai.request(baseUrl)
-        .put('/5afd4420af96550a6c31c6d6')
+        .put('/5b03d36362c9c1209ca3095e')
         .set('Cookie', cookie)
-        .send({ name: 'Mountain Bike' })
+        .send({ name: 'SuperDuperBike' })
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
+          expect(res.body.name).be.eql('SuperDuperBike');
+          expect(res.body['_id']).be.eql('5b03d36362c9c1209ca3095e');
           done();
         });
     });
@@ -83,10 +92,11 @@ describe('Items', () => {
   describe('should delete given item', () => {
     it('should delete given item', (done) => {
       chai.request(baseUrl)
-        .delete('/5afd4420af96550a6c31c6d6')
+        .delete('/5b03fc0f1e3e62088897de89')
         .set('Cookie', cookie)
         .end((err, res) => {
           expect(res).to.have.status(200);
+          expect(res.body['_id']).be.eql('5b03fc0f1e3e62088897de89');
           done();
         });
     });
