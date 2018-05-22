@@ -16,7 +16,7 @@
         <td>{{item.name}}</td>
         <td>{{item.price | currency: 'Ft '}}</td>
         <td>
-          <button type="button" class="btn btn-sm btn-danger" (click)="removeFromCart(item)">Töröl</button></td>
+          <button type="button" class="btn btn-sm btn-danger" (click)="removeFromCart(item)"><i class="fas fa-trash-alt"></i></button></td>
       </tr>
       <tr>
         <td><strong>Összesen:</strong></td>
@@ -27,7 +27,7 @@
   </table>
 </div>
 <br>
-<a routerLink="../dashboard/products" class="btn btn-success">Vissza a boltba</a>
+<a routerLink="../dashboard/products" class="btn btn-info">Vissza a boltba</a>
 <button class="btn btn-danger" (click)="emptyCart()">Kosár ürítése</button>
-<a routerLink="../checkout" class="btn btn-info">Tovább a fizetéshez</a>
+<a routerLink="../checkout" class="btn btn-success">Tovább a fizetéshez</a>
 
