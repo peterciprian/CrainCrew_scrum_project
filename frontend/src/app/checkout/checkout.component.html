@@ -54,7 +54,7 @@
         <label for="phone">Szállítási cím</label>
         <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.shippingAddress">
       </div>
-      <a routerLink="../cart" class="btn btn-info">Vissza a kosárba</a>
+      <button routerLink="../cart" class="btn btn-info">Vissza a kosárba</button>
       <button class="btn btn-success" (click)="createOrder(cart)">Megrendelés</button>
   </div>
   </div>
