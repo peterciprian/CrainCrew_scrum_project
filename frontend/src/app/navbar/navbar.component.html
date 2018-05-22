@@ -26,16 +26,16 @@
             <a *ngIf="(longgedIn)" routerLinkActive="active" routerLink="profile" class="nav-link" >{{loggedInUser.user.username}}</a>
         </li>
         <li class="nav-item">
-          <a *ngIf="(longgedIn && isAdmin)" routerLinkActive="active" routerLink="dashboard/orders" class="nav-link" >Rendelések</a>
+          <a *ngIf="(longgedIn && isAdmin)" routerLinkActive="active" routerLink="../orders" class="nav-link" >Rendelések</a>
         </li>
         <li class="nav-item">
-          <a routerLinkActive="active" routerLink="dashboard/products" class="nav-link" >Termékek</a>
+          <a routerLinkActive="active" routerLink="../products" class="nav-link" >Termékek</a>
         </li>
         <li class="nav-item">
-          <a *ngIf="(longgedIn && isAdmin)" routerLinkActive="active" routerLink="categ" class="nav-link" >Kategóriák</a>
+          <a *ngIf="(longgedIn && isAdmin)" routerLinkActive="active" routerLink="category" class="nav-link" >Kategóriák</a>
         </li>
         <li class="nav-item">
-          <a *ngIf="(longgedIn && isAdmin)" routerLinkActive="active" routerLink="dashboard/users" class="nav-link" >Felhasználók</a>
+          <a *ngIf="(longgedIn && isAdmin)" routerLinkActive="active" routerLink="../users" class="nav-link" >Felhasználók</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">

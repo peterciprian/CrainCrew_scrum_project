@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
   registerred = false;
   longgedIn = false;
   isAdmin = false;
-  loggedInUser: any;
+  public loggedInUser: any;
 
   public cart = JSON.parse(localStorage.getItem('cartItems'));
 
@@ -51,7 +51,7 @@ export class NavbarComponent implements OnInit {
     this.createForm();
   }
 
-  /** 
+  /**
    * Bekéri a szerveről, az aktuálisan belépett user adatait
    * először az OnInit hívja meg, ill login() metódus végé is meghívjuk
    * ha nincs senki belépve, üres objectummal tér vissza
@@ -94,10 +94,11 @@ export class NavbarComponent implements OnInit {
         this.validatePassword
       ])],
       confirm: ['', Validators.required]
-    }, { validator: this.samePasswords('password', 'confirm') })
+    }, { validator: this.samePasswords('password', 'confirm') });
   }
 
   validateEmail(controls) {
+    // tslint:disable-next-line:max-line-length
     const regExp = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     if (regExp.test(controls.value)) {
       return null;
@@ -129,7 +130,7 @@ export class NavbarComponent implements OnInit {
       if (group.controls[password].value === group.controls[confirm].value) {
         return null;
       } else {
-        return { 'samePasswords': true }
+        return { 'samePasswords': true };
       }
     };
   }
@@ -143,7 +144,7 @@ export class NavbarComponent implements OnInit {
       } else {
         this.flashMessagesService.show('Sikertelen belépés, ellenőrizd adataid!', { cssClass: 'alert-danger' });
       }
-      this.router.navigate(['dashboard/products']);
+      this.router.navigate(['../products']);
     });
     setTimeout(() => {
       this.isLoggedIn();
