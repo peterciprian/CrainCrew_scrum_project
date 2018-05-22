@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Item } from '../item';
+/* import { Comments } from '../'; */
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +18,7 @@ export class ProductsComponent implements OnInit {
   // baseUrl = 'https://api.mlab.com/api/1/databases/crane-crew/collections/items/?apiKey=IM0DBPnVxrZDK4-YxGS0hxzTSXVbKRED';
   baseUrl = 'http://localhost:8080/item/';
   items: Array<Item>;
+  comment: '';
   actualItem: Item = {
     _id: '',
     name: '',
@@ -25,15 +27,18 @@ export class ProductsComponent implements OnInit {
     manufacturer: '',
     price: 0,
     category: '',
+    comments: [],
   };
 
   item: Item = {
+    _id: '',
     name: '',
     url: '',
     img: '',
     manufacturer: '',
     price: 0,
     category: '',
+    comments: [],
   };
 
   myForm: FormGroup;
@@ -171,6 +176,7 @@ export class ProductsComponent implements OnInit {
           manufacturer: '',
           price: 0,
           category: '',
+          comments: [],
         };
         this.list();
         this.myForm.reset();
@@ -260,7 +266,12 @@ export class ProductsComponent implements OnInit {
     this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' }); }
     localStorage.cartItems = JSON.stringify(this.cart);
   }
-
-
-
+  sendComment(item) {
+    this.item.comments.push(this.comment);
+    console.log(this.comment);
+    this.http.put(this.baseUrl + item._id, this.item, this.options)
+      .subscribe(data => {
+        console.log(data);
+      });
+  }
 }

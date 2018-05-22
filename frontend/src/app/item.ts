@@ -7,6 +7,7 @@ export interface Item {
     newImg?: string;
     manufacturer: string;
     price: number;
+    comments: Array<any>;
     category: string;
     createdAt?: Date;
     updatedAt?: Date;
