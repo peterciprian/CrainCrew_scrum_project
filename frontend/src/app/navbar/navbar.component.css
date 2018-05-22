@@ -6,6 +6,7 @@
 .navbar .navbar-nav>li>a:hover,
 .navbar .navbar-nav>li>a:focus {
   color: #E0A800;
+  cursor: pointer;
 }
 
 #logo {
