@@ -178,6 +178,7 @@
         <td>{{item.manufacturer}}</td>
         <td>{{item.price}}</td>
         <td>{{item.category}}</td>
+        <td>{{item.comments}}</td>
         <td>
           <img *ngIf="item.img" class="sm-thumbnail" src="{{'http://localhost:8080/img/' + item.img}}" alt="bicikli kep">
           <img *ngIf="!item.img" class="sm-thumbnail" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep"> </td>
@@ -193,7 +194,6 @@
             <button type="button" (click)="selectedItem(item)" class="btn btn-sm btn-warning">
               <i class="fas fa-shopping-cart"></i>
             </button>
-
           </div>
         </td>
       </tr>
@@ -312,11 +312,13 @@
           <span class="form-control">{{actualItem.price}}</span>
         </div>
         <div class="input-group mb-2">
-          <div class="input-group-prepend">
+            <input type="text" name="comment" [(ngModel)]="actualItem.comments.comment">
+            <button (click)='sendComment(item)'>Send</button>
+          <div class="input-group-prepend" >
             <span class="input-group-text">Értékelések:</span>
           </div>
           <ul>
-            <!--li *ngFor="comment of comments" class="form-control"><span>{{comment}}</span></li-->
+            <li class="form-control"><span>{{actualItem.comments}}</span></li>
           </ul>
         </div>
 

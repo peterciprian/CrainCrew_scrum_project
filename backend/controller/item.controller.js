@@ -21,7 +21,7 @@ module.exports = {
    */
   list: (req, res) => {
     Item.find({})
-      .populate('comments', 'user')
+      .populate('comments', 'comment')
       .then(item => res.json(item))
       .catch(err => res.send(err));
 
