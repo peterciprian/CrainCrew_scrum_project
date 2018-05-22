@@ -55,7 +55,7 @@
         <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.shippingAddress">
       </div>
       <a routerLink="../cart"><button class="btn btn-info">Vissza a kosárba</button></a>
-      <button class="btn btn-success" (click)="createOrder(cart)">Megrendelés</button>
+      <button class="btn btn-success" (click)="createOrder(cart)" [disabled]="newOrder.price === 0" >Megrendelés</button>
   </div>
   </div>
 </div>

@@ -35,7 +35,7 @@ export class CartComponent implements OnInit {
 
   emptyCart() {
     this.cart = [];
-    localStorage.cartItems = [];
+    localStorage.clear();
   }
 
 }

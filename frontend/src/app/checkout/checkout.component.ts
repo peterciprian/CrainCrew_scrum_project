@@ -23,7 +23,7 @@ export class CheckoutComponent implements OnInit {
   loggedInUser: any;
   items: any;
 
-  constructor(public http: Http) { }
+  constructor(public http: Http, private flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
     this.loadOrder();
@@ -70,14 +70,18 @@ export class CheckoutComponent implements OnInit {
   }
 
   createOrder(cart) {
-    console.log(this.newOrder);
-    /*this.http.post(this.baseUrl, this.newOrder, this.options)
+    // console.log(this.newOrder);
+    this.http.post(this.baseUrl, this.newOrder, this.options)
       .subscribe(data => {
         console.log(data);
+        if (data.ok) {
+          this.flashMessagesService.show('A rendelés sikeresen elküldve!', { cssClass: 'alert-success' });
+          localStorage.clear();
+          this.loadOrder();
+        } else {this.flashMessagesService.show('Valami para van! Kérjük próbálja újra!', { cssClass: 'alert-danger' }); }
       });
-
-    localStorage.cartItems = [];*/
   }
+
   addOneMore(index) {
     this.newOrder.items[index].quantity++;
     this.countCartPrice();
