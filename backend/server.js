@@ -112,7 +112,9 @@ app.post('/sendemail', (req, res) => {
     to: 'cranecrew.zsiga@gmail.com',
     from: mailadr.from,
     subject: mailadr.subject,
-    html: `<i>${mailadr.html}</i>`,
+    html: `<p><strong>${mailadr.html}</strong> 
+              <br>
+              FROM: ${mailadr.from}</p>`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
