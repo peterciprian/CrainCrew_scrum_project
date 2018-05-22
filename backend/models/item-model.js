@@ -34,6 +34,11 @@ const ItemSchema = new mongoose.Schema({
     required: true,
     default: 'felnőtt',
   },
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment',
+    required: true,
+  }],
 }, {
   timestamps: true,
 });
