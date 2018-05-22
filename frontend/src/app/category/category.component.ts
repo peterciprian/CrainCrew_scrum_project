@@ -4,6 +4,8 @@ import { Http, RequestOptions } from '@angular/http';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { FlashMessagesService } from 'angular2-flash-messages';
+
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -36,7 +38,8 @@ export class CategoryComponent implements OnInit {
 
   myForm: FormGroup;
 
-  constructor(public http: Http) {
+  constructor(public http: Http,
+    private flashMessagesService: FlashMessagesService) {
     this.list();
     this.myForm = new FormGroup({
       'name': new FormControl('', [
@@ -83,10 +86,17 @@ export class CategoryComponent implements OnInit {
 
   create() {
     this.categ.user = this.loggedInUser.user._id;
-    console.log(this.categ);
+    // console.log(this.categ);
     this.http.post(this.baseUrl, this.categ, this.options)
       .subscribe(data => {
-        console.log(data);
+        console.log(data.json());
+        const res = data.json();
+        if (res.code === 11000) {
+          this.flashMessagesService.show('Sikertelen hozzáadás, adat duplicáció (név és sorrend is egyedi)!', { cssClass: 'alert-danger' });
+        }
+        if (res.name) {
+          this.flashMessagesService.show('Sikeres hozzáadás!', { cssClass: 'alert-success' });
+        }
         this.categ = {
           name: '',
           user: '',
