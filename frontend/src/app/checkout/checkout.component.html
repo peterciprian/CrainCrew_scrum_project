@@ -34,7 +34,6 @@
       </table>
     </div>
     <div class="col-xs-12 col-lg-6">
-<<<<<<< HEAD
       <form>
         <div class="form-group">
           <label for="name">Név</label>
@@ -62,31 +61,6 @@
         <button class="btn btn-success" (click)="createOrder(cart)" [disabled]="newOrder.price === 0 || !username.valid || !email.valid || !phoneNumber.valid || !billingAddress.valid || !shippingAddress.valid" >Megrendelés</button>
       </form>
     </div>
-=======
-      <div class="form-group">
-        <label for="name">Név</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.username">
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.email">
-      </div>
-      <div class="form-group">
-        <label for="phone">Telefonszám</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.phoneNumber">
-      </div>
-      <div class="form-group">
-        <label for="billingAddress">Számlázási cím</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.billingAddress">
-      </div>
-      <div class="form-group">
-        <label for="shippingAddress">Szállítási cím</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.shippingAddress">
-      </div>
-      <button routerLink="../cart" class="btn btn-info">Vissza a kosárba</button>
-      <button class="btn btn-success" (click)="createOrder(cart)">Megrendelés</button>
-  </div>
->>>>>>> 9810fe80615860cc99888789117fba34c6c04d84
   </div>
 </div>
 
