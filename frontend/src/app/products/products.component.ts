@@ -18,7 +18,11 @@ export class ProductsComponent implements OnInit {
   // baseUrl = 'https://api.mlab.com/api/1/databases/crane-crew/collections/items/?apiKey=IM0DBPnVxrZDK4-YxGS0hxzTSXVbKRED';
   baseUrl = 'http://localhost:8080/item/';
   items: Array<Item>;
-  comment: '';
+  comment: {
+    comment: '',
+    itemId: '',
+    user: '',
+  };
   actualItem: Item = {
     _id: '',
     name: '',
@@ -27,7 +31,13 @@ export class ProductsComponent implements OnInit {
     manufacturer: '',
     price: 0,
     category: '',
-    comments: [],
+    comments: [
+      {
+        comment: '',
+        itemId: '',
+        user: '',
+      }
+    ],
   };
 
   item: Item = {
@@ -267,11 +277,15 @@ export class ProductsComponent implements OnInit {
     localStorage.cartItems = JSON.stringify(this.cart);
   }
   sendComment(item) {
-    this.item.comments.push(this.comment);
-    console.log(this.comment);
-    this.http.put(this.baseUrl + item._id, this.item, this.options)
+    for (let i = 0; i < this.items.length; i++) {
+    this.items[i].comments.push(this.actualItem.comments);
+  }
+  console.log(this.actualItem.comments);
+  console.log(this.items);
+    this.http.put(this.baseUrl + item._id, this.item, this.options);
+    /* this.http.put(this.baseUrl + item._id, this.item, this.options)
       .subscribe(data => {
         console.log(data);
-      });
+      }); */
   }
 }
