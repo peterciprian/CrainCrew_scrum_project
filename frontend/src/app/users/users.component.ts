@@ -16,8 +16,8 @@ export class UsersComponent implements OnInit {
     username: '',
     email: '',
     password: '',
-    billingAddress: '',
-    shippingAddress: '',
+    /* billingAddress: '',
+    shippingAddress: '', */
     phoneNumber: 0,
     role: '',
   };
@@ -62,7 +62,7 @@ export class UsersComponent implements OnInit {
     }
   }
   addUser() {
-    this.setShippingAddress(),
+    /* this.setShippingAddress(), */
     this.http.post(`http://localhost:8080/user/register`, this.newUser, this.options)
     .subscribe(data => {
       console.log(data['_body']);

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-// const Order = require('./order-model');
+const User = require('./user');
 
 /**
  * ItemSchema schema
@@ -7,15 +7,16 @@ const mongoose = require('mongoose');
  */
 const CommentSchema = new mongoose.Schema({
 
-  category: {
+  comment: {
     type: String,
     required: true,
   },
   itemId: {
     type: mongoose.Schema.Types.ObjectId,
   },
-  num: {
-    type: Number,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
 }, {

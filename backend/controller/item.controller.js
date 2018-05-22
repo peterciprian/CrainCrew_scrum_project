@@ -20,8 +20,11 @@ module.exports = {
    * @returns {Object}
    */
   list: (req, res) => {
-    Item.find({}).then(item => res.json(item))
+    Item.find({})
+      .populate('comments', 'user')
+      .then(item => res.json(item))
       .catch(err => res.send(err));
+
   },
 
   /**
