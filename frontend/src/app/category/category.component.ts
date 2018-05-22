@@ -3,6 +3,7 @@ import { Http, RequestOptions } from '@angular/http';
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
