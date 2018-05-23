@@ -29,17 +29,17 @@
               </p>
               <h6>Szállítási cím</h6>
               <p>
-                {{loggedInUser.user.shippingAddress.Country}} <br>
-                {{loggedInUser.user.shippingAddress.City}} <br>
-                {{loggedInUser.user.shippingAddress.Street}} <br>
-                {{loggedInUser.user.shippingAddress.Zipcode}} 
+                {{loggedInUser.user.shippingAddress.Country}}
+                <br> {{loggedInUser.user.shippingAddress.City}}
+                <br> {{loggedInUser.user.shippingAddress.Street}}
+                <br> {{loggedInUser.user.shippingAddress.Zipcode}}
               </p>
               <h6>Számlázási cím</h6>
               <p>
-                {{loggedInUser.user.billingAddress.Country}} <br>
-                {{loggedInUser.user.billingAddress.City}} <br>
-                {{loggedInUser.user.billingAddress.Street}} <br>
-                {{loggedInUser.user.billingAddress.Zipcode}}                 
+                {{loggedInUser.user.billingAddress.Country}}
+                <br> {{loggedInUser.user.billingAddress.City}}
+                <br> {{loggedInUser.user.billingAddress.Street}}
+                <br> {{loggedInUser.user.billingAddress.Zipcode}}
               </p>
             </div>
           </div>
@@ -82,28 +82,89 @@
                 <input class="form-control" type="email" name="currentuseremail" [(ngModel)]="loggedInUser.user.email">
               </div>
             </div>
+
             <div class="form-group row">
               <label class="col-lg-3 col-form-label form-control-label">Szállítási cím</label>
               <div class="col-lg-9">
-                <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.Country"  [(ngModel)]="loggedInUser.user.shippingAddress.Country" name="currentUsershippingAddress1">
-                <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.City"  [(ngModel)]="loggedInUser.user.shippingAddress.City" name="currentUsershippingAddress2">
-                <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.Street"  [(ngModel)]="loggedInUser.user.shippingAddress.Street" name="currentUsershippingAddress3">
-                <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.Zipcode"  [(ngModel)]="loggedInUser.user.shippingAddress.Zipcode" name="currentUsershippingAddress4">
+
+                <div class="input-group">
+                  <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.Country" [(ngModel)]="loggedInUser.user.shippingAddress.Country"
+                    name="currentUsershippingAddress1" placeholder="Hungary">
+                  <div class="input-group-append">
+                    <span class="input-group-text">Ország</span>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.City" [(ngModel)]="loggedInUser.user.shippingAddress.City"
+                    name="currentUsershippingAddress2" placeholder="Budapest">
+                  <div class="input-group-append">
+                    <span class="input-group-text">Város</span>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.Street" [(ngModel)]="loggedInUser.user.shippingAddress.Street"
+                    name="currentUsershippingAddress3" placeholder="Példa utca 10.">
+                  <div class="input-group-append">
+                    <span class="input-group-text">Cím</span>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <input class="form-control" type="number" [value]="loggedInUser.user.shippingAddress.Zipcode" [(ngModel)]="loggedInUser.user.shippingAddress.Zipcode"
+                    name="currentUsershippingAddress4" placeholder="1155">
+                  <div class="input-group-append">
+                    <span class="input-group-text">Irányító szám</span>
+                  </div>
+                </div>
+
               </div>
             </div>
+
             <div class="form-group row">
               <label class="col-lg-3 col-form-label form-control-label">Számlázási cím</label>
               <div class="col-lg-9">
-                <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.Country" [(ngModel)]="loggedInUser.user.billingAddress.Country" name="currentUserBillingAddress1">
-                <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.City"  [(ngModel)]="loggedInUser.user.billingAddress.City" name="currentUserBillingAddress2">
-                <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.Street"  [(ngModel)]="loggedInUser.user.billingAddress.Street" name="currentUserBillingAddress3">
-                <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.Zipcode"  [(ngModel)]="loggedInUser.user.billingAddress.Zipcode" name="currentUserBillingAddress4">
+
+                <div class="input-group">
+                  <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.Country" [(ngModel)]="loggedInUser.user.billingAddress.Country"
+                    name="currentUserBillingAddress1" placeholder="Hungary">
+                  <div class="input-group-append">
+                    <span class="input-group-text">Ország</span>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.City" [(ngModel)]="loggedInUser.user.billingAddress.City"
+                    name="currentUserBillingAddress2" placeholder="Budapest">
+                  <div class="input-group-append">
+                    <span class="input-group-text">Város</span>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.Street" [(ngModel)]="loggedInUser.user.billingAddress.Street"
+                    name="currentUserBillingAddress3" placeholder="Példa utca 10.">
+                  <div class="input-group-append">
+                    <span class="input-group-text">Cím</span>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <input class="form-control" type="number" [value]="loggedInUser.user.billingAddress.Zipcode" [(ngModel)]="loggedInUser.user.billingAddress.Zipcode"
+                    name="currentUserBillingAddress4" placeholder="1155">
+                  <div class="input-group-append">
+                    <span class="input-group-text">Irányító szám</span>
+                  </div>
+                </div>
+
               </div>
             </div>
+
             <div class="form-group row">
               <label class="col-lg-3 col-form-label form-control-label">Telefonszám</label>
               <div class="col-lg-9">
-                <input class="form-control" type="text" name="currentuserphone" [(ngModel)]="loggedInUser.user.phoneNumber">
+                <input class="form-control" type="text" name="currentuserphone" [(ngModel)]="loggedInUser.user.phoneNumber" placeholder="701234567">
               </div>
             </div>
             <div class="form-group row">
@@ -149,18 +210,18 @@
                 </div>
               </div>
             </div>
-            </div>
-        </form>
-        </div>
-        <div class="modal-footer">
-          <div class="row show-hide-message">
-            <div [ngClass]="messageClass">
-              {{message}}
-            </div>
           </div>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
-          <button type="button" class="btn btn-success" (click)="updatePassword(setPassword)" data-dismiss="modal">Változtatás</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="row show-hide-message">
+          <div [ngClass]="messageClass">
+            {{message}}
+          </div>
         </div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
+        <button type="button" class="btn btn-success" (click)="updatePassword(setPassword)" data-dismiss="modal">Változtatás</button>
       </div>
     </div>
   </div>
+</div>

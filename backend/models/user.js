@@ -24,30 +24,44 @@ const userSchema = mongoose.Schema({
   billingAddress: {
     Country: {
       type: String,
+      default: 'Hungary',
+
     },
     City: {
       type: String,
+      default: '',
+
     },
     Street: {
       type: String,
+      default: '',
+
     },
     Zipcode: {
       type: Number,
+      default: '',
     },
   },
 
   shippingAddress: {
     Country: {
       type: String,
+      default: 'Hungary',
+
     },
     City: {
       type: String,
+      default: '',
+
     },
     Street: {
       type: String,
+      default: '',
+
     },
     Zipcode: {
       type: Number,
+      default: '',
     },
   },
   
