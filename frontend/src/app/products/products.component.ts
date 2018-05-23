@@ -286,16 +286,13 @@ sendNewComment() {
 }
 isConfirmed() {
   for (let i = 0; i < this.orders.length; i++) {
-    this.orders[i].items.forEach(item => {
-      if (item.item_id === this.newComment.item._id) {
-        if (this.orders[i].user._id === this.newComment.user._id) {
-          return true;
-        } else {
-          return false;
-        }
+    for (let j = 0; j < this.orders[i].items.length; j++) {
+      // tslint:disable-next-line:max-line-length
+      if (this.orders[i].user['_id'] === this.newComment.user['_id'] && this.orders[i].items[j].item['_id'] === this.newComment.item['_id']) {
+        return true;
       }
-    });
-  }
+    }
+  }return false;
 }
 listOders() {
   this.http.get('http://localhost:8080/order/', this.options)
