@@ -276,14 +276,15 @@ filterCommentsByItemId(itemId) {
   return this.comments.filter(comment => comment.item === itemId );
 }
 sendNewComment() {
-  this.newComment.user._id = this.loggedInUser.user._id;
-  this.newComment.item._id = this.actualItem._id;
+  this.newComment.user['_id'] = this.loggedInUser.user['_id'];
+  this.newComment.item['_id'] = this.actualItem._id;
   this.newComment.confirmed = this.isConfirmed();
   console.log(this.newComment);
   this.http.post('http://localhost:8080/comment/', this.newComment, this.options)
     .subscribe((data) => {this.comments = JSON.parse(data['_body']);
     console.log(this.comments); });
 }
+
 isConfirmed() {
   for (let i = 0; i < this.orders.length; i++) {
     for (let j = 0; j < this.orders[i].items.length; j++) {
@@ -292,7 +293,8 @@ isConfirmed() {
         return true;
       }
     }
-  }return false;
+  }
+  return false;
 }
 listOders() {
   this.http.get('http://localhost:8080/order/', this.options)
