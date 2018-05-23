@@ -85,19 +85,19 @@
             <div class="form-group row">
               <label class="col-lg-3 col-form-label form-control-label">Szállítási cím</label>
               <div class="col-lg-9">
-                <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.Country"  [(ngModel)]="loggedInUser.user.shippingAddress.Country">
-                <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.City"  [(ngModel)]="loggedInUser.user.shippingAddress.City">
-                <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.Street"  [(ngModel)]="loggedInUser.user.shippingAddress.Street">
-                <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.Zipcode"  [(ngModel)]="loggedInUser.user.shippingAddress.Zipcode">
+                <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.Country"  [(ngModel)]="loggedInUser.user.shippingAddress.Country" name="currentUsershippingAddress1">
+                <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.City"  [(ngModel)]="loggedInUser.user.shippingAddress.City" name="currentUsershippingAddress2">
+                <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.Street"  [(ngModel)]="loggedInUser.user.shippingAddress.Street" name="currentUsershippingAddress3">
+                <input class="form-control" type="text" [value]="loggedInUser.user.shippingAddress.Zipcode"  [(ngModel)]="loggedInUser.user.shippingAddress.Zipcode" name="currentUsershippingAddress4">
               </div>
             </div>
             <div class="form-group row">
               <label class="col-lg-3 col-form-label form-control-label">Számlázási cím</label>
               <div class="col-lg-9">
-                <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.Country" [(ngModel)]="loggedInUser.user.billingAddress.Country">
-                <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.City"  [(ngModel)]="loggedInUser.user.billingAddress.City">
-                <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.Street"  [(ngModel)]="loggedInUser.user.billingAddress.Street">
-                <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.Zipcode"  [(ngModel)]="loggedInUser.user.billingAddress.Zipcode">
+                <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.Country" [(ngModel)]="loggedInUser.user.billingAddress.Country" name="currentUserBillingAddress1">
+                <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.City"  [(ngModel)]="loggedInUser.user.billingAddress.City" name="currentUserBillingAddress2">
+                <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.Street"  [(ngModel)]="loggedInUser.user.billingAddress.Street" name="currentUserBillingAddress3">
+                <input class="form-control" type="text" [value]="loggedInUser.user.billingAddress.Zipcode"  [(ngModel)]="loggedInUser.user.billingAddress.Zipcode" name="currentUserBillingAddress4">
               </div>
             </div>
             <div class="form-group row">
