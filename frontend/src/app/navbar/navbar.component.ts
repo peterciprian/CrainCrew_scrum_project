@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
   isAdmin = false;
   public loggedInUser: any;
 
-  public cart = JSON.parse(localStorage.getItem('cartItems'));
+  public cart = JSON.parse(localStorage.getItem('cartItems')) || [];
 
   options = new RequestOptions({ withCredentials: true });
 

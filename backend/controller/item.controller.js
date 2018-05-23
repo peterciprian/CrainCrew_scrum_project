@@ -24,7 +24,6 @@ module.exports = {
       .populate('comments', 'comment')
       .then(item => res.json(item))
       .catch(err => res.send(err));
-
   },
 
   /**
@@ -51,8 +50,7 @@ module.exports = {
       const url = req.body.url;
       req.body.img = `${url}.jpg`;
       request(address).pipe(fs.createWriteStream(`public/img/${url}.jpg`));
-    }
-
+    } 
     Item.create(req.body)
       .then(item => res.send(item))
       .catch(err => res.send(err));

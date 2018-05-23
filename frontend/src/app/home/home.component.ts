@@ -67,6 +67,25 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  list2() {
+    this.http.get(this.baseUrl, this.options)
+      .subscribe(data => {
+        const tempSort = JSON.parse(data['_body']);
+        tempSort.sort((a, b) => {
+          const dateA = new Date(a.updatedAt);
+          const dateB = new Date(b.updatedAt);
+          if (dateA < dateB) {
+            return 1;
+          }
+          if (dateA > dateB) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+        this.items = tempSort;
+      });
+  }
 
   listCateg() {
     this.http.get('http://localhost:8080/categ/', this.options)

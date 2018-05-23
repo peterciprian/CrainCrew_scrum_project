@@ -71,6 +71,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn();
+    this.list();
     this.listCateg();
     this.listOders();
     this.listComments();
@@ -100,7 +101,7 @@ export class ProductsComponent implements OnInit {
   constructor(
     public http: Http,
     private flashMessagesService: FlashMessagesService) {
-    this.list();
+ 
   }
 
     /**
@@ -214,7 +215,6 @@ export class ProductsComponent implements OnInit {
         setTimeout(() => {
           this.list();
         }, 1000);
-
       });
   }
 
@@ -255,12 +255,13 @@ export class ProductsComponent implements OnInit {
       b[key] = b[key] || '';
       this.lastKey = key;
       if (key === 'price') {
-        return a[key] > (b[key]) * this.multiplier;
+        return (a[key] - b[key]) * this.multiplier;
       } else {
         return a[key].localeCompare(b[key]) * this.multiplier;
       }
     });
   }
+  
   listComments() {
     this.http.get('http://localhost:8080/comment', this.options)
     .subscribe(data => {
@@ -268,13 +269,16 @@ export class ProductsComponent implements OnInit {
       console.log(this.comments);
     });
   }
+
   filterCommentsByUserId(userId) {
     return this.comments.filter(comment => comment.user === userId );
   }
+
   filterCommentsByItemId(itemId) {
     console.log(itemId);
     return this.comments.filter(comment => comment.item === itemId );
   }
+
   sendNewComment() {
     this.newComment.user['_id'] = this.loggedInUser.user['_id'];
     this.newComment.item['_id'] = this.actualItem._id;
@@ -284,6 +288,7 @@ export class ProductsComponent implements OnInit {
       .subscribe((data) => {this.comments = JSON.parse(data['_body']);
       console.log(this.comments); });
   }
+
   isConfirmed() {
     for (let i = 0; i < this.orders.length; i++) {
       for (let j = 0; j < this.orders[i].items.length; j++) {
@@ -295,6 +300,7 @@ export class ProductsComponent implements OnInit {
     }
     return false;
   }
+
   listOders() {
     this.http.get('http://localhost:8080/order/', this.options)
     .subscribe(data => {
