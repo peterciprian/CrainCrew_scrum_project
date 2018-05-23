@@ -25,6 +25,10 @@ const CommentSchema = new mongoose.Schema({
     ref: 'Item',
     required: true,
   },
+  confirmed: {
+    type: Boolean,
+    required: true,
+  },
 }, {
   timestamps: true,
 });
