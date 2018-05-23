@@ -1,0 +1,12 @@
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 500px) {
+  body {
+    padding-top: 56px;
+  }
+}
+div {
+  padding-bottom: 10px;
+}
