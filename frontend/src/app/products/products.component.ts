@@ -63,6 +63,12 @@ export class ProductsComponent implements OnInit {
   loggedInUser: any;
 
   cart = [];
+  categs: Array<any>;
+  categ = {
+   name: '',
+   user: '',
+   sequence: ''
+ };
 
   ngOnInit() {
     this.isLoggedIn();
@@ -132,7 +138,10 @@ export class ProductsComponent implements OnInit {
 
   showSelectedTable(categ) {
     this.showThumbnail = false;
-    this.listKid();
+    this.http.get(this.baseUrl, this.options)
+    .subscribe(data => {
+      this.items = JSON.parse(data['_body']).filter(item => item.category === categ);
+    });
   }
 
   list() {
@@ -142,22 +151,15 @@ export class ProductsComponent implements OnInit {
       });
 
   }
-
-  listAdult() {
-    this.http.get(this.baseUrl, this.options)
-      .subscribe(data => {
-        this.items = JSON.parse(data['_body']).filter(item => item.category === 'felnőtt');
-      });
-  }
-
-  listKid() {
-    this.http.get(this.baseUrl, this.options)
+  listCateg() {
+    this.http.get('http://localhost:8080/categ/', this.options)
       .subscribe(data => {
         const temp = JSON.parse(data['_body']);
         temp.sort((a, b) => a.sequence - b.sequence);
         this.categs = temp;
       });
   }
+
 
   find(itemId) {
     this.http.get(this.baseUrl + itemId, this.options)
