@@ -292,6 +292,7 @@ export class ProductsComponent implements OnInit {
           return true;
         }
       }
+      console.log(this.orders[i].items);
     }
     return false;
   }
