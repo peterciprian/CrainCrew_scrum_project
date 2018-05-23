@@ -7,7 +7,7 @@ const Item = require('../models/item-model');
  */
 module.exports = {
 /**
-   * List function to get all orders, populated with the correct user and product ID's
+   * List function to get all comments, populated with the correct username
    * @param {Object} - Http request object
    * @param {Object} - Http response object
    * @returns {Object}
@@ -21,7 +21,7 @@ module.exports = {
   },
 
   /**
-   * Find function to get a specific order, populated with the correct user and product ID's
+   * Find function to get a specific comment, populated with the correct username
    * @param {Object} - Http request object
    * @param {Object} - Http response object
    * @returns {Object}
@@ -35,7 +35,7 @@ module.exports = {
   },
 
   /**
-   * Create function to create a new order
+   * Create function to create a new comment
    * @param {Object} - Http request object
    * @param {Object} - Http response object
    * @returns {Object}
@@ -48,7 +48,7 @@ module.exports = {
   },
 
   /**
-   * Update function to update a specific order, populated with the correct user and product ID's
+   * Update function to update a specific comment, populated with the correct username, identified by commentID
    * @param {Object} - Http request object
    * @param {Object} - Http response object
    * @returns {Object}
@@ -62,7 +62,7 @@ module.exports = {
   },
 
   /**
-   * Delete function to delete a specific order, identified by orderID
+   * Delete function to delete a specific comment, identified by commentID
    * @param {Object} - Http request object
    * @param {Object} - Http response object
    * @returns {Object}

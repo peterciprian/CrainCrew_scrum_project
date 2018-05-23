@@ -1,7 +1,7 @@
 const Categ = require('../models/categ-model.js');
 
 /**
- * @module Product
+ * @module Categ
  */
 module.exports = {
 
