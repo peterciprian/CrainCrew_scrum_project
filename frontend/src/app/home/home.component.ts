@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
     manufacturer: '',
     price: 0,
     category: '',
-    comments: [],
   };
 
   item: Item = {
@@ -33,7 +32,6 @@ export class HomeComponent implements OnInit {
     manufacturer: '',
     price: 0,
     category: '',
-    comments: [],
   };
 
   cart = [];

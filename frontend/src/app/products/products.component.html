@@ -308,13 +308,13 @@
           <span class="form-control">{{actualItem.price}}</span>
         </div>
         <div class="input-group mb-2">
-            <input type="text" name="comment" [(ngModel)]="actualItem.comments.comment">
-            <button (click)='sendComment(item)'>Send</button>
+            <input type="text" name="comment" [(ngModel)]="newComment.comment">
+            <button (click)='sendNewComment()'>Küldés</button>
           <div class="input-group-prepend" >
             <span class="input-group-text">Értékelések:</span>
           </div>
-          <ul>
-            <li class="form-control"><span>{{actualItem.comments}}</span></li>
+          <ul *ngFor = "let comment of actualComments">
+            <li class="form-control"><span>{{comment.comment}}</span></li>
           </ul>
         </div>
 
