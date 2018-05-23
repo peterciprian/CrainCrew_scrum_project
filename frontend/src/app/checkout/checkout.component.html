@@ -27,36 +27,40 @@
           </tr>
           <tr>
             <td><strong>Összesen:</strong></td>
-            <td>{{cartSum() | currency: 'Ft '}}</td>
+            <td>{{newOrder.price | currency: 'Ft '}}</td>
             <td></td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="col-xs-12 col-lg-6">
-      <div class="form-group">
-        <label for="name">Név</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.username">
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.email">
-      </div>
-      <div class="form-group">
-        <label for="phone">Telefonszám</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.phoneNumber">
-      </div>
-      <div class="form-group">
-        <label for="phone">Számlázási cím</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.billingAddress">
-      </div>
-      <div class="form-group">
-        <label for="phone">Szállítási cím</label>
-        <input type="text" class="form-control" [(ngModel)]="loggedInUser.user.shippingAddress">
-      </div>
-      <button routerLink="../cart" class="btn btn-info">Vissza a kosárba</button>
-      <button class="btn btn-success" (click)="createOrder(cart)">Megrendelés</button>
-  </div>
+      <form>
+        <div class="form-group">
+          <label for="name">Név</label>
+          <input type="text" class="form-control" name="username" [(ngModel)]="loggedInUser.user.username" #username="ngModel" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" name="email" [(ngModel)]="loggedInUser.user.email" #email="ngModel" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Telefonszám</label>
+          <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="loggedInUser.user.phoneNumber" #phoneNumber="ngModel" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Számlázási cím</label>
+          <input type="text" class="form-control" name="billingAddress" [(ngModel)]="loggedInUser.user.billingAddress" #billingAddress="ngModel" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Szállítási cím</label>
+          <input type="text" class="form-control" name="shippingAddress" [(ngModel)]="loggedInUser.user.shippingAddress" #shippingAddress="ngModel" required>
+        </div>
+        <div class="alert alert-danger" *ngIf="!username.valid || !email.valid || !phoneNumber.valid || !billingAddress.valid || !shippingAddress.valid">A kapcsolati adatok hiányosak, kérjük töltse fel elérhetőségeivel, majd mentse az adatlapot!</div>
+        <button class="btn btn-secondary" (click)="editUser()" [disabled]="username.pristine && email.pristine && phoneNumber.pristine && billingAddress.pristine && shippingAddress.pristine"> Adatok mentése</button>
+        <a routerLink="../cart"><button class="btn btn-info">Vissza a kosárba</button></a>
+        <button class="btn btn-success" (click)="createOrder(cart)" [disabled]="newOrder.price === 0 || !username.valid || !email.valid || !phoneNumber.valid || !billingAddress.valid || !shippingAddress.valid" >Megrendelés</button>
+      </form>
+    </div>
   </div>
 </div>
 

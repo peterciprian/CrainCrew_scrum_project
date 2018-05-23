@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
-
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
