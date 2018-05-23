@@ -38,7 +38,7 @@ export class SelectproductComponent implements OnInit {
   cart = [];
   registerred = false;
   longgedIn = false;
-  isAdmin = true;
+  isAdmin = false;
   loggedInUser: any;
   id: any;
   options = new RequestOptions({ withCredentials: true });
@@ -72,8 +72,8 @@ export class SelectproductComponent implements OnInit {
       this.listComments(); });
   }
   isConfirmed() {
-    for (let i = 0; i < this.orders.length; i++) {console.log(this.orders[i].items.length);
-      for (let j = 0; j < this.orders[i].items; j++) {
+    for (let i = 0; i < this.orders.length; i++) {
+      for (let j = 0; j < this.orders[i].items.length; j++) {
         // tslint:disable-next-line:max-line-length
         if (this.orders[i].user['_id'] === this.newComment.user['_id'] && this.orders[i].items[j].item['_id'] === this.newComment.item['_id']) {
           return true;
@@ -149,6 +149,16 @@ export class SelectproductComponent implements OnInit {
     this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' }); }
     localStorage.cartItems = JSON.stringify(this.cart);
   }
+
+  deleteComment(comment) {
+      if (confirm('Really?')) {
+        this.http.delete('http://localhost:8080/comment/' + comment['_id'] , this.options)
+          .subscribe(data => {
+            console.log(data);
+            this.listComments();
+          });
+      }
+    }
 
   ngOnInit() {this.navigate();
   this.isLoggedIn();
