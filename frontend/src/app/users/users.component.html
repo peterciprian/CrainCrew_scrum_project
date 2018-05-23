@@ -31,10 +31,16 @@
         </select>
       </td>
       <td>
-          <input type="text" class="form-control" [(ngModel)]="user.billingAddress">
+          <input type="text" class="form-control" [(ngModel)]="user.billingAddress.Country">
+          <input type="text" class="form-control" [(ngModel)]="user.billingAddress.City">
+          <input type="text" class="form-control" [(ngModel)]="user.billingAddress.Street">
+          <input type="text" class="form-control" [(ngModel)]="user.billingAddress.Zipcode">
       </td>
       <td>
-          <input type="text" class="form-control" [(ngModel)]="user.shippingAddress">
+          <input type="text" class="form-control" [(ngModel)]="user.shippingAddress.Country">
+          <input type="text" class="form-control" [(ngModel)]="user.shippingAddress.City">
+          <input type="text" class="form-control" [(ngModel)]="user.shippingAddress.Street">
+          <input type="text" class="form-control" [(ngModel)]="user.shippingAddress.Zipcode">
       </td>
       <td>
           <input type="text" class="form-control" [(ngModel)]="user.phoneNumber">
