@@ -18,11 +18,8 @@ export class ProductsComponent implements OnInit {
   // baseUrl = 'https://api.mlab.com/api/1/databases/crane-crew/collections/items/?apiKey=IM0DBPnVxrZDK4-YxGS0hxzTSXVbKRED';
   baseUrl = 'http://localhost:8080/item/';
   items: Array<Item>;
-  comment: {
-    comment: '',
-    itemId: '',
-    user: '',
-  };
+  comments: any;
+
   actualItem: Item = {
     _id: '',
     name: '',
@@ -266,6 +263,21 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+listComments() {
+  this.http.get('http://localhost:8080/user/comment', this.options)
+  .subscribe(data => {
+    this.comments = JSON.parse(data['_body']);
+  });
+}
+
+filterCommentsByUserId(userId) {
+  return this.comments.filter(comment => comment.user === userId );
+}
+
+filterCommentsByItemId(itemId) {
+  return this.comments.filter(comment => comment.item === itemId );
+}
+
   selectedItem(item) {
     this.cart = (localStorage.cartItems ? JSON.parse(localStorage.cartItems) : []);
     const find = this.cart.findIndex(i => i['_id'] === item['_id']);
@@ -276,16 +288,6 @@ export class ProductsComponent implements OnInit {
     this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' }); }
     localStorage.cartItems = JSON.stringify(this.cart);
   }
-  sendComment(item) {
-    for (let i = 0; i < this.items.length; i++) {
-    this.items[i].comments.push(this.actualItem.comments);
-  }
-  console.log(this.actualItem.comments);
-  console.log(this.items);
-    this.http.put(this.baseUrl + item._id, this.item, this.options);
-    /* this.http.put(this.baseUrl + item._id, this.item, this.options)
-      .subscribe(data => {
-        console.log(data);
-      }); */
-  }
+
+
 }
