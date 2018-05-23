@@ -32,7 +32,6 @@ const ItemSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    default: 'felnőtt',
   },
   comments: [{
     type: mongoose.Schema.Types.ObjectId,
