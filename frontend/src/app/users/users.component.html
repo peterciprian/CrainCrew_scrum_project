@@ -1,5 +1,6 @@
 <br>
-<h2><i class="fas fa-user"></i> Felhasználók</h2>
+<h2>
+  <i class="fas fa-user"></i> Felhasználók</h2>
 <hr>
 
 <button class="btn btn-info my-2 my-sm-0" type="button" data-toggle="modal" data-target="#createModal">Létrehozás</button>
@@ -9,8 +10,14 @@
     <th>Felhasználónév</th>
     <th>Email</th>
     <th>Jogosultság</th>
-    <th>Számlázási cím</th>
-    <th>Szállítási cím</th>
+    <th>Számlázási cím - Ország</th>
+    <th>Számlázási cím - Város</th>
+    <th>Számlázási cím - Utca</th>
+    <th>Számlázási cím - Irányítószám</th>
+    <th>Szállítási cím - Ország</th>
+    <th>Szállítási cím - Város</th>
+    <th>Szállítási cím - Utca</th>
+    <th>Szállítási cím - Irányítószám</th>
     <th>Telefonszám</th>
     <th>Művelet</th>
   </thead>
@@ -31,13 +38,31 @@
         </select>
       </td>
       <td>
-          <input type="text" class="form-control" [(ngModel)]="user.billingAddress">
+        <input type="text" class="form-control" [(ngModel)]="user.billingAddress.Country">
       </td>
       <td>
-          <input type="text" class="form-control" [(ngModel)]="user.shippingAddress">
+        <input type="text" class="form-control" [(ngModel)]="user.billingAddress.City">
       </td>
       <td>
-          <input type="text" class="form-control" [(ngModel)]="user.phoneNumber">
+        <input type="text" class="form-control" [(ngModel)]="user.billingAddress.Street">
+      </td>
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="user.billingAddress.Zipcode">
+      </td>
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="user.shippingAddress.Country">
+      </td>
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="user.shippingAddress.City">
+      </td>
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="user.shippingAddress.Street">
+      </td>
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="user.shippingAddress.Zipcode">
+      </td>
+      <td>
+        <input type="text" class="form-control" [(ngModel)]="user.phoneNumber">
       </td>
       <td>
         <div class="btn-group">
