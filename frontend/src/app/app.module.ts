@@ -35,7 +35,7 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
   { path: 'category', component: CategoryComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'product', component: SelectproductComponent },
+  { path: 'products/:id', component: SelectproductComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
