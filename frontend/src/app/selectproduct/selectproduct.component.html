@@ -74,7 +74,8 @@
             <div class="panel panel-default col-12" *ngIf="comment.item==selectedProduct._id">
               <div class="panel-heading">
                 <strong>{{comment.user.username}}</strong>
-                <span class="text-muted">commented: {{comment.createdAt}}</span>
+                <span class="text-muted">commented: {{comment.createdAt | date: short }}</span>
+                <span *ngIf="comment.confirmed === true"><i class="fas fa-bicycle"></i></span>
               </div>
               <div class="panel-body">{{comment.comment}}
               </div>

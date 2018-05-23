@@ -76,7 +76,7 @@ export class SelectproductComponent implements OnInit {
       for (let j = 0; j < this.orders[i].items; j++) {
         // tslint:disable-next-line:max-line-length
         if (this.orders[i].user['_id'] === this.newComment.user['_id'] && this.orders[i].items[j].item['_id'] === this.newComment.item['_id']) {
-          return true;
+          this.newComment.confirmed = true;
         }
       }
     }
@@ -129,13 +129,22 @@ export class SelectproductComponent implements OnInit {
       this.selectedProduct.img = this.selectedProduct.newImg;
     }
 
-    this.http.put(this.baseUrl + this.selectedProduct['_id'], this.selectedProduct, this.options)
+    this.http.put(this.baseUrl + this.id.id, this.selectedProduct, this.options)
       .subscribe(data => {
         console.log(data);
         setTimeout(() => {
           this.navigate();
         }, 1000);
 
+      });
+  }
+
+  listCateg() {
+    this.http.get('http://localhost:8080/categ/', this.options)
+      .subscribe(data => {
+        const temp = JSON.parse(data['_body']);
+        temp.sort((a, b) => a.sequence - b.sequence);
+        this.categs = temp;
       });
   }
 
@@ -153,5 +162,6 @@ export class SelectproductComponent implements OnInit {
   ngOnInit() {this.navigate();
   this.isLoggedIn();
 this.listComments();
-this.listOders(); }
+this.listOders(); 
+this.listCateg()}
 }
