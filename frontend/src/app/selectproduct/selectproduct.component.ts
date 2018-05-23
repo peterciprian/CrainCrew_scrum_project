@@ -19,6 +19,22 @@ export class SelectproductComponent implements OnInit {
     price: 0,
     category: '',
   };
+  categs: Array<any>;
+  categ = {
+    name: '',
+    user: '',
+    sequence: ''
+  };
+  orders: Array<any>;
+  comments: Array<any>;
+  actualComments = [];
+  newComment: any = {
+    user: {},
+    comment: '',
+    item: {},
+    confirmed: false,
+  };
+
   cart = [];
   registerred = false;
   longgedIn = false;
@@ -33,6 +49,38 @@ export class SelectproductComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params;
     });
+  }
+  listComments() {
+    this.http.get('http://localhost:8080/comment', this.options)
+    .subscribe(data => {
+      this.comments = JSON.parse(data['_body']);
+      console.log(this.comments);
+    });
+  }
+
+  filterCommentsByItem(selectedProduct) {
+    return this.comments.filter(comment => comment.item === selectedProduct._id );
+  }
+  sendNewComment() {
+    this.newComment.user['_id'] = this.loggedInUser.user['_id'];
+    this.newComment.item['_id'] = this.selectedProduct._id;
+    this.newComment.confirmed = this.isConfirmed();
+    console.log(this.newComment);
+    this.http.post('http://localhost:8080/comment/', this.newComment, this.options)
+      .subscribe((data) => {this.comments = JSON.parse(data['_body']);
+      console.log(this.comments); });
+  }
+
+  isConfirmed() {
+    for (let i = 0; i < this.orders.length; i++) {
+      for (let j = 0; j < this.orders[i].items.length; j++) {
+        // tslint:disable-next-line:max-line-length
+        if (this.orders[i].user['_id'] === this.newComment.user['_id'] && this.orders[i].items[j].item['_id'] === this.newComment.item['_id']) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
   isLoggedIn() {
     this.http.get('http://localhost:8080/user/profile', this.options)
@@ -96,5 +144,6 @@ export class SelectproductComponent implements OnInit {
   }
 
   ngOnInit() {this.navigate();
-  this.isLoggedIn(); }
+  this.isLoggedIn();
+this.listComments(); }
 }

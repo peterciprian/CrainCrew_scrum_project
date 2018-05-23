@@ -1,7 +1,8 @@
 <div class="container" style="padding-top: 50px">
   <div class="row">
     <div class="col-xs-4 item-photo">
-      <img style="max-width:500px;" src="{{'http://localhost:8080/img/' + selectedProduct.img}}" />
+      <img *ngIf="selectedProduct.img" style="max-width:500px;" src="{{'http://localhost:8080/img/' + selectedProduct.img}}">
+      <img *ngIf="!selectedProduct.img" style="max-width:500px;" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep">
     </div>
     <div class="col-xs-5" style="border:0px solid gray">
       <h3>{{selectedProduct.name}}</h3>
@@ -21,7 +22,7 @@
         </button>
       </div>
     </div>
-    <div class="row my-2">
+    <div class="row my-4">
       <div class="col col-md-12">
         <ul class="nav nav-tabs">
           <li class="nav-item">
@@ -39,9 +40,9 @@
         </ul>
       </div>
     </div>
-    <div class="row">
-      <div class="tab-content py-4">
-        <div class="tab-pane active" id="information" style="width:100%;border-top:1px solid silver">
+    <div class="row my-2">
+      <div class="tab-content col-md-12">
+        <div class="tab-pane active" id="information" style="width:100%;border-top:1px solid silver; padding-bottom:10px">
           <p style="padding:15px;">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem dolore rerum possimus dolorem sunt accusamus quas eaque, eum
             consequuntur nostrum earum doloremque iure magni est, sit atque nihil ex repudiandae!
@@ -53,29 +54,42 @@
               illo beatae ab eos aliquid tempore soluta et sequi vero quibusdam id mollitia illum.</li>
           </ul>
         </div>
-        <div class="tab-pane" id="garancia" style="width:100%;border-top:1px solid silver">
-          <div class="col col-md-12">
-            <p style="padding:15px;">
-              Termékeinkre 6 hónapos pénzvisszafizetési garanciát vállalunk, ezen felül pedig 12 hónapig bizonyos javításokat ingyenesen
-              végzünk, városszerte megtalálható velünk szerződött bicikli-szervízek bármelyikében. Bármilyen kérdés fölmerülne,
-              forduljon hozzunk bizalommal, a kapcsolat menüpont alól küldhet nekünk ímélt, melyet lelkes csapatunk minél
-              hamarabb megválaszol.
-            </p>
-          </div>
+        <div class="tab-pane" id="garancia" style="width:100%;border-top:1px solid silver; padding-bottom:10px">
+          <p style="padding:15px; padding-bottom: 10px">
+            Termékeinkre 6 hónapos pénzvisszafizetési garanciát vállalunk, ezen felül pedig 12 hónapig bizonyos javításokat ingyenesen
+            végzünk, városszerte megtalálható velünk szerződött bicikli-szervízek bármelyikében. Bármilyen kérdés fölmerülne,
+            forduljon hozzunk bizalommal, a kapcsolat menüpont alól küldhet nekünk ímélt, melyet lelkes csapatunk minél hamarabb
+            megválaszol.
+          </p>
         </div>
-        <div class="tab-pane" id="delivery" style="width:100%;border-top:1px solid silver">
-          <div class="col col-md-12">
-            <p style="padding:15px;">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, quaerat asperiores cumque est laboriosam ratione libero
-              nisi doloremque praesentium iste, nemo reiciendis culpa reprehenderit voluptatem? Sint ipsum et debitis aspernatur!
+        <div class="tab-pane" id="delivery" style="width:100%;border-top:1px solid silver; padding-bottom: 10px;">
+          <p style="padding:15px;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, quaerat asperiores cumque est laboriosam ratione libero
+            nisi doloremque praesentium iste, nemo reiciendis culpa reprehenderit voluptatem? Sint ipsum et debitis aspernatur!
 
-            </p>
-          </div>
+          </p>
         </div>
-        <div class="tab-pane" id="comments" style="width:100%;border-top:1px solid silver">
-            <div class="col col-md-6">
-                
+        <div class="tab-pane" id="comments" style="width:100%;border-top:1px solid silver; padding-bottom: 10px;">
+          <div class="col-12" *ngFor="let comment of comments">
+            <div class="panel panel-default col-12" *ngIf="comment.item==selectedProduct._id">
+              <div class="panel-heading">
+                <strong>{{comment.user.username}}</strong>
+                <span class="text-muted">commented: {{comment.createdAt}}</span>
+              </div>
+              <div class="panel-body">{{comment.comment}}
+              </div>
             </div>
+          </div>
+          <div class="container pb-cmnt-container" style="padding-bottom: 15px">
+              <div class="panel panel-info col-md-12">
+                <div class="panel-body col-md-12">
+                  <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea col-md-12" style="height:150px; width: 100%" name="comment" [(ngModel)]="newComment.comment"></textarea>
+                  <form class="form-inline">
+                    <button class="btn btn-primary pull-left" (click)="sendNewComment()" type="button">Értékelés küldése</button>
+                  </form>
+                </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
