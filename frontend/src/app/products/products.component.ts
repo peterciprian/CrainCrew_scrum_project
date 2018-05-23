@@ -153,7 +153,13 @@ export class ProductsComponent implements OnInit {
   listKid() {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
+<<<<<<< HEAD
         this.items = JSON.parse(data['_body']).filter(item => item.category === 'gyerek');
+=======
+        const temp = JSON.parse(data['_body']);
+        temp.sort((a, b) => a.sequence - b.sequence);
+        this.categs = temp;
+>>>>>>> d244583561d53ccd9ba3d03d8ac1a004c16ec2a9
       });
   }
 
