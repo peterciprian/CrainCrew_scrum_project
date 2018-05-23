@@ -147,7 +147,9 @@ export class ProductsComponent implements OnInit {
   listCateg() {
     this.http.get('http://localhost:8080/categ/', this.options)
       .subscribe(data => {
-        this.categs = JSON.parse(data['_body']);
+        const temp = JSON.parse(data['_body']);
+        temp.sort((a, b) => a.sequence - b.sequence);
+        this.categs = temp;
       });
   }
 
