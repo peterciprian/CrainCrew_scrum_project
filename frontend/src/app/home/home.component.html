@@ -1,10 +1,14 @@
 <br>
 <div class="container">
-    <div class="row">
-      
-  <h2 *ngIf="(!longgedIn)"><i class="fas fa-hand-point-right"></i> Üdvözlöm!<small *ngIf="(!longgedIn)" class="text-muted"> Kérem jelentkezzen be!</small></h2>
-  <h2 *ngIf="(longgedIn)"><i class="fas fa-bicycle"></i> Legújabb termékeink:<small class="text-muted"> Tekintse meg őket</small></h2>
-    </div>
+  <div class="row">
+    <h2 *ngIf="(!longgedIn)">
+      <i class="fas fa-hand-point-right"></i> Üdvözlöm!
+      <small class="text-muted"> Kérem jelentkezzen be!</small>
+    </h2>
+    <h2 *ngIf="(longgedIn)">
+      <i class="fas fa-bicycle"></i> Legújabb termékeink:
+      <small class="text-muted"> Tekintse meg őket</small>
+    </h2>
   </div>
 <hr>
 <!-- *********** oldalsó katagoria link -->

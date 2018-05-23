@@ -63,6 +63,12 @@ export class ProductsComponent implements OnInit {
   loggedInUser: any;
 
   cart = [];
+  categs: Array<any>;
+  categ = {
+   name: '',
+   user: '',
+   sequence: ''
+ };
 
   ngOnInit() {
     this.isLoggedIn();
@@ -132,7 +138,10 @@ export class ProductsComponent implements OnInit {
 
   showSelectedTable(categ) {
     this.showThumbnail = false;
-    this.listKid();
+    this.http.get(this.baseUrl, this.options)
+    .subscribe(data => {
+      this.items = JSON.parse(data['_body']).filter(item => item.category === categ);
+    });
   }
 
   list() {
@@ -142,20 +151,15 @@ export class ProductsComponent implements OnInit {
       });
 
   }
-
-  listAdult() {
-    this.http.get(this.baseUrl, this.options)
+  listCateg() {
+    this.http.get('http://localhost:8080/categ/', this.options)
       .subscribe(data => {
-        this.items = JSON.parse(data['_body']).filter(item => item.category === 'felnőtt');
+        const temp = JSON.parse(data['_body']);
+        temp.sort((a, b) => a.sequence - b.sequence);
+        this.categs = temp;
       });
   }
 
-  listKid() {
-    this.http.get(this.baseUrl, this.options)
-      .subscribe(data => {
-        this.items = JSON.parse(data['_body']).filter(item => item.category === 'gyerek');
-      });
-  }
 
   find(itemId) {
     this.http.get(this.baseUrl + itemId, this.options)
@@ -276,14 +280,15 @@ filterCommentsByItemId(itemId) {
   return this.comments.filter(comment => comment.item === itemId );
 }
 sendNewComment() {
-  this.newComment.user._id = this.loggedInUser.user._id;
-  this.newComment.item._id = this.actualItem._id;
+  this.newComment.user['_id'] = this.loggedInUser.user['_id'];
+  this.newComment.item['_id'] = this.actualItem._id;
   this.newComment.confirmed = this.isConfirmed();
   console.log(this.newComment);
   this.http.post('http://localhost:8080/comment/', this.newComment, this.options)
     .subscribe((data) => {this.comments = JSON.parse(data['_body']);
     console.log(this.comments); });
 }
+
 isConfirmed() {
   for (let i = 0; i < this.orders.length; i++) {
     for (let j = 0; j < this.orders[i].items.length; j++) {
@@ -292,7 +297,8 @@ isConfirmed() {
         return true;
       }
     }
-  }return false;
+  }
+  return false;
 }
 listOders() {
   this.http.get('http://localhost:8080/order/', this.options)
