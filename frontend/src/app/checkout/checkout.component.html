@@ -62,12 +62,28 @@
           <input type="text" class="form-control" name="shippingAddress4" [(ngModel)]="loggedInUser.user.shippingAddress.Zipcode" #shippingAddress4="ngModel" required>
   
         </div>
-        <div class="alert alert-danger" *ngIf="!username.valid || !email.valid || !phoneNumber.valid || !billingAddress.valid || !shippingAddress.valid">A kapcsolati adatok hiányosak, kérjük töltse fel elérhetőségeivel, majd mentse az adatlapot!</div>
-        <button class="btn btn-secondary" (click)="editUser()" [disabled]="username.pristine && email.pristine && phoneNumber.pristine && billingAddress.pristine && shippingAddress.pristine"> Adatok mentése</button>
+        <div class="alert alert-danger" *ngIf="!username.valid || !email.valid || !phoneNumber.valid 
+        || !billingAddress1.valid || !shippingAddress1.valid
+        || !billingAddress2.valid || !shippingAddress2.valid
+        || !billingAddress3.valid || !shippingAddress3.valid
+        || !billingAddress4.valid || !shippingAddress4.valid">A kapcsolati adatok hiányosak, kérjük töltse fel elérhetőségeivel, majd mentse az adatlapot!</div>
+        <button class="btn btn-secondary" (click)="editUser()" [disabled]="username.pristine && email.pristine && phoneNumber.pristine 
+        && billingAddress1.pristine && shippingAddress1.pristine
+        && billingAddress2.pristine && shippingAddress2.pristine
+        && billingAddress3.pristine && shippingAddress3.pristine
+        && billingAddress4.pristine && shippingAddress4.pristine"> Adatok mentése</button>
         <a routerLink="../cart"><button class="btn btn-info">Vissza a kosárba</button></a>
-        <button class="btn btn-success" (click)="createOrder(cart)" [disabled]="newOrder.price === 0 || !username.valid || !email.valid || !phoneNumber.valid || !billingAddress.valid || !shippingAddress.valid" >Megrendelés</button>
+        <button class="btn btn-success" (click)="createOrder(cart)" [disabled]="newOrder.price === 0 || !username.valid || !email.valid || !phoneNumber.valid 
+        || !billingAddress1.valid || !shippingAddress1.valid
+        || !billingAddress2.valid || !shippingAddress2.valid
+        || !billingAddress3.valid || !shippingAddress3.valid
+        || !billingAddress4.valid || !shippingAddress4.valid" >Megrendelés</button>
       </form>
     </div>
   </div>
 </div>
 
+<br>
+<br>
+<br>
+<br>
