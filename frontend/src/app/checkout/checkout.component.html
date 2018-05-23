@@ -34,7 +34,7 @@
       </table>
     </div>
     <div class="col-xs-12 col-lg-6">
-      <form *ngIf="!loggedInUser">
+      <form *ngIf="loggedInUser">
         <div class="form-group">
           <label for="name">Név</label>
           <input type="text" class="form-control" name="username" [(ngModel)]="loggedInUser.user.username" #username="ngModel" required>
