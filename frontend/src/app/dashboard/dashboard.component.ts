@@ -84,10 +84,19 @@ export class DashboardComponent implements OnInit {
   }
 
   fillDataTable() {
+    const data = {};
     for (let i = 0; i < this.singleorderPrice.length; i++) {
-      this.pieChartData.dataTable.push([this.singleorderDate[i], this.singleorderPrice[i]]);
-      this.filltable = true;
-  }
+      if (!data[this.singleorderDate[i]]) {
+        data[this.singleorderDate[i]] = 0;
+      }
+      data[this.singleorderDate[i]] += this.singleorderPrice[i];
+    }
+    console.log(data);
+    // tslint:disable-next-line:forin
+    for (const k in data) {
+      this.pieChartData.dataTable.push([k, data[k]]);
+    }
+    this.filltable = true;
     console.log(this.pieChartData);
   }
   getUsers() {
