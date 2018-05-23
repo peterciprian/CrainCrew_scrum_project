@@ -128,8 +128,6 @@ export class ProductsComponent implements OnInit {
     this.list();
   }
 
-
-
   showSelectedTable(categ) {
     this.showThumbnail = false;
     this.http.get(this.baseUrl, this.options)

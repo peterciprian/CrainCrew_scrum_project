@@ -25,7 +25,6 @@
   color: white;
   overflow: hidden;
   padding-top: 15px;
-  position: fixed;
   width: 100%;
   z-index: 1;
 }
