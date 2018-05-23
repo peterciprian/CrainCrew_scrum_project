@@ -1,44 +1,21 @@
 <br>
 <div class="container">
     <div class="row">
-        <div class="col-8">
-            <h2 *ngIf="(!longgedIn)"> Üdvözlöm!</h2>
-            <p  *ngIf="(!longgedIn)" class="lead"> Kérem jelentkezzen be!</p>
-        </div>
-        <div class="col-4">
-          <h2> Legújabb termékeink:</h2>
-          <p class="lead"> Tekintse meg őket</p>
-        </div>
-      </div>
+      <h2 *ngIf="(!longgedIn)"><i class="fas fa-hand-point-right"></i> Üdvözlöm!<small *ngIf="(!longgedIn)" class="text-muted"> Kérem jelentkezzen be!</small></h2>
+      <h2 *ngIf="(longgedIn)"><i class="fas fa-bicycle"></i> Legújabb termékeink:<small class="text-muted"> Tekintse meg őket</small></h2>
+    </div>
 </div>
 <hr>
-
 
 <!-- *********** oldalsó katagoria link -->
 
 <div class="container">
   <div class="row">
     <div class="col-2">
-        <ul class="list-group">
-          <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <a routerLink="../products" routerLinkActive="active" class="nav-link active" >Gyerek</a>
-          </li>
-          <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <a routerLink="../products" routerLinkActive="active" class="nav-link" >Felnőtt</a>
-          </li>
-          <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <a class="nav-link disabled" href="#">Mtn bike</a>
-          </li>
-          <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <a class="nav-link disabled" href="#">Városi</a>
-          </li>
-          <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <a class="nav-link disabled" href="#">Női</a>
-          </li>
-          <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <a class="nav-link disabled" href="#">Férfi</a>
-          </li>
-        </ul>
+        <div class="btn-group-vertical">
+            <button class="btn btn-lg btn-block btn-success" type="button">Kategóriák</button>
+            <button *ngFor='let categ of categs' class="btn btn-lg btn-light" (click)="showSelectedTable(categ.name)" type="button">{{categ.name}}</button>
+        </div>
     </div>
     
 <!-- *********** termékek  -->
@@ -114,7 +91,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" data-dismiss="modal" class="btn btn-sm btn-info">Close</button>
+        <button type="button" data-dismiss="modal" class="btn btn-sm btn-info">Bezárás</button>
         <button type="button" (click)="selectedItem(actualItem)" data-dismiss="modal" class="btn btn-sm btn-warning">
             <i class="fas fa-shopping-cart"></i></button>
       </div>

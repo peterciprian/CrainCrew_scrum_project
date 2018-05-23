@@ -66,8 +66,17 @@ export class ProductsComponent implements OnInit {
 
   cart = [];
 
+  categs: Array<any>;
+  categ = {
+    name: '',
+    user: '',
+    sequence: ''
+  };
+
+
   ngOnInit() {
     this.isLoggedIn();
+    this.listCateg();
 
     this.myForm = new FormGroup({
       'name': new FormControl('', [
@@ -131,14 +140,14 @@ export class ProductsComponent implements OnInit {
     this.list();
   }
 
-  showAdultTable() {
-    this.showThumbnail = false;
-    this.listAdult();
-  }
 
-  showKidTable() {
+
+  showSelectedTable(categ) {
     this.showThumbnail = false;
-    this.listKid();
+    this.http.get(this.baseUrl, this.options)
+    .subscribe(data => {
+      this.items = JSON.parse(data['_body']).filter(item => item.category === categ);
+    });
   }
 
   list() {
@@ -149,17 +158,10 @@ export class ProductsComponent implements OnInit {
 
   }
 
-  listAdult() {
-    this.http.get(this.baseUrl, this.options)
+  listCateg() {
+    this.http.get('http://localhost:8080/categ/', this.options)
       .subscribe(data => {
-        this.items = JSON.parse(data['_body']).filter(item => item.category === 'felnőtt');
-      });
-  }
-
-  listKid() {
-    this.http.get(this.baseUrl, this.options)
-      .subscribe(data => {
-        this.items = JSON.parse(data['_body']).filter(item => item.category === 'gyerek');
+        this.categs = JSON.parse(data['_body']);
       });
   }
 

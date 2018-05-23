@@ -19,8 +19,7 @@
         Kategóriák
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <button class="dropdown-item" (click)="showAdultTable()" type="button">Felnőtt</button>
-        <button class="dropdown-item" (click)="showKidTable()" type="button">Gyerek</button>
+        <button *ngFor='let categ of categs' class="dropdown-item" (click)="showSelectedTable(categ.name)" type="button">{{categ.name}}</button>
       </div>
     </div>
   </div>
@@ -84,8 +83,7 @@
               'is-valid': myForm.controls.category.valid && (myForm.controls.category.dirty || myForm.controls.category.touched), 
               'is-invalid': myForm.controls.category.invalid && (myForm.controls.category.dirty || myForm.controls.category.touched)
             }">
-          <option selected value="felnott">Felnőtt</option>
-          <option value="gyerek">Gyerek</option>
+          <option *ngFor='let categ of categs' [value]="categ.name">{{categ.name}}</option>
         </select>
       </div>
 
@@ -145,8 +143,6 @@
     </div>
   </div>
 </div>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
 
 <!-- *********** list view -->
 <div class="container">
