@@ -54,7 +54,6 @@ export class ProductsComponent implements OnInit {
 
   cart = [];
 
-  
   categs: Array<any>;
   categ = {
     name: '',
@@ -137,8 +136,6 @@ export class ProductsComponent implements OnInit {
     .subscribe(data => {
       this.items = JSON.parse(data['_body']).filter(item => item.category === categ);
     });
-
-
   }
 
   list() {
@@ -155,9 +152,6 @@ export class ProductsComponent implements OnInit {
         this.categs = JSON.parse(data['_body']);
       });
   }
-
-
-
 
   find(itemId) {
     this.http.get(this.baseUrl + itemId, this.options)
