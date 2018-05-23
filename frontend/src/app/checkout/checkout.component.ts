@@ -14,7 +14,7 @@ export class CheckoutComponent implements OnInit {
   options = new RequestOptions({ withCredentials: true });
   baseUrl = 'http://localhost:8080/order/';
   newOrder = {
-    user: '',
+    user: {_id: ''},
     items: [
       { item: '', quantity: 1 }
     ],
@@ -35,12 +35,12 @@ export class CheckoutComponent implements OnInit {
       .subscribe(data => {
         this.loggedInUser = JSON.parse(data['_body']);
         console.log(this.loggedInUser);
-        this.newOrder.user = this.loggedInUser.user['_id'];
+        this.newOrder.user['_id'] = this.loggedInUser.user['_id'];
       });
     this.newOrder.price = this.cartSum();
     this.newOrder.items = [];
     for (let i = 0; i < this.cart.length; i++) {
-      this.newOrder.items.push({item: this.cart[i]['_id'], quantity: 1});
+      this.newOrder.items.push({item: this.cart[i], quantity: 1});
     }
     console.log(this.newOrder);
   }
@@ -63,14 +63,14 @@ export class CheckoutComponent implements OnInit {
     let sumPrice = 0;
     for (let i = 0; i < this.newOrder.items.length; i++) {
       for (let j = 0; j < this.items.length; j++) {
-        if (this.newOrder.items[i].item === this.items[j]['_id'] ) {
+        if (this.newOrder.items[i].item['_id'] === this.items[j]['_id'] ) {
           sumPrice += Number(this.items[j].price) * Number(this.newOrder.items[i].quantity);
         }
     }}
     this.newOrder.price = sumPrice;
   }
 
-  createOrder(cart) {
+  createOrder() {
     // console.log(this.newOrder);
     this.http.post(this.baseUrl, this.newOrder, this.options)
       .subscribe(data => {

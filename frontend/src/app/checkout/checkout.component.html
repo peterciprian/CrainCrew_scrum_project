@@ -113,7 +113,7 @@
         || !billingAddress3.valid || !shippingAddress3.valid
         || !billingAddress4.valid || !shippingAddress4.valid">Adatok mentése</button>
         <a routerLink="../cart"><button class="btn btn-info">Vissza a kosárba</button></a>
-        <button class="btn btn-success" (click)="createOrder(cart)" [disabled]="newOrder.price === 0 || !username.valid || !email.valid || !phoneNumber.valid 
+        <button class="btn btn-success" (click)="createOrder()" [disabled]="newOrder.price === 0 || !username.valid || !email.valid || !phoneNumber.valid 
         || !billingAddress1.valid || !shippingAddress1.valid
         || !billingAddress2.valid || !shippingAddress2.valid
         || !billingAddress3.valid || !shippingAddress3.valid
