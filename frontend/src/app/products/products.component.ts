@@ -282,8 +282,8 @@ filterCommentsByUserId(userId) {
 filterCommentsByItemId(itemId) {
   return this.comments.filter(comment => comment.item === itemId );
 }
-sendNewComment(){
-this.newComment.user = 
+sendNewComment() {
+this.newComment.user = '';
 };
 
   selectedItem(item) {
