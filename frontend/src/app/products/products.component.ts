@@ -130,12 +130,7 @@ export class ProductsComponent implements OnInit {
     this.list();
   }
 
-  showAdultTable() {
-    this.showThumbnail = false;
-    this.listAdult();
-  }
-
-  showKidTable() {
+  showSelectedTable(categ) {
     this.showThumbnail = false;
     this.listKid();
   }
