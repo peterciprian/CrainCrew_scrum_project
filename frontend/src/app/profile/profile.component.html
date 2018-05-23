@@ -51,8 +51,7 @@
             <thead>
               <th>ID</th>
               <th>Felhasználó</th>
-              <th>Termék</th>
-              <th>Darabszám</th>
+              <th>Termék [#db]</th>
               <th>Dátum</th>
               <th>Végösszeg</th>
             </thead>
@@ -60,8 +59,12 @@
               <tr *ngFor="let order of orders">
                 <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order['_id']}}</td>
                 <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order.user.username}}</td>
-                <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order.items[0].item.name}}</td>
-                <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order.items[0].quantity}}</td>
+                <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">
+                  <div *ngFor="let item of order.items">
+                    <p>{{item.item.name}}  [{{item.quantity}}]</p>
+                  </div>
+                </td>
+
                 <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order.createdAt | date}}</td>
                 <td *ngIf="order.user['_id'] === loggedInUser.user['_id']">{{order.price}} Ft</td>
               </tr>
