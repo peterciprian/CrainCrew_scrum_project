@@ -1,0 +1,50 @@
+#footer {
+    background-color: #333;
+    bottom: 0;
+    color: white;
+    overflow: hidden;
+    padding-top: 15px;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .social {
+    font-size: 1.7em;
+    letter-spacing: 5px;
+  }
+  
+  .face {
+    color: #3B5998;
+  }
+  
+  .face:hover {
+    color: #fff;;
+  }
+  
+  .insta {
+    color: #DC346E;
+  }
+  
+  .insta:hover {
+    color: #fff;;
+  }
+  
+  .you {
+    color: #FF0000;
+  }
+  
+  .you:hover {
+    color: #fff;;
+  }
+  
+  .pin {
+    color: #BD081C;
+  }
+  
+  .pin:hover {
+    color: #fff;;
+  }
+  
+  .fa-shopping-cart {
+    font-size: 1.4em;
+  }
