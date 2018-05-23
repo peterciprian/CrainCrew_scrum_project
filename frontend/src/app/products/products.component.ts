@@ -299,7 +299,6 @@ isConfirmed() {
           return false;
         }
       }
-      return false;
     });
   }
 }
