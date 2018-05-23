@@ -240,8 +240,7 @@
             <span class="input-group-text">Kategória:</span>
           </div>
           <select class="custom-select" name="userRole" [(ngModel)]="actualItem.category">
-            <option value="felnőtt">Felnőtt</option>
-            <option value="gyerek">Gyerek</option>
+            <option *ngFor='let categ of categs' [value]="categ.name">{{categ.name}}</option>
           </select>
         </div>
         <div class="input-group mb-3">
