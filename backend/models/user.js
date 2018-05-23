@@ -24,7 +24,6 @@ const userSchema = mongoose.Schema({
   billingAddress: {
     Country: {
       type: String,
-      default: 'Hungary',
     },
     City: {
       type: String,
@@ -40,7 +39,6 @@ const userSchema = mongoose.Schema({
   shippingAddress: {
     Country: {
       type: String,
-      default: 'Hungary',
     },
     City: {
       type: String,
@@ -52,6 +50,7 @@ const userSchema = mongoose.Schema({
       type: Number,
     },
   },
+  
   phoneNumber: {
     type: Number,
   },
