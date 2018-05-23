@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Comment = require('./comment-model');
 
 /**
  * ItemSchema schema
@@ -33,11 +32,6 @@ const ItemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  comments: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Comment',
-    /* required: true, */
-  }],
 }, {
   timestamps: true,
 });

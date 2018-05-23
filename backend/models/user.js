@@ -7,6 +7,9 @@ const passportLocalMongoose = require('passport-local-mongoose');
  */
 
 const userSchema = mongoose.Schema({
+  commentId: {
+    type: mongoose.Schema.Types.ObjectId,
+  },
   username: {
     type: String,
     required: true,
@@ -24,7 +27,6 @@ const userSchema = mongoose.Schema({
   billingAddress: {
     Country: {
       type: String,
-      default: 'Hungary',
     },
     City: {
       type: String,
@@ -40,7 +42,6 @@ const userSchema = mongoose.Schema({
   shippingAddress: {
     Country: {
       type: String,
-      default: 'Hungary',
     },
     City: {
       type: String,
@@ -52,6 +53,7 @@ const userSchema = mongoose.Schema({
       type: Number,
     },
   },
+
   phoneNumber: {
     type: Number,
   },

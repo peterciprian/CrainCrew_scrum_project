@@ -23,11 +23,13 @@
   background-color: #333;
   bottom: 0;
   color: white;
+  
+  display: flex;
   overflow: hidden;
   padding-top: 15px;
-  position: fixed;
   width: 100%;
   z-index: 1;
+
 }
 
 .social {
