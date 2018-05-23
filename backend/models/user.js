@@ -7,6 +7,9 @@ const passportLocalMongoose = require('passport-local-mongoose');
  */
 
 const userSchema = mongoose.Schema({
+  commentId: {
+    type: mongoose.Schema.Types.ObjectId,
+  },
   username: {
     type: String,
     required: true,
@@ -64,7 +67,7 @@ const userSchema = mongoose.Schema({
       default: '',
     },
   },
-  
+
   phoneNumber: {
     type: Number,
   },

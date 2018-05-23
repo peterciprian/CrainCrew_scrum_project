@@ -3,16 +3,14 @@
   <div class="row">
     <h2 *ngIf="(!longgedIn)">
       <i class="fas fa-hand-point-right"></i> Üdvözlöm!
-      <small *ngIf="(!longgedIn)" class="text-muted"> Kérem jelentkezzen be!</small>
+      <small class="text-muted"> Kérem jelentkezzen be!</small>
     </h2>
     <h2 *ngIf="(longgedIn)">
       <i class="fas fa-bicycle"></i> Legújabb termékeink:
       <small class="text-muted"> Tekintse meg őket</small>
     </h2>
   </div>
-</div>
 <hr>
-
 <!-- *********** oldalsó katagoria link -->
 
 <div class="container">
@@ -23,8 +21,9 @@
         <button *ngFor='let categ of categs' class="btn btn-lg btn-light" (click)="showSelectedTable(categ.name)" type="button">{{categ.name}}</button>
       </div>
     </div>
-    <!-- *********** termékek  -->
-    <div class="col-10">
+    
+<!-- *********** termékek  -->
+    <div class="col-xs-12 col-md-10">
       <div class="container">
         <div class="card-columns">
           <div class="card" *ngFor='let item of items | slice:0:10'>

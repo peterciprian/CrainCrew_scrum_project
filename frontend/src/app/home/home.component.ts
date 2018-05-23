@@ -71,7 +71,9 @@ export class HomeComponent implements OnInit {
   listCateg() {
     this.http.get('http://localhost:8080/categ/', this.options)
       .subscribe(data => {
-        this.categs = JSON.parse(data['_body']);
+        const temp = JSON.parse(data['_body']);
+        temp.sort((a, b) => a.sequence - b.sequence);
+        this.categs = temp;
       });
   }
 
@@ -117,7 +119,7 @@ selectedItem(item) {
 showSelectedTable(categ) {
   this.http.get(this.baseUrl, this.options)
   .subscribe(data => {
-    this.items = JSON.parse(data['_body']).filter(item => item.category === categ).sort(category => categ.sequence);
+    this.items = JSON.parse(data['_body']).filter(item => item.category === categ);
   });
 }
 
