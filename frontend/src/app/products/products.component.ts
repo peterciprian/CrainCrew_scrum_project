@@ -69,14 +69,6 @@ export class ProductsComponent implements OnInit {
    sequence: ''
  };
 
-  categs: Array<any>;
-  categ = {
-    name: '',
-    user: '',
-    sequence: ''
-  };
-
-
   ngOnInit() {
     this.isLoggedIn();
     this.listCateg();
