@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Item } from '../item';
-/* import { Comments } from '../'; */
-
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -18,11 +16,13 @@ export class ProductsComponent implements OnInit {
   // baseUrl = 'https://api.mlab.com/api/1/databases/crane-crew/collections/items/?apiKey=IM0DBPnVxrZDK4-YxGS0hxzTSXVbKRED';
   baseUrl = 'http://localhost:8080/item/';
   items: Array<Item>;
-  /* comments: any; */
+  orders: Array<any>;
+  comments: Array<any>;
+  actualComments = [];
   newComment: any = {
-    user: '',
+    user: {},
     comment: '',
-    item: '',
+    item: {},
     confirmed: false,
   };
 
@@ -34,13 +34,6 @@ export class ProductsComponent implements OnInit {
     manufacturer: '',
     price: 0,
     category: '',
-    comments: [
-      {
-        comment: '',
-        itemId: '',
-        user: '',
-      }
-    ],
   };
 
   item: Item = {
@@ -51,7 +44,6 @@ export class ProductsComponent implements OnInit {
     manufacturer: '',
     price: 0,
     category: '',
-    comments: [],
   };
 
   myForm: FormGroup;
@@ -74,6 +66,8 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn();
+    this.listOders();
+    this.listComments();
 
     this.myForm = new FormGroup({
       'name': new FormControl('', [
@@ -100,7 +94,6 @@ export class ProductsComponent implements OnInit {
   constructor(
     public http: Http,
     private flashMessagesService: FlashMessagesService) {
-    this.list();
     this.list();
   }
 
@@ -137,12 +130,7 @@ export class ProductsComponent implements OnInit {
     this.list();
   }
 
-  showAdultTable() {
-    this.showThumbnail = false;
-    this.listAdult();
-  }
-
-  showKidTable() {
+  showSelectedTable(categ) {
     this.showThumbnail = false;
     this.listKid();
   }
@@ -165,7 +153,9 @@ export class ProductsComponent implements OnInit {
   listKid() {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
-        this.items = JSON.parse(data['_body']).filter(item => item.category === 'gyerek');
+        const temp = JSON.parse(data['_body']);
+        temp.sort((a, b) => a.sequence - b.sequence);
+        this.categs = temp;
       });
   }
 
@@ -191,6 +181,7 @@ export class ProductsComponent implements OnInit {
           category: '',
         };
         this.list();
+        this.listOders();
         this.myForm.reset();
       });
   }
@@ -198,6 +189,8 @@ export class ProductsComponent implements OnInit {
   modalChange(id) {
     const choosen = this.items.filter(item => item._id === id)[0];
     this.actualItem = Object.assign({}, choosen); // a this.modal megkapja egy duplikációját a choosennen
+    this.actualComments = this.filterCommentsByItemId(id);
+    /* console.log(this.actualComments); */
   }
 
   /**
@@ -269,9 +262,10 @@ export class ProductsComponent implements OnInit {
   }
 
 listComments() {
-  this.http.get('http://localhost:8080/user/comment', this.options)
+  this.http.get('http://localhost:8080/comment', this.options)
   .subscribe(data => {
     this.comments = JSON.parse(data['_body']);
+    console.log(this.comments);
   });
 }
 
@@ -280,11 +274,39 @@ filterCommentsByUserId(userId) {
 }
 
 filterCommentsByItemId(itemId) {
+  console.log(itemId);
   return this.comments.filter(comment => comment.item === itemId );
 }
-sendNewComment(){
-this.newComment.user = 
-};
+sendNewComment() {
+  this.newComment.user['_id'] = this.loggedInUser.user['_id'];
+  this.newComment.item['_id'] = this.actualItem._id;
+  this.newComment.confirmed = this.isConfirmed();
+  console.log(this.newComment);
+  this.http.post('http://localhost:8080/comment/', this.newComment, this.options)
+    .subscribe((data) => {this.comments = JSON.parse(data['_body']);
+    console.log(this.comments); });
+}
+
+isConfirmed() {
+  for (let i = 0; i < this.orders.length; i++) {
+    for (let j = 0; j < this.orders[i].items.length; j++) {
+      // tslint:disable-next-line:max-line-length
+      if (this.orders[i].user['_id'] === this.newComment.user['_id'] && this.orders[i].items[j].item['_id'] === this.newComment.item['_id']) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+listOders() {
+  this.http.get('http://localhost:8080/order/', this.options)
+  .subscribe(data => {
+    this.orders = JSON.parse(data['_body']);
+    console.log(this.orders);
+  });
+}
+
+
 
   selectedItem(item) {
     this.cart = (localStorage.cartItems ? JSON.parse(localStorage.cartItems) : []);
@@ -296,6 +318,4 @@ this.newComment.user =
     this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' }); }
     localStorage.cartItems = JSON.stringify(this.cart);
   }
-
-
 }
