@@ -18,7 +18,13 @@ export class ProductsComponent implements OnInit {
   // baseUrl = 'https://api.mlab.com/api/1/databases/crane-crew/collections/items/?apiKey=IM0DBPnVxrZDK4-YxGS0hxzTSXVbKRED';
   baseUrl = 'http://localhost:8080/item/';
   items: Array<Item>;
-  comments: any;
+  /* comments: any; */
+  newComment: any = {
+    user: '',
+    comment: '',
+    item: '',
+    confirmed: false,
+  };
 
   actualItem: Item = {
     _id: '',
@@ -66,17 +72,8 @@ export class ProductsComponent implements OnInit {
 
   cart = [];
 
-  categs: Array<any>;
-  categ = {
-    name: '',
-    user: '',
-    sequence: ''
-  };
-
-
   ngOnInit() {
     this.isLoggedIn();
-    this.listCateg();
 
     this.myForm = new FormGroup({
       'name': new FormControl('', [
@@ -140,14 +137,14 @@ export class ProductsComponent implements OnInit {
     this.list();
   }
 
-
-
-  showSelectedTable(categ) {
+  showAdultTable() {
     this.showThumbnail = false;
-    this.http.get(this.baseUrl, this.options)
-    .subscribe(data => {
-      this.items = JSON.parse(data['_body']).filter(item => item.category === categ);
-    });
+    this.listAdult();
+  }
+
+  showKidTable() {
+    this.showThumbnail = false;
+    this.listKid();
   }
 
   list() {
@@ -158,10 +155,17 @@ export class ProductsComponent implements OnInit {
 
   }
 
-  listCateg() {
-    this.http.get('http://localhost:8080/categ/', this.options)
+  listAdult() {
+    this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
-        this.categs = JSON.parse(data['_body']);
+        this.items = JSON.parse(data['_body']).filter(item => item.category === 'felnőtt');
+      });
+  }
+
+  listKid() {
+    this.http.get(this.baseUrl, this.options)
+      .subscribe(data => {
+        this.items = JSON.parse(data['_body']).filter(item => item.category === 'gyerek');
       });
   }
 
@@ -185,7 +189,6 @@ export class ProductsComponent implements OnInit {
           manufacturer: '',
           price: 0,
           category: '',
-          comments: [],
         };
         this.list();
         this.myForm.reset();
@@ -279,6 +282,9 @@ filterCommentsByUserId(userId) {
 filterCommentsByItemId(itemId) {
   return this.comments.filter(comment => comment.item === itemId );
 }
+sendNewComment(){
+this.newComment.user = 
+};
 
   selectedItem(item) {
     this.cart = (localStorage.cartItems ? JSON.parse(localStorage.cartItems) : []);
