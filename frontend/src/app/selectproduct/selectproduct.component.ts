@@ -62,18 +62,18 @@ export class SelectproductComponent implements OnInit {
     return this.comments.filter(comment => comment.item === selectedProduct._id );
   }
   sendNewComment() {
+    console.log(this.loggedInUser.user['_id'], this.newComment.item['_id']);
     this.newComment.user['_id'] = this.loggedInUser.user['_id'];
     this.newComment.item['_id'] = this.selectedProduct._id;
     this.newComment.confirmed = this.isConfirmed();
     console.log(this.newComment);
     this.http.post('http://localhost:8080/comment/', this.newComment, this.options)
       .subscribe((data) => {this.comments = JSON.parse(data['_body']);
-      console.log(this.comments); });
+      this.listComments(); });
   }
-
   isConfirmed() {
-    for (let i = 0; i < this.orders.length; i++) {
-      for (let j = 0; j < this.orders[i].items.length; j++) {
+    for (let i = 0; i < this.orders.length; i++) {console.log(this.orders[i].items.length);
+      for (let j = 0; j < this.orders[i].items; j++) {
         // tslint:disable-next-line:max-line-length
         if (this.orders[i].user['_id'] === this.newComment.user['_id'] && this.orders[i].items[j].item['_id'] === this.newComment.item['_id']) {
           return true;
@@ -81,6 +81,13 @@ export class SelectproductComponent implements OnInit {
       }
     }
     return false;
+  }
+  listOders() {
+    this.http.get('http://localhost:8080/order/', this.options)
+    .subscribe(data => {
+      this.orders = JSON.parse(data['_body']);
+      console.log(this.orders);
+    });
   }
   isLoggedIn() {
     this.http.get('http://localhost:8080/user/profile', this.options)
@@ -134,7 +141,7 @@ export class SelectproductComponent implements OnInit {
 
   addToCart(selectedProduct) {
     this.cart = (localStorage.cartItems ? JSON.parse(localStorage.cartItems) : []);
-    const find = this.cart.findIndex(i => i['_id'] === this.selectedProduct['_id']);
+    const find = this.cart.findIndex(i => i['_id'] === selectedProduct['_id']);
 
     if (find !== -1) {
         this.flashMessagesService.show('A termék már szerepel a kosárban!', { cssClass: 'alert-danger' });
@@ -145,5 +152,6 @@ export class SelectproductComponent implements OnInit {
 
   ngOnInit() {this.navigate();
   this.isLoggedIn();
-this.listComments(); }
+this.listComments();
+this.listOders(); }
 }

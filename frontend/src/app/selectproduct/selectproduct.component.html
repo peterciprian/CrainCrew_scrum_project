@@ -16,7 +16,7 @@
         <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(selectedProduct._id)"
           class="btn btn-sm btn-outline-danger">Módosítás</button>
         <button *ngIf="(longgedIn && isAdmin)" type="button" (click)="delete(selectedProduct._id)" class="btn btn-sm btn-danger">Törlés</button>
-        <a class="btn btn-info" routerLink="../products" routerLinkActive="active" role="button" href="#">Vissza a termékekhez</a>
+        <a class="btn btn-info" routerLink="products" routerLinkActive="active" role="button" href="#">Vissza a termékekhez</a>
         <button type="button" (click)="addToCart(selectedProduct)" class="btn btn-sm btn-warning">
           <i class="fas fa-shopping-cart"></i>
         </button>
@@ -83,7 +83,7 @@
           <div class="container pb-cmnt-container" style="padding-bottom: 15px">
               <div class="panel panel-info col-md-12">
                 <div class="panel-body col-md-12">
-                  <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea col-md-12" style="height:150px; width: 100%" name="comment" [(ngModel)]="newComment.comment"></textarea>
+                  <textarea placeholder="Write your comment here!" class="pb-cmnt-textarea col-md-12" name="commen" [(ngModel)]="newComment.comment" style="height:100px; width: 100%" name="comment" [(ngModel)]="newComment.comment"></textarea>
                   <form class="form-inline">
                     <button class="btn btn-primary pull-left" (click)="sendNewComment()" type="button">Értékelés küldése</button>
                   </form>
