@@ -74,7 +74,7 @@
             <div class="panel panel-default col-12" *ngIf="comment.item==selectedProduct._id">
               <div class="panel-heading">
                 <strong>{{comment.user.username}} </strong><i *ngIf="comment.confirmed" class="fas fa-check-circle" data-toggle="tooltip" data-placement="top" title="Regisztrált vásárló" style="cursor: pointer; color: green; font-size: 20px"></i>
-                <span class="text-muted"> commented: {{comment.createdAt}}</span>
+                <span class="text-muted"> commented: {{comment.createdAt | date : short}}</span>
               </div>
               <div class="panel-body">{{comment.comment}}&nbsp;&nbsp;
               <button *ngIf="(isAdmin)" class="btn btn-sm btn-danger" (click)="deleteComment(comment)">X</button>
