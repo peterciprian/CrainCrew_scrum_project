@@ -36,16 +36,23 @@ export class HomeComponent implements OnInit {
     comments: [],
   };
 
-
   cart = [];
-  
   registerred = false;
   longgedIn = false;
   isAdmin = false;
   loggedInUser: any;
 
 
+  categs: Array<any>;
+  categ = {
+    name: '',
+    user: '',
+    sequence: ''
+  };
+
+
   ngOnInit() {
+    this.listCateg();
     this.list();
     this.isLoggedIn();
   }
@@ -63,7 +70,14 @@ export class HomeComponent implements OnInit {
   }
 
 
-      /** 
+  listCateg() {
+    this.http.get('http://localhost:8080/categ/', this.options)
+      .subscribe(data => {
+        this.categs = JSON.parse(data['_body']);
+      });
+  }
+
+      /**
    * Bekéri a szerveről, az aktuálisan belépett user adatait
    * először az OnInit hívja meg, ill login() metódus végé is meghívjuk
    * ha nincs senki belépve, üres objectummal tér vissza
@@ -96,10 +110,17 @@ selectedItem(item) {
   const find = this.cart.findIndex(i => i['_id'] === item['_id']);
 
   if (find !== -1) {
-      this.flashMessagesService.show('A termék már szerepel a kosárban!', { cssClass: 'alert-warning' });
+      this.flashMessagesService.show('A termék már szerepel a kosárban!', { cssClass: 'alert-danger' });
     } else {this.cart.push(item);
   this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' }); }
   localStorage.cartItems = JSON.stringify(this.cart);
+}
+
+showSelectedTable(categ) {
+  this.http.get(this.baseUrl, this.options)
+  .subscribe(data => {
+    this.items = JSON.parse(data['_body']).filter(item => item.category === categ).sort(category => categ.sequence);
+  });
 }
 
 }

@@ -18,7 +18,13 @@ export class ProductsComponent implements OnInit {
   // baseUrl = 'https://api.mlab.com/api/1/databases/crane-crew/collections/items/?apiKey=IM0DBPnVxrZDK4-YxGS0hxzTSXVbKRED';
   baseUrl = 'http://localhost:8080/item/';
   items: Array<Item>;
-  comments: any;
+  /* comments: any; */
+  newComment: any = {
+    user: '',
+    comment: '',
+    item: '',
+    confirmed: false,
+  };
 
   actualItem: Item = {
     _id: '',
@@ -183,7 +189,6 @@ export class ProductsComponent implements OnInit {
           manufacturer: '',
           price: 0,
           category: '',
-          comments: [],
         };
         this.list();
         this.myForm.reset();
@@ -277,6 +282,9 @@ filterCommentsByUserId(userId) {
 filterCommentsByItemId(itemId) {
   return this.comments.filter(comment => comment.item === itemId );
 }
+sendNewComment(){
+this.newComment.user = 
+};
 
   selectedItem(item) {
     this.cart = (localStorage.cartItems ? JSON.parse(localStorage.cartItems) : []);
