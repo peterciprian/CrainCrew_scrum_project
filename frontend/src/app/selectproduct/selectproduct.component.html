@@ -74,7 +74,7 @@
             <div class="panel panel-default col-12" *ngIf="comment.item==selectedProduct._id">
               <div class="panel-heading">
                 <strong>{{comment.user.username}}</strong><i *ngIf="comment.confirmed" class="fas fa-check-circle"></i>
-                <span class="text-muted">commented: {{comment.createdAt}}</span>
+                <span class="text-muted">commented: {{comment.createdAt | date : short}}</span>
               </div>
               <div class="panel-body">{{comment.comment}} 
               </div>
