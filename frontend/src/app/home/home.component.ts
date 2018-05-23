@@ -36,14 +36,26 @@ export class HomeComponent implements OnInit {
 
 
   cart = [];
+<<<<<<< HEAD
 
+=======
+>>>>>>> 24f568ecff247c904865b883757a29cf7f120ac1
   registerred = false;
   longgedIn = false;
   isAdmin = false;
   loggedInUser: any;
 
 
+  categs: Array<any>;
+  categ = {
+    name: '',
+    user: '',
+    sequence: ''
+  };
+
+
   ngOnInit() {
+    this.listCateg();
     this.list();
     this.isLoggedIn();
   }
@@ -61,7 +73,14 @@ export class HomeComponent implements OnInit {
   }
 
 
-      /**
+  listCateg() {
+    this.http.get('http://localhost:8080/categ/', this.options)
+      .subscribe(data => {
+        this.categs = JSON.parse(data['_body']);
+      });
+  }
+
+      /** 
    * Bekéri a szerveről, az aktuálisan belépett user adatait
    * először az OnInit hívja meg, ill login() metódus végé is meghívjuk
    * ha nincs senki belépve, üres objectummal tér vissza
