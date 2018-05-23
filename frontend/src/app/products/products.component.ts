@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Item } from '../item';
+
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -25,7 +26,6 @@ export class ProductsComponent implements OnInit {
     item: {},
     confirmed: false,
   };
-
   actualItem: Item = {
     _id: '',
     name: '',
@@ -37,7 +37,6 @@ export class ProductsComponent implements OnInit {
   };
 
   item: Item = {
-    _id: '',
     name: '',
     url: '',
     img: '',
@@ -63,9 +62,24 @@ export class ProductsComponent implements OnInit {
   loggedInUser: any;
 
   cart = [];
+  categs: Array<any>;
+  categ = {
+   name: '',
+   user: '',
+   sequence: ''
+ };
+
+  categs: Array<any>;
+  categ = {
+    name: '',
+    user: '',
+    sequence: ''
+  };
+
 
   ngOnInit() {
     this.isLoggedIn();
+    this.listCateg();
     this.listOders();
     this.listComments();
 
@@ -132,7 +146,10 @@ export class ProductsComponent implements OnInit {
 
   showSelectedTable(categ) {
     this.showThumbnail = false;
-    this.listKid();
+    this.http.get(this.baseUrl, this.options)
+    .subscribe(data => {
+      this.items = JSON.parse(data['_body']).filter(item => item.category === categ);
+    });
   }
 
   list() {
@@ -142,22 +159,15 @@ export class ProductsComponent implements OnInit {
       });
 
   }
-
-  listAdult() {
-    this.http.get(this.baseUrl, this.options)
-      .subscribe(data => {
-        this.items = JSON.parse(data['_body']).filter(item => item.category === 'felnőtt');
-      });
-  }
-
-  listKid() {
-    this.http.get(this.baseUrl, this.options)
+  listCateg() {
+    this.http.get('http://localhost:8080/categ/', this.options)
       .subscribe(data => {
         const temp = JSON.parse(data['_body']);
         temp.sort((a, b) => a.sequence - b.sequence);
         this.categs = temp;
       });
   }
+
 
   find(itemId) {
     this.http.get(this.baseUrl + itemId, this.options)
@@ -181,14 +191,13 @@ export class ProductsComponent implements OnInit {
           category: '',
         };
         this.list();
-        this.listOders();
         this.myForm.reset();
       });
   }
 
   modalChange(id) {
     const choosen = this.items.filter(item => item._id === id)[0];
-    this.actualItem = Object.assign({}, choosen); // a this.modal megkapja egy duplikációját a choosennen
+    this.actualItem = Object.assign({}, choosen); // a this.modal megkapja egy duplik�ci�j�t a choosennen
     this.actualComments = this.filterCommentsByItemId(id);
     /* console.log(this.actualComments); */
   }
@@ -260,53 +269,47 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
-
-listComments() {
-  this.http.get('http://localhost:8080/comment', this.options)
-  .subscribe(data => {
-    this.comments = JSON.parse(data['_body']);
-    console.log(this.comments);
-  });
-}
-
-filterCommentsByUserId(userId) {
-  return this.comments.filter(comment => comment.user === userId );
-}
-
-filterCommentsByItemId(itemId) {
-  console.log(itemId);
-  return this.comments.filter(comment => comment.item === itemId );
-}
-sendNewComment() {
-  this.newComment.user['_id'] = this.loggedInUser.user['_id'];
-  this.newComment.item['_id'] = this.actualItem._id;
-  this.newComment.confirmed = this.isConfirmed();
-  console.log(this.newComment);
-  this.http.post('http://localhost:8080/comment/', this.newComment, this.options)
-    .subscribe((data) => {this.comments = JSON.parse(data['_body']);
-    console.log(this.comments); });
-}
-
-isConfirmed() {
-  for (let i = 0; i < this.orders.length; i++) {
-    for (let j = 0; j < this.orders[i].items.length; j++) {
-      // tslint:disable-next-line:max-line-length
-      if (this.orders[i].user['_id'] === this.newComment.user['_id'] && this.orders[i].items[j].item['_id'] === this.newComment.item['_id']) {
-        return true;
+  listComments() {
+    this.http.get('http://localhost:8080/comment', this.options)
+    .subscribe(data => {
+      this.comments = JSON.parse(data['_body']);
+      console.log(this.comments);
+    });
+  }
+  filterCommentsByUserId(userId) {
+    return this.comments.filter(comment => comment.user === userId );
+  }
+  filterCommentsByItemId(itemId) {
+    console.log(itemId);
+    return this.comments.filter(comment => comment.item === itemId );
+  }
+  sendNewComment() {
+    this.newComment.user['_id'] = this.loggedInUser.user['_id'];
+    this.newComment.item['_id'] = this.actualItem._id;
+    this.newComment.confirmed = this.isConfirmed();
+    console.log(this.newComment);
+    this.http.post('http://localhost:8080/comment/', this.newComment, this.options)
+      .subscribe((data) => {this.comments = JSON.parse(data['_body']);
+      console.log(this.comments); });
+  }
+  isConfirmed() {
+    for (let i = 0; i < this.orders.length; i++) {
+      for (let j = 0; j < this.orders[i].items.length; j++) {
+        // tslint:disable-next-line:max-line-length
+        if (this.orders[i].user['_id'] === this.newComment.user['_id'] && this.orders[i].items[j].item['_id'] === this.newComment.item['_id']) {
+          return true;
+        }
       }
     }
+    return false;
   }
-  return false;
-}
-listOders() {
-  this.http.get('http://localhost:8080/order/', this.options)
-  .subscribe(data => {
-    this.orders = JSON.parse(data['_body']);
-    console.log(this.orders);
-  });
-}
-
-
+  listOders() {
+    this.http.get('http://localhost:8080/order/', this.options)
+    .subscribe(data => {
+      this.orders = JSON.parse(data['_body']);
+      console.log(this.orders);
+    });
+  }
 
   selectedItem(item) {
     this.cart = (localStorage.cartItems ? JSON.parse(localStorage.cartItems) : []);
@@ -318,4 +321,7 @@ listOders() {
     this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' }); }
     localStorage.cartItems = JSON.stringify(this.cart);
   }
+
+
+
 }
