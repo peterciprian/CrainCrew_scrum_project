@@ -276,10 +276,6 @@ filterCommentsByItemId(itemId) {
   return this.comments.filter(comment => comment.item === itemId );
 }
 sendNewComment() {
-<<<<<<< HEAD
-this.newComment.user = '';
-};
-=======
   this.newComment.user._id = this.loggedInUser.user._id;
   this.newComment.item._id = this.actualItem._id;
   this.newComment.confirmed = this.isConfirmed();
@@ -310,7 +306,6 @@ listOders() {
 }
 
 
->>>>>>> e11eef76384e40fb1ab8f2596c82eb8a8dd41036
 
   selectedItem(item) {
     this.cart = (localStorage.cartItems ? JSON.parse(localStorage.cartItems) : []);
