@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
   isAdmin = false;
   public loggedInUser: any;
 
-  public cart = JSON.parse(localStorage.getItem('cartItems'));
+  public cart = JSON.parse(localStorage.getItem('cartItems')) || [];
 
   options = new RequestOptions({ withCredentials: true });
 
@@ -137,18 +137,12 @@ export class NavbarComponent implements OnInit {
 
   login() {
     this.http.post(this.baseUrl + 'login', this.user, this.options).subscribe(data => {
-      const res = data.json();
-
-     
       console.log( data);
       if (data.ok) {
         this.flashMessagesService.show('Sikeres belépés!', { cssClass: 'alert-success' });
         this.longgedIn = true;
         console.log(data['_body']);
         this.router.navigate(['../products']);
-      }
-      if (res.status === 401) {
-        this.flashMessagesService.show('Sikertelen belépés, ellenőrizd adataid!', { cssClass: 'alert-danger' });
       }
     });
     setTimeout(() => {

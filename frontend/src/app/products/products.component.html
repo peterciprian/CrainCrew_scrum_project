@@ -111,7 +111,7 @@
 
     </form>
 
-    <!--<pre>{{myForm.value | json }}</pre> -->
+    <pre>{{myForm.value | json }}</pre> 
     <br/>
 
     <button [disabled]="!myForm.valid" type="sumbmit" (click)="create()" data-toggle="collapse" data-target="#addNew" aria-controls="collapseExample"
@@ -132,7 +132,7 @@
         <p class="card-text">Fogyasztói ár: {{item.price | currency:'HUF '}} </p>
       </div>
       <div class="card-footer">
-        <button type="button" data-toggle="modal" data-target="#details" (click)="modalChange(item._id)" class="btn btn-sm btn-info">Részletek</button>
+          <a class="btn btn-info btn-sm" role="button" href="http://localhost:4200/products/{{item['_id']}}">Részletek</a>
         <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)"
           class="btn btn-sm btn-info">Módosítás</button>
         <button *ngIf="(longgedIn && isAdmin)" type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törlés</button>
@@ -183,8 +183,6 @@
           <div class="btn-group">
             <!-- Button trigger modal-->
             <a class="btn btn-info" role="button" href="http://localhost:4200/products/{{item['_id']}}">Részletek</a>
-            <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)"
-              class="btn btn-sm btn-info">Módosítás</button>
             <button *ngIf="(longgedIn && isAdmin)" type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törlés</button>
             <button type="button" (click)="selectedItem(item)" class="btn btn-sm btn-warning">
               <i class="fas fa-shopping-cart"></i>
