@@ -24,7 +24,6 @@ module.exports = {
       .populate('comments', 'comment')
       .then(item => res.json(item))
       .catch(err => res.send(err));
-
   },
 
   /**
