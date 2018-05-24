@@ -69,7 +69,9 @@ export class SelectproductComponent implements OnInit {
     this.http.post('http://localhost:8080/comment/', this.newComment, this.options)
       .subscribe((data) => {this.comments = JSON.parse(data['_body']);
       this.listComments(); });
+    this.newComment.comment = '';
   }
+
   isConfirmed() {
     for (let i = 0; i < this.orders.length; i++) {
       for (let j = 0; j < this.orders[i].items.length; j++) {
