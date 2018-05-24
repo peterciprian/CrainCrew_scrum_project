@@ -17,6 +17,8 @@ export class ProfileComponent implements OnInit {
   baseUrlOrders = 'http://localhost:8080/order/';
   loggedInUser: any;
   longgedIn = false;
+  lastKey = '';
+  multiplier = 1;
   setPassword: Object = {
     oldPassword: '',
     newPassword: '',
@@ -59,6 +61,23 @@ export class ProfileComponent implements OnInit {
         this.longgedIn = true;
       }
       console.log('Anyone logged in?:' + this.longgedIn);
+    });
+  }
+
+  sortTable(key: string) {
+
+    if (this.lastKey === key) {
+      this.multiplier *= -1;
+    }
+    this.orders.sort((a, b): any => {
+      a[key] = a[key] || '';
+      b[key] = b[key] || '';
+      this.lastKey = key;
+      if (key === 'price') {
+        return a[key] > (b[key]) * this.multiplier;
+      } else {
+        return a[key].localeCompare(b[key]) * this.multiplier;
+      }
     });
   }
   updatePassword() {
