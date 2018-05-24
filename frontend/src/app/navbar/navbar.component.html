@@ -134,7 +134,7 @@
               <div class="form-group">
                 <label for="username">E-mail cím:</label>
                 <div>
-                  <input type="text" name="username" class="form-control" placeholder="Felhasználónév" formControlName="username" [(ngModel)]="user.username">
+                  <input type="text" name="username" class="form-control" placeholder="Email" formControlName="username" [(ngModel)]="user.username">
                   <div class="alert alert-danger" *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">A mező kitöltése kötelező</div>
                 </div>
               </div>
