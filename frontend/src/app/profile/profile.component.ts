@@ -96,7 +96,9 @@ export class ProfileComponent implements OnInit {
     } else { this.passwordValidationError(); }
   }
 
-  passwordValidationError() {// console.log('Something bad happened'); }
+  passwordValidationError() {
+    // console.log('Something bad happened');
+}
 
-  ngOnInit() {this.listOrders(); }
+  ngOnInit() { this.listOrders(); }
 }
