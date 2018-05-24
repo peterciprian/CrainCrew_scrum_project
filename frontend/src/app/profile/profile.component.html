@@ -49,11 +49,11 @@
         <div class="tab-pane" id="orders">
           <table class="table table-bordered text-center">
             <thead>
-              <th>ID</th>
-              <th>Felhasználó</th>
+              <th class="sort-th" (click)="sortTable('_id')">ID</th>
+              <th class="sort-th" (click)="sortTable('name')">Felhasználó</th>
               <th>Termék [#db]</th>
-              <th>Dátum</th>
-              <th>Végösszeg</th>
+              <th class="sort-th" (click)="sortTable('createdAt')">Dátum</th>
+              <th class="sort-th" (click)="sortTable('price')">Végösszeg</th>
             </thead>
             <tbody>
               <tr *ngFor="let order of orders">
