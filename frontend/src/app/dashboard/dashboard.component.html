@@ -9,15 +9,15 @@
     <div class="col-sm-3">
     <ul class="list-group">
       <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" *ngIf="orders !== undefined">
-        <a routerLink="orders" class="nav-link" href="#">Rendelések</a>
+        <a routerLink="../orders" class="nav-link">Rendelések</a>
         <span class="badge badge-success badge-pill">{{order.length}}</span>
       </li>
       <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"  *ngIf="items !== undefined" >
-          <a routerLink="products" class="nav-link" href="#">Termékek</a>
+          <a routerLink="../products" class="nav-link">Termékek</a>
         <span class="badge badge-success badge-pill">{{items.length}}</span>
     </li>
       <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" *ngIf="users !== undefined">
-          <a routerLink="users" class="nav-link" href="#">Felhasználók</a>
+          <a routerLink="../users" class="nav-link">Felhasználók</a>
           <span class="badge badge-success badge-pill">{{users.length}}</span>
         </li>
     </ul>
