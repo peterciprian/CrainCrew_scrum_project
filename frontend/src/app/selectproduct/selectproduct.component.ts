@@ -62,7 +62,6 @@ export class SelectproductComponent implements OnInit {
     return this.comments.filter(comment => comment.item === selectedProduct._id );
   }
   sendNewComment() {
-    console.log(this.loggedInUser.user['_id'], this.newComment.item['_id']);
     this.newComment.user['_id'] = this.loggedInUser.user['_id'];
     this.newComment.item['_id'] = this.selectedProduct._id;
     this.newComment.confirmed = this.isConfirmed();
@@ -76,7 +75,7 @@ export class SelectproductComponent implements OnInit {
       for (let j = 0; j < this.orders[i].items.length; j++) {
         // tslint:disable-next-line:max-line-length
         if (this.orders[i].user['_id'] === this.newComment.user['_id'] && this.orders[i].items[j].item['_id'] === this.newComment.item['_id']) {
-          this.newComment.confirmed = true;
+          return true;
         }
       }
     }
