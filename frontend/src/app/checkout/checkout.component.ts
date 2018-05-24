@@ -78,6 +78,7 @@ export class CheckoutComponent implements OnInit {
         if (data.ok) {
           this.flashMessagesService.show('A rendelés sikeresen elküldve!', { cssClass: 'alert-success' });
           localStorage.clear();
+          this.cart = [];
           this.loadOrder();
         } else {this.flashMessagesService.show('Valami para van! Kérjük próbálja újra!', { cssClass: 'alert-danger' }); }
       });

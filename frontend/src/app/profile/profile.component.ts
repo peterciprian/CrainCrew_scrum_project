@@ -87,11 +87,14 @@ export class ProfileComponent implements OnInit {
         .subscribe(data => {
           if (data.ok === true) {
             // console.log('success', 'Sikeres jelszómódosítás');
+            this.flashMessagesService.show('Sikeres jelszó módosítás.', { cssClass: 'alert-success' });
           } else {
             // console.log('error');
+            this.flashMessagesService.show('Sikertelen jelszó módosítás.', { cssClass: 'alert-danger' });
           }
         }, error => {
           // console.log('upsz');
+          this.flashMessagesService.show('Sikertelen jelszó módosítás.', { cssClass: 'alert-danger' });
         });
     } else { this.passwordValidationError(); }
   }
