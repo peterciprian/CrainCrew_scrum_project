@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Item } from '../item';
+
 
 @Component({
   selector: 'app-selectproduct',
@@ -10,6 +11,7 @@ import { Item } from '../item';
   styleUrls: ['./selectproduct.component.css']
 })
 export class SelectproductComponent implements OnInit {
+  router: Router;
   selectedProduct: Item = {
     _id: '',
     name: '',
@@ -119,6 +121,14 @@ export class SelectproductComponent implements OnInit {
     const choosen = this.selectedProduct;
     this.selectedProduct = Object.assign({}, choosen); // a this.modal megkapja egy duplikációját a choosennen
   }
+  delete(itemId) {
+    if (confirm('Really?')) {
+      this.http.delete(this.baseUrl + itemId, this.options)
+        .subscribe(data => {
+          console.log(data);
+        });
+    }
+  }
   update() {
     if (this.selectedProduct.oldImg) {
       delete this.selectedProduct.oldImg;
@@ -172,6 +182,6 @@ export class SelectproductComponent implements OnInit {
   ngOnInit() {this.navigate();
   this.isLoggedIn();
 this.listComments();
-this.listOders(); 
-this.listCateg()}
+this.listOders();
+this.listCateg(); }
 }
