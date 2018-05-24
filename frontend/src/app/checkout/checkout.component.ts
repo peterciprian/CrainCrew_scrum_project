@@ -34,7 +34,7 @@ export class CheckoutComponent implements OnInit {
     this.http.get('http://localhost:8080/user/profile', this.options)
       .subscribe(data => {
         this.loggedInUser = JSON.parse(data['_body']);
-        console.log(this.loggedInUser);
+        // console.log(this.loggedInUser);
         this.newOrder.user['_id'] = this.loggedInUser.user['_id'];
       });
     this.newOrder.price = this.cartSum();
@@ -42,7 +42,7 @@ export class CheckoutComponent implements OnInit {
     for (let i = 0; i < this.cart.length; i++) {
       this.newOrder.items.push({item: this.cart[i], quantity: 1});
     }
-    console.log(this.newOrder);
+    // console.log(this.newOrder);
   }
 
   listItems() {
@@ -71,10 +71,10 @@ export class CheckoutComponent implements OnInit {
   }
 
   createOrder() {
-    // console.log(this.newOrder);
+    // // console.log(this.newOrder);
     this.http.post(this.baseUrl, this.newOrder, this.options)
       .subscribe(data => {
-        console.log(data);
+        // console.log(data);
         if (data.ok) {
           this.flashMessagesService.show('A rendelés sikeresen elküldve!', { cssClass: 'alert-success' });
           localStorage.clear();
@@ -94,7 +94,7 @@ export class CheckoutComponent implements OnInit {
     }
   }
   editUser() {
-    console.log(this.loggedInUser['_id']);
+    // console.log(this.loggedInUser['_id']);
     this.http
       .put(
         `http://localhost:8080/user/update/${this.loggedInUser.user['_id']}`,
@@ -102,7 +102,7 @@ export class CheckoutComponent implements OnInit {
         this.options
       )
       .subscribe(data => {
-        console.log(data);
+        // console.log(data);
       });
   }
 

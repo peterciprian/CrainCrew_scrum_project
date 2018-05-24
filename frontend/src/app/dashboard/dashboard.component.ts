@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
     this.http.get('http://localhost:8080/order', this.options)
       .subscribe(getOrders => {
         this.order = JSON.parse(getOrders['_body']);
-        console.log(this.order.length);
+        // console.log(this.order.length);
       });
   }
   getAllOrdersPrice() {
@@ -72,15 +72,15 @@ export class DashboardComponent implements OnInit {
       this.orderPrice += this.order[i].price;
       this.singleorderPrice.push(this.order[i].price);
     }
-    console.log(this.orderPrice);
-    console.log(this.singleorderPrice);
+    // console.log(this.orderPrice);
+    // console.log(this.singleorderPrice);
   }
   getOrdersDate() {
     this.singleorderDate = [];
     for (let i = 0; i < this.order.length; i++) {
       this.singleorderDate.push(this.order[i].updatedAt.slice(8, 10));
      }
-     console.log(this.singleorderDate);
+     // console.log(this.singleorderDate);
   }
 
   fillDataTable() {
@@ -91,26 +91,26 @@ export class DashboardComponent implements OnInit {
       }
       data[this.singleorderDate[i]] += this.singleorderPrice[i];
     }
-    console.log(data);
+    // console.log(data);
     // tslint:disable-next-line:forin
     for (const k in data) {
       this.pieChartData.dataTable.push([k, data[k]]);
     }
     this.filltable = true;
-    console.log(this.pieChartData);
+    // console.log(this.pieChartData);
   }
   getUsers() {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
         this.users = JSON.parse(data['_body']);
-        console.log(this.users.length);
+        // console.log(this.users.length);
   });
   }
   listItems() {
     this.http.get(this.baseUrl2, this.options)
       .subscribe(data => {
         this.items = JSON.parse(data['_body']);
-        console.log(this.items.length);
+        // console.log(this.items.length);
       });
   }
 
@@ -118,7 +118,7 @@ export class DashboardComponent implements OnInit {
     this.http.get(this.baseUrl3, this.options)
       .subscribe(data => {
         this.orders = JSON.parse(data['_body']);
-        console.log(this.orders.length);
+        // console.log(this.orders.length);
       });
   }
 

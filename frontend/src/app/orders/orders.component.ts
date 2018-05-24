@@ -5,7 +5,7 @@ import { RequestOptions, Http } from '@angular/http';
 export class TotalPipe implements PipeTransform {
   transform(order: any) {
     let total = 0;
-    console.log();
+    // console.log();
     for (let i = 0; i < order.items.length; i++) {
       total += order.items[i].item.price * order.items[i].quantity;
     }
@@ -58,7 +58,7 @@ export class OrdersComponent implements OnInit {
     this.http.get(this.baseUrl, this.options)
       .subscribe(data => {
         this.orders = JSON.parse(data['_body']);
-        console.log(this.orders);
+        // console.log(this.orders);
       });
   }
   listUsers() {
@@ -71,7 +71,7 @@ export class OrdersComponent implements OnInit {
     this.http.get('http://localhost:8080/item/', this.options)
       .subscribe(data => {
         this.items = JSON.parse(data['_body']);
-        console.log(this.items);
+        // console.log(this.items);
       });
   }
 
@@ -79,7 +79,7 @@ export class OrdersComponent implements OnInit {
     this.http.get(this.baseUrl + orderId, this.options)
       .subscribe(data => {
         this.orders = JSON.parse(data['_body']);
-        console.log(this.orders);
+        // console.log(this.orders);
       });
   }
 
@@ -94,7 +94,7 @@ export class OrdersComponent implements OnInit {
     this.newOrder.price = sumPrice;
     this.http.post(this.baseUrl, this.newOrder, this.options)
       .subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.listOrders();
       });
   }
@@ -109,7 +109,7 @@ export class OrdersComponent implements OnInit {
     this.actualOrder.price = sumPrice;
     this.http.put(this.baseUrl + 'update/' + this.actualOrder['_id'], this.actualOrder, this.options)
       .subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.listOrders();
       });
   }
@@ -118,7 +118,7 @@ export class OrdersComponent implements OnInit {
     if (confirm('Really?')) {
       this.http.delete(this.baseUrl + 'delete/' + itemId, this.options)
         .subscribe(data => {
-          console.log(data);
+          // console.log(data);
           this.listOrders();
         });
     }
@@ -131,9 +131,9 @@ export class OrdersComponent implements OnInit {
   }
 
   removeModalRow(id) {
-    console.log(id);
+    // console.log(id);
     this.actualOrder.items = this.actualOrder.items.filter(asd => asd['_id'] !== id._id);
-    console.log(this.actualOrder);
+    // console.log(this.actualOrder);
   }
 
   addRow() {
@@ -141,12 +141,12 @@ export class OrdersComponent implements OnInit {
       item: '',
       quantity: ''
     });
-    console.log(this.newOrder);
+    // console.log(this.newOrder);
   }
 
   loadModalData(order) {
     this.actualOrder = order;
-    console.log(this.actualOrder);
+    // console.log(this.actualOrder);
   }
 
 }

@@ -63,15 +63,15 @@ export class CategoryComponent implements OnInit {
     this.http.get('http://localhost:8080/user/profile', this.options)
       .subscribe(data => {
         this.loggedInUser = JSON.parse(data['_body']);
-        console.log(this.loggedInUser);
+        // // console.log(this.loggedInUser);
         if (this.loggedInUser.user) {
           this.longgedIn = true;
           if (this.loggedInUser.user.role === 'admin') {
             this.isAdmin = true;
           }
         }
-        console.log('Anyone logged in? - Categ component:' + this.longgedIn);
-        console.log('Is admin:' + this.isAdmin);
+        // // console.log('Anyone logged in? - Categ component:' + this.longgedIn);
+        // // console.log('Is admin:' + this.isAdmin);
       });
   }
 
@@ -84,10 +84,10 @@ export class CategoryComponent implements OnInit {
 
   create() {
     this.categ.user = this.loggedInUser.user._id;
-    // console.log(this.categ);
+    // // // console.log(this.categ);
     this.http.post(this.baseUrl, this.categ, this.options)
       .subscribe(data => {
-        console.log(data.json());
+        // // console.log(data.json());
         const res = data.json();
         if (res.code === 11000) {
           this.flashMessagesService.show('Sikertelen hozzáadás, adat duplicáció (név és sorrend is egyedi)!', { cssClass: 'alert-danger' });
@@ -108,7 +108,7 @@ export class CategoryComponent implements OnInit {
   update() {
     this.http.put(this.baseUrl + this.actualCateg['_id'], this.actualCateg, this.options)
       .subscribe(data => {
-        console.log(data);
+        // // console.log(data);
         setTimeout(() => {
           this.list();
         }, 1000);
@@ -120,7 +120,7 @@ export class CategoryComponent implements OnInit {
     if (confirm('Really?')) {
       this.http.delete(this.baseUrl + categId, this.options)
         .subscribe(data => {
-          console.log(data);
+          // // console.log(data);
           this.list();
         });
     }

@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
   listOrders() {
     this.http.get(this.baseUrlOrders, this.options).subscribe(data => {
       this.orders = JSON.parse(data['_body']);
-      console.log(this.orders);
+      // console.log(this.orders);
     });
   }
 
@@ -49,18 +49,18 @@ export class ProfileComponent implements OnInit {
         this.options
       )
       .subscribe(data => {
-        console.log(data);
+        // console.log(data);
       });
   }
 
   isLoggedIn() {
     this.http.get(this.baseUrl + 'profile', this.options).subscribe(data => {
       this.loggedInUser = JSON.parse(data['_body']);
-      console.log(this.loggedInUser);
+      // console.log(this.loggedInUser);
       if (this.loggedInUser.user) {
         this.longgedIn = true;
       }
-      console.log('Anyone logged in?:' + this.longgedIn);
+      // console.log('Anyone logged in?:' + this.longgedIn);
     });
   }
 
@@ -82,21 +82,21 @@ export class ProfileComponent implements OnInit {
   }
   updatePassword() {
     if (this.setPassword['newPassword'] === this.setPassword['newPassword2'] && this.setPassword['newPassword'].length > 8) {
-      console.log(this.loggedInUser.user['_id']);
+      // console.log(this.loggedInUser.user['_id']);
       this.http.post(`http://localhost:8080/user/change/${this.loggedInUser.user['_id']}`, this.setPassword, this.options)
         .subscribe(data => {
           if (data.ok === true) {
-            console.log('success', 'Sikeres jelszómódosítás');
+            // console.log('success', 'Sikeres jelszómódosítás');
           } else {
-            console.log('error');
+            // console.log('error');
           }
         }, error => {
-          console.log('upsz');
+          // console.log('upsz');
         });
     } else { this.passwordValidationError(); }
   }
 
-  passwordValidationError() {console.log('Something bad happened'); }
+  passwordValidationError() {// console.log('Something bad happened'); }
 
   ngOnInit() {this.listOrders(); }
 }

@@ -62,14 +62,14 @@ export class NavbarComponent implements OnInit {
     this.http.get(this.baseUrl + 'profile', this.options)
       .subscribe(data => {
         this.loggedInUser = JSON.parse(data['_body']);
-        console.log(this.loggedInUser);
+        // console.log(this.loggedInUser);
         if (this.loggedInUser.user) {
           this.longgedIn = true;
           if (this.loggedInUser.user.role === 'admin') {
             this.isAdmin = true;
           }
         }
-        console.log('Anyone logged in?:' + this.longgedIn);
+        // console.log('Anyone logged in?:' + this.longgedIn);
       });
   }
 
@@ -137,11 +137,11 @@ export class NavbarComponent implements OnInit {
 
   login() {
     this.http.post(this.baseUrl + 'login', this.user, this.options).subscribe(data => {
-      console.log( data);
+      // console.log( data);
       if (data.ok) {
         this.flashMessagesService.show('Sikeres belépés!', { cssClass: 'alert-success' });
         this.longgedIn = true;
-        console.log(data['_body']);
+        // console.log(data['_body']);
         this.router.navigate(['../products']);
       }
     });
@@ -154,7 +154,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.http.get(this.baseUrl + 'logout', this.options)
       .subscribe(data => {
-        console.log(data['_body']);
+        // console.log(data['_body']);
       });
     this.flashMessagesService.show('Sikeres kilépés.', { cssClass: 'alert-success' });
     this.registerred = false;
@@ -165,13 +165,13 @@ export class NavbarComponent implements OnInit {
 
   register() {
     this.http.post(this.baseUrl + 'register', this.newuser, this.options).subscribe(data => {
-      console.log(data.status);
+      // console.log(data.status);
       if (data.ok) {
         this.flashMessagesService.show('Sikeres regisztráció.', { cssClass: 'alert-success' });
-        console.log(data['_body']);
+        // console.log(data['_body']);
         this.registerred = true;
       } else {
-        console.log('error: ' + data.status);
+        // console.log('error: ' + data.status);
       }
     });
   }

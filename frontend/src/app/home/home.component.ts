@@ -107,15 +107,15 @@ export class HomeComponent implements OnInit {
   this.http.get('http://localhost:8080/user/profile', this.options)
     .subscribe(data => {
       this.loggedInUser = JSON.parse(data['_body']);
-      console.log(this.loggedInUser);
+      // console.log(this.loggedInUser);
       if (this.loggedInUser.user) {
         this.longgedIn = true;
         if (this.loggedInUser.user.role === 'admin') {
           this.isAdmin = true;
         }
       }
-      console.log('Anyone logged in? - product component:' + this.longgedIn);
-      console.log('Is admin:' + this.isAdmin);
+      // console.log('Anyone logged in? - product component:' + this.longgedIn);
+      // console.log('Is admin:' + this.isAdmin);
     });
 }
 

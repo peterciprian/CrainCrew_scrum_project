@@ -115,15 +115,15 @@ export class ProductsComponent implements OnInit {
   this.http.get('http://localhost:8080/user/profile', this.options)
     .subscribe(data => {
       this.loggedInUser = JSON.parse(data['_body']);
-      console.log(this.loggedInUser);
+      // console.log(this.loggedInUser);
       if (this.loggedInUser.user) {
         this.longgedIn = true;
         if (this.loggedInUser.user.role === 'admin') {
           this.isAdmin = true;
         }
       }
-      console.log('Anyone logged in? - product component:' + this.longgedIn);
-      console.log('Is admin:' + this.isAdmin);
+      // console.log('Anyone logged in? - product component:' + this.longgedIn);
+      // console.log('Is admin:' + this.isAdmin);
     });
 }
 
@@ -166,15 +166,15 @@ export class ProductsComponent implements OnInit {
     this.http.get(this.baseUrl + itemId, this.options)
       .subscribe(data => {
         this.items = JSON.parse(data['_body']);
-        console.log(this.items);
+        // console.log(this.items);
       });
   }
 
   create() {
-    console.log(this.item);
+    // console.log(this.item);
     this.http.post(this.baseUrl, this.item, this.options)
       .subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.item = {
           name: '',
           url: '',
@@ -192,7 +192,7 @@ export class ProductsComponent implements OnInit {
     const choosen = this.items.filter(item => item._id === id)[0];
     this.actualItem = Object.assign({}, choosen); // a this.modal megkapja egy duplik�ci�j�t a choosennen
     this.actualComments = this.filterCommentsByItemId(id);
-    /* console.log(this.actualComments); */
+    /* // console.log(this.actualComments); */
   }
 
   /**
@@ -211,7 +211,7 @@ export class ProductsComponent implements OnInit {
 
     this.http.put(this.baseUrl + this.actualItem['_id'], this.actualItem, this.options)
       .subscribe(data => {
-        console.log(data);
+        // console.log(data);
         setTimeout(() => {
           this.list();
         }, 1000);
@@ -223,7 +223,7 @@ export class ProductsComponent implements OnInit {
     if (confirm('Really?')) {
       this.http.delete(this.baseUrl + itemId, this.options)
         .subscribe(data => {
-          console.log(data);
+          // console.log(data);
           this.list();
         });
     }
@@ -266,7 +266,7 @@ export class ProductsComponent implements OnInit {
     this.http.get('http://localhost:8080/comment', this.options)
     .subscribe(data => {
       this.comments = JSON.parse(data['_body']);
-      console.log(this.comments);
+      // console.log(this.comments);
     });
   }
 
@@ -275,7 +275,7 @@ export class ProductsComponent implements OnInit {
   }
 
   filterCommentsByItemId(itemId) {
-    console.log(itemId);
+    // console.log(itemId);
     return this.comments.filter(comment => comment.item === itemId );
   }
 
@@ -283,10 +283,11 @@ export class ProductsComponent implements OnInit {
     this.newComment.user['_id'] = this.loggedInUser.user['_id'];
     this.newComment.item['_id'] = this.actualItem._id;
     this.newComment.confirmed = this.isConfirmed();
-    console.log(this.newComment);
+    // console.log(this.newComment);
     this.http.post('http://localhost:8080/comment/', this.newComment, this.options)
       .subscribe((data) => {this.comments = JSON.parse(data['_body']);
-      console.log(this.comments); });
+      // console.log(this.comments);
+    });
   }
 
   isConfirmed() {
@@ -305,7 +306,7 @@ export class ProductsComponent implements OnInit {
     this.http.get('http://localhost:8080/order/', this.options)
     .subscribe(data => {
       this.orders = JSON.parse(data['_body']);
-      console.log(this.orders);
+      // console.log(this.orders);
     });
   }
 

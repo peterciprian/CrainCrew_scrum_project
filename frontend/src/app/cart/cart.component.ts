@@ -19,7 +19,7 @@ export class CartComponent implements OnInit {
   }
 
   removeFromCart(item) {
-    console.log(item);
+    // console.log(item);
     this.cart = this.cart.filter(asd => asd['_id'] !== item._id);
     this.flashMessagesService.show('A termék kikerült a kosárból!', { cssClass: 'alert-success' });
     localStorage.cartItems = JSON.stringify(this.cart);
