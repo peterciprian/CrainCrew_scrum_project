@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Http, RequestOptions } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
-/* import { parse } from 'path'; */
+import { Globals } from '../globals';
 
 
 @Component({
@@ -47,7 +47,8 @@ export class NavbarComponent implements OnInit {
     private formBuilder: FormBuilder,
     public http: Http,
     private router: Router,
-    private flashMessagesService: FlashMessagesService) {
+    private flashMessagesService: FlashMessagesService,
+    public global: Globals) {
     this.createForm();
   }
 
@@ -148,7 +149,7 @@ export class NavbarComponent implements OnInit {
     setTimeout(() => {
       this.isLoggedIn();
     }, 1000);
-    }
+  }
 
 
   logout() {
@@ -176,8 +177,20 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  public getQuantity() {
+    if (JSON.parse(localStorage.getItem('cartItems')) === null) {
+      this.global.badge = 0;
+    } else {
+      /* const cart = JSON.parse(localStorage.getItem('cartItems')).products; */
+      this.cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+      this.global.badge = this.cart.length;
+    }
+  }
+
   ngOnInit() {
     this.isLoggedIn();
+    console.log(this.cart);
+    this.getQuantity();
   }
 
 }

@@ -5,6 +5,7 @@ import { Item } from '../item';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { Globals } from '../globals';
 
 @Component({
   selector: 'app-products',
@@ -64,10 +65,10 @@ export class ProductsComponent implements OnInit {
   cart = [];
   categs: Array<any>;
   categ = {
-   name: '',
-   user: '',
-   sequence: ''
- };
+    name: '',
+    user: '',
+    sequence: ''
+  };
 
   ngOnInit() {
     this.isLoggedIn();
@@ -100,32 +101,33 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     public http: Http,
-    private flashMessagesService: FlashMessagesService) {
- 
+    private flashMessagesService: FlashMessagesService,
+    public global: Globals) {
+
   }
 
-    /**
-   * Bekéri a szerveről, az aktuálisan belépett user adatait
-   * először az OnInit hívja meg, ill login() metódus végé is meghívjuk
-   * ha nincs senki belépve, üres objectummal tér vissza
-   * Ha van user, egy user objectumot ad vissza: loggedInUser változóba
-   * Ha van user megnézi a role tulajdonságát, ha admin, az isAdmi változót "true"-ra állítja
-  */
- isLoggedIn() {
-  this.http.get('http://localhost:8080/user/profile', this.options)
-    .subscribe(data => {
-      this.loggedInUser = JSON.parse(data['_body']);
-      // console.log(this.loggedInUser);
-      if (this.loggedInUser.user) {
-        this.longgedIn = true;
-        if (this.loggedInUser.user.role === 'admin') {
-          this.isAdmin = true;
+  /**
+ * Bekéri a szerveről, az aktuálisan belépett user adatait
+ * először az OnInit hívja meg, ill login() metódus végé is meghívjuk
+ * ha nincs senki belépve, üres objectummal tér vissza
+ * Ha van user, egy user objectumot ad vissza: loggedInUser változóba
+ * Ha van user megnézi a role tulajdonságát, ha admin, az isAdmi változót "true"-ra állítja
+*/
+  isLoggedIn() {
+    this.http.get('http://localhost:8080/user/profile', this.options)
+      .subscribe(data => {
+        this.loggedInUser = JSON.parse(data['_body']);
+        // console.log(this.loggedInUser);
+        if (this.loggedInUser.user) {
+          this.longgedIn = true;
+          if (this.loggedInUser.user.role === 'admin') {
+            this.isAdmin = true;
+          }
         }
-      }
-      // console.log('Anyone logged in? - product component:' + this.longgedIn);
-      // console.log('Is admin:' + this.isAdmin);
-    });
-}
+        // console.log('Anyone logged in? - product component:' + this.longgedIn);
+        // console.log('Is admin:' + this.isAdmin);
+      });
+  }
 
   showThumbnailSwitch() {
     this.showThumbnail = true;
@@ -140,9 +142,9 @@ export class ProductsComponent implements OnInit {
   showSelectedTable(categ) {
     this.showThumbnail = false;
     this.http.get(this.baseUrl, this.options)
-    .subscribe(data => {
-      this.items = JSON.parse(data['_body']).filter(item => item.category === categ);
-    });
+      .subscribe(data => {
+        this.items = JSON.parse(data['_body']).filter(item => item.category === categ);
+      });
   }
 
   list() {
@@ -261,22 +263,22 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
-  
+
   listComments() {
     this.http.get('http://localhost:8080/comment', this.options)
-    .subscribe(data => {
-      this.comments = JSON.parse(data['_body']);
-      // console.log(this.comments);
-    });
+      .subscribe(data => {
+        this.comments = JSON.parse(data['_body']);
+        // console.log(this.comments);
+      });
   }
 
   filterCommentsByUserId(userId) {
-    return this.comments.filter(comment => comment.user === userId );
+    return this.comments.filter(comment => comment.user === userId);
   }
 
   filterCommentsByItemId(itemId) {
     // console.log(itemId);
-    return this.comments.filter(comment => comment.item === itemId );
+    return this.comments.filter(comment => comment.item === itemId);
   }
 
   sendNewComment() {
@@ -285,9 +287,10 @@ export class ProductsComponent implements OnInit {
     this.newComment.confirmed = this.isConfirmed();
     // console.log(this.newComment);
     this.http.post('http://localhost:8080/comment/', this.newComment, this.options)
-      .subscribe((data) => {this.comments = JSON.parse(data['_body']);
-      // console.log(this.comments);
-    });
+      .subscribe((data) => {
+        this.comments = JSON.parse(data['_body']);
+        // console.log(this.comments);
+      });
   }
 
   isConfirmed() {
@@ -304,21 +307,32 @@ export class ProductsComponent implements OnInit {
 
   listOders() {
     this.http.get('http://localhost:8080/order/', this.options)
-    .subscribe(data => {
-      this.orders = JSON.parse(data['_body']);
-      // console.log(this.orders);
-    });
+      .subscribe(data => {
+        this.orders = JSON.parse(data['_body']);
+        // console.log(this.orders);
+      });
   }
-
+  getQuantity() {
+    if (JSON.parse(localStorage.getItem('cartItems')) === null) {
+      this.global.badge = 0;
+    } else {
+      /* const cart = JSON.parse(localStorage.getItem('cartItems')).products; */
+      this.cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+      this.global.badge = this.cart.length;
+    }
+  }
   selectedItem(item) {
     this.cart = (localStorage.cartItems ? JSON.parse(localStorage.cartItems) : []);
     const find = this.cart.findIndex(i => i['_id'] === item['_id']);
 
     if (find !== -1) {
-        this.flashMessagesService.show('A termék már szerepel a kosárban!', { cssClass: 'alert-danger' });
-      } else {this.cart.push(item);
-    this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' }); }
+      this.flashMessagesService.show('A termék már szerepel a kosárban!', { cssClass: 'alert-danger' });
+    } else {
+      this.cart.push(item);
+      this.flashMessagesService.show('A termék bekerült a kosárba!', { cssClass: 'alert-success' });
+    }
     localStorage.cartItems = JSON.stringify(this.cart);
+    this.getQuantity();
   }
 
 

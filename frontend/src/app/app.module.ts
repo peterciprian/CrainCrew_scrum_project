@@ -21,6 +21,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { CategoryComponent } from './category/category.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SelectproductComponent } from './selectproduct/selectproduct.component';
+import { Globals } from './globals';
 
 
 const routes: Routes = [
@@ -69,7 +70,7 @@ const routes: Routes = [
       apiKey: 'AIzaSyC3Me_Mi8SqrA9OGTW8Q7AEMqTzfwcbM-w'
     })
   ],
-  providers: [],
+  providers: [Globals],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
