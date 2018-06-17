@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RequestOptions, Http } from '@angular/http';
-import { FormGroup, FormControl} from '@angular/forms';
+import { Globals } from '../globals';
 
 @Component({
   selector: 'app-checkout',
@@ -14,7 +14,7 @@ export class CheckoutComponent implements OnInit {
   options = new RequestOptions({ withCredentials: true });
   baseUrl = 'http://localhost:8080/order/';
   newOrder = {
-    user: {_id: ''},
+    user: { _id: '' },
     items: [
       { item: '', quantity: 1 }
     ],
@@ -23,7 +23,7 @@ export class CheckoutComponent implements OnInit {
   loggedInUser: any;
   items: any;
 
-  constructor(public http: Http, private flashMessagesService: FlashMessagesService) { }
+  constructor(public http: Http, private flashMessagesService: FlashMessagesService, public global: Globals) { }
 
   ngOnInit() {
     this.loadOrder();
@@ -40,7 +40,7 @@ export class CheckoutComponent implements OnInit {
     this.newOrder.price = this.cartSum();
     this.newOrder.items = [];
     for (let i = 0; i < this.cart.length; i++) {
-      this.newOrder.items.push({item: this.cart[i], quantity: 1});
+      this.newOrder.items.push({ item: this.cart[i], quantity: 1 });
     }
     // console.log(this.newOrder);
   }
@@ -63,10 +63,11 @@ export class CheckoutComponent implements OnInit {
     let sumPrice = 0;
     for (let i = 0; i < this.newOrder.items.length; i++) {
       for (let j = 0; j < this.items.length; j++) {
-        if (this.newOrder.items[i].item['_id'] === this.items[j]['_id'] ) {
+        if (this.newOrder.items[i].item['_id'] === this.items[j]['_id']) {
           sumPrice += Number(this.items[j].price) * Number(this.newOrder.items[i].quantity);
         }
-    }}
+      }
+    }
     this.newOrder.price = sumPrice;
   }
 
@@ -79,8 +80,9 @@ export class CheckoutComponent implements OnInit {
           this.flashMessagesService.show('A rendelés sikeresen elküldve!', { cssClass: 'alert-success' });
           localStorage.clear();
           this.cart = [];
+          this.global.badge = this.cart.length;
           this.loadOrder();
-        } else {this.flashMessagesService.show('Valami para van! Kérjük próbálja újra!', { cssClass: 'alert-danger' }); }
+        } else { this.flashMessagesService.show('Valami gond van! Kérjük próbálja újra!', { cssClass: 'alert-danger' }); }
       });
   }
 
@@ -90,7 +92,8 @@ export class CheckoutComponent implements OnInit {
   }
 
   removeOne(index) {
-    if (this.newOrder.items[index].quantity > 1) { this.newOrder.items[index].quantity--;
+    if (this.newOrder.items[index].quantity > 1) {
+      this.newOrder.items[index].quantity--;
       this.countCartPrice();
     }
   }

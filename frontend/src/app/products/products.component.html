@@ -125,13 +125,13 @@
 <div class="container">
   <!-- NEW view  -->
   <div *ngIf="showThumbnail==true">
-  <div class="card-deck col-md-4" *ngFor='let item of items'>
+    <div class="card-deck col-md-4" *ngFor='let item of items'>
       <div class="card" style="width: 19rem;">
         <img *ngIf="item.img" class="card-img-top" src="{{'http://localhost:8080/img/' + item.img}}" alt="bicikli kep">
         <img *ngIf="!item.img" class="card-img-top" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep">
         <div class="card-body">
-          <h5 class="card-title">Termék neve: {{item.name}}</h5>
-          <p class="card-text">Fogyasztói ár: {{item.price | currency:'HUF '}} </p>
+          <h5 class="card-title">{{item.name}}</h5>
+          <p class="card-text">{{item.price | currency:'HUF '}} </p>
         </div>
         <div class="card-footer">
           <a class="btn btn-info btn-sm" role="button" href="http://localhost:4200/products/{{item['_id']}}">Részletek</a>

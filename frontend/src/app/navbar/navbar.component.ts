@@ -127,6 +127,7 @@ export class NavbarComponent implements OnInit {
   }
 
   samePasswords(password, confirm) {
+    // tslint:disable-next-line:no-shadowed-variable
     return (group: FormGroup) => {
       if (group.controls[password].value === group.controls[confirm].value) {
         return null;

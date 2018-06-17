@@ -27,17 +27,17 @@
       <div class="col-xs-12 col-md-10">
         <div class="container">
           <!-- NEW view  -->
-          <div class="card-deck col-md-4"  *ngFor='let item of items | slice:0:10'>
+          <div class="card-deck col-md-4" *ngFor='let item of items | slice:0:10'>
             <div class="card">
               <img *ngIf="item.img" class="card-img-top" src="{{'http://localhost:8080/img/' + item.img}}" alt="bicikli kep">
               <img *ngIf="!item.img" class="card-img-top" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep">
               <div class="card-body">
-                <h5 class="card-title">Termék neve: {{item.name}}</h5>
-                <p class="card-text">Fogyasztói ár: {{item.price | currency:'HUF '}} </p>
+                <h5 class="card-title">{{item.name}}</h5>
+                <p class="card-text">{{item.price | currency:'HUF '}} </p>
               </div>
               <div class="card-footer">
-                  <a class="btn btn-info" role="button" href="http://localhost:4200/products/{{item['_id']}}">Részletek</a>
-                </div>  
+                <a class="btn btn-info" role="button" href="http://localhost:4200/products/{{item['_id']}}">Részletek</a>
+              </div>
             </div>
           </div>
           <!-- original view  
@@ -53,67 +53,67 @@
                 <a class="btn btn-info" role="button" href="http://localhost:4200/products/{{item['_id']}}">Részletek</a>
               </div>
             </div>-->
-          </div>
         </div>
-        <div>&nbsp;</div>
-        <div>&nbsp;</div>
+      </div>
+      <div>&nbsp;</div>
+      <div>&nbsp;</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FOR SHOW DETAILS -->
+<div id="details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade">
+  <div role="document" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="exampleModalLabel" class="modal-title"> {{actualItem.name}}</h5>
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img *ngIf="actualItem.img" class="card-img-top" src="{{'http://localhost:8080/img/' + actualItem.img}}" alt="bicikli kep">
+        <img *ngIf="!actualItem.img" class="card-img-top" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Termék név:</span>
+          </div>
+          <span class="form-control">{{actualItem.name}}</span>
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Kategória:</span>
+          </div>
+          <span class="form-control">{{actualItem.category}}</span>
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Gyártó:</span>
+          </div>
+          <span class="form-control">{{actualItem.manufacturer}}</span>
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Ár:</span>
+          </div>
+          <span class="form-control">{{actualItem.price}}</span>
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Értékelések:</span>
+          </div>
+          <ul>
+            <!--li *ngFor="comment of comments" class="form-control"><span>{{comment}}</span></li-->
+          </ul>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-sm btn-info">Bezárás</button>
+        <button type="button" (click)="selectedItem(actualItem)" data-dismiss="modal" class="btn btn-sm btn-warning">
+          <i class="fas fa-shopping-cart"></i>
+        </button>
       </div>
     </div>
   </div>
-
-  <!-- MODAL FOR SHOW DETAILS -->
-  <div id="details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade">
-    <div role="document" class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 id="exampleModalLabel" class="modal-title"> {{actualItem.name}}</h5>
-          <button type="button" data-dismiss="modal" aria-label="Close" class="close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <img *ngIf="actualItem.img" class="card-img-top" src="{{'http://localhost:8080/img/' + actualItem.img}}" alt="bicikli kep">
-          <img *ngIf="!actualItem.img" class="card-img-top" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Termék név:</span>
-            </div>
-            <span class="form-control">{{actualItem.name}}</span>
-          </div>
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Kategória:</span>
-            </div>
-            <span class="form-control">{{actualItem.category}}</span>
-          </div>
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Gyártó:</span>
-            </div>
-            <span class="form-control">{{actualItem.manufacturer}}</span>
-          </div>
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Ár:</span>
-            </div>
-            <span class="form-control">{{actualItem.price}}</span>
-          </div>
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Értékelések:</span>
-            </div>
-            <ul>
-              <!--li *ngFor="comment of comments" class="form-control"><span>{{comment}}</span></li-->
-            </ul>
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" data-dismiss="modal" class="btn btn-sm btn-info">Bezárás</button>
-          <button type="button" (click)="selectedItem(actualItem)" data-dismiss="modal" class="btn btn-sm btn-warning">
-            <i class="fas fa-shopping-cart"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
