@@ -170,7 +170,7 @@
 
 <!-- *********** list view -->
 <div class="container">
-  <table class="table table-striped" *ngIf="showThumbnail==false">
+  <table class="table table-bordered table-striped text-center" *ngIf="showThumbnail==false">
     <thead>
       <tr>
         <th>
@@ -187,7 +187,6 @@
         <th scope="col">Kép</th>
         <th *ngIf="(longgedIn && isAdmin)" class="sort-th" (click)="sortTable('createdAt')">Feltöltve</th>
         <th *ngIf="(longgedIn && isAdmin)" class="sort-th" (click)="sortTable('updatedAt')">Módosítva</th>
-        <th></th>
         <th></th>
       </tr>
     </thead>
