@@ -5,19 +5,13 @@
 
 <button class="btn btn-info my-2 my-sm-0" type="button" data-toggle="modal" data-target="#createModal">Létrehozás</button>
 <div>&nbsp;</div>
-<table class="table table-bordered text-center">
+<table class="table table-bordered table-striped text-center">
   <thead>
     <th>Felhasználónév</th>
     <th>Email</th>
     <th>Jogosultság</th>
-    <th>Számlázási cím - Ország</th>
-    <th>Számlázási cím - Város</th>
-    <th>Számlázási cím - Utca</th>
-    <th>Számlázási cím - Irányítószám</th>
-    <th>Szállítási cím - Ország</th>
-    <th>Szállítási cím - Város</th>
-    <th>Szállítási cím - Utca</th>
-    <th>Szállítási cím - Irányítószám</th>
+    <th>Számlázási cím</th>
+    <th>Szállítási cím</th>
     <th>Telefonszám</th>
     <th>Művelet</th>
   </thead>
@@ -39,26 +33,14 @@
       </td>
       <td>
         <input type="text" class="form-control" [(ngModel)]="user.billingAddress.Country">
-      </td>
-      <td>
         <input type="text" class="form-control" [(ngModel)]="user.billingAddress.City">
-      </td>
-      <td>
         <input type="text" class="form-control" [(ngModel)]="user.billingAddress.Street">
-      </td>
-      <td>
         <input type="text" class="form-control" [(ngModel)]="user.billingAddress.Zipcode">
       </td>
       <td>
         <input type="text" class="form-control" [(ngModel)]="user.shippingAddress.Country">
-      </td>
-      <td>
         <input type="text" class="form-control" [(ngModel)]="user.shippingAddress.City">
-      </td>
-      <td>
         <input type="text" class="form-control" [(ngModel)]="user.shippingAddress.Street">
-      </td>
-      <td>
         <input type="text" class="form-control" [(ngModel)]="user.shippingAddress.Zipcode">
       </td>
       <td>
@@ -96,12 +78,6 @@
         <label for="password">Jelszó</label>
         <input type="text" class="form-control" name="password" id="newUserPassword" [(ngModel)]="newUser.password">
         <br>
-        <!-- <label for="billindAddress">Számlázási cím</label>
-        <input type="text" class="form-control" name="billindAddress" id="newUserbillingAddress" [(ngModel)]="newUser.billingAddress">
-        <br>
-        <label for="shippingAddress">Szállítási cím(amennyiben megegyezik a számlázási címmel hagyja szabadon)</label>
-        <input type="text" class="form-control" name="shippingAddress" [(ngModel)]="newUser.shippingAddress">
-        <br> -->
         <label for="phoneNumber">Telefonszám</label>
         <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="newUser.phoneNumber">
       </div>
@@ -114,3 +90,5 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
         <input type="button" class="btn btn-success" value="Létrehozás" name="create" id="" (click)="addUser()">
       </div>
+    </div>
+  </div>

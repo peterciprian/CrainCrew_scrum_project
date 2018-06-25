@@ -26,20 +26,20 @@ export class AboutUsComponent implements OnInit {
   ngOnInit() {
     this.http.get(this.baseUrl + 'profile', this.options)
       .subscribe(data => {
-        console.log(data['_body']);
+        // console.log(data['_body']);
         if (data.ok) {
           this.currentUser = JSON.parse(data['_body']);
           this.currentUser = this.currentUser.user.email;
-          console.log(this.currentUser);
+          // console.log(this.currentUser);
           this.mailform.from = this.currentUser;
-          console.log(this.mailform.from);
+          // console.log(this.mailform.from);
         }
       });
   }
 
   sendmailform() {
     this.http.post('http://localhost:8080/sendemail', this.mailform).subscribe(data => {
-      console.log(data);
+      // console.log(data);
     });
     this.flashMessagesService.show('Email elküldve.', { cssClass: 'alert-success' });
   }

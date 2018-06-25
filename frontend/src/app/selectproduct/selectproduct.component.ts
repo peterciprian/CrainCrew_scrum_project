@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Item } from '../item';
+
 
 @Component({
   selector: 'app-selectproduct',
@@ -10,6 +11,7 @@ import { Item } from '../item';
   styleUrls: ['./selectproduct.component.css']
 })
 export class SelectproductComponent implements OnInit {
+  router: Router;
   selectedProduct: Item = {
     _id: '',
     name: '',
@@ -54,7 +56,7 @@ export class SelectproductComponent implements OnInit {
     this.http.get('http://localhost:8080/comment', this.options)
     .subscribe(data => {
       this.comments = JSON.parse(data['_body']);
-      console.log(this.comments);
+      // console.log(this.comments);
     });
   }
 
@@ -65,7 +67,7 @@ export class SelectproductComponent implements OnInit {
     this.newComment.user['_id'] = this.loggedInUser.user['_id'];
     this.newComment.item['_id'] = this.selectedProduct._id;
     this.newComment.confirmed = this.isConfirmed();
-    console.log(this.newComment);
+    // console.log(this.newComment);
     this.http.post('http://localhost:8080/comment/', this.newComment, this.options)
       .subscribe((data) => {this.comments = JSON.parse(data['_body']);
       this.listComments(); });
@@ -87,22 +89,22 @@ export class SelectproductComponent implements OnInit {
     this.http.get('http://localhost:8080/order/', this.options)
     .subscribe(data => {
       this.orders = JSON.parse(data['_body']);
-      console.log(this.orders);
+      // console.log(this.orders);
     });
   }
   isLoggedIn() {
     this.http.get('http://localhost:8080/user/profile', this.options)
       .subscribe(data => {
         this.loggedInUser = JSON.parse(data['_body']);
-        console.log(this.loggedInUser);
+        // console.log(this.loggedInUser);
         if (this.loggedInUser.user) {
           this.longgedIn = true;
           if (this.loggedInUser.user.role === 'admin') {
             this.isAdmin = true;
           }
         }
-        console.log('Anyone logged in? - product component:' + this.longgedIn);
-        console.log('Is admin:' + this.isAdmin);
+        // console.log('Anyone logged in? - product component:' + this.longgedIn);
+        // console.log('Is admin:' + this.isAdmin);
       });
   }
   navigate() {
@@ -120,6 +122,14 @@ export class SelectproductComponent implements OnInit {
     const choosen = this.selectedProduct;
     this.selectedProduct = Object.assign({}, choosen); // a this.modal megkapja egy duplikációját a choosennen
   }
+  delete(itemId) {
+    if (confirm('Really?')) {
+      this.http.delete(this.baseUrl + itemId, this.options)
+        .subscribe(data => {
+          // console.log(data);
+        });
+    }
+  }
   update() {
     if (this.selectedProduct.oldImg) {
       delete this.selectedProduct.oldImg;
@@ -132,7 +142,7 @@ export class SelectproductComponent implements OnInit {
 
     this.http.put(this.baseUrl + this.id.id, this.selectedProduct, this.options)
       .subscribe(data => {
-        console.log(data);
+        // console.log(data);
         setTimeout(() => {
           this.navigate();
         }, 1000);
@@ -164,7 +174,7 @@ export class SelectproductComponent implements OnInit {
       if (confirm('Really?')) {
         this.http.delete('http://localhost:8080/comment/' + comment['_id'] , this.options)
           .subscribe(data => {
-            console.log(data);
+            // console.log(data);
             this.listComments();
           });
       }
@@ -173,6 +183,6 @@ export class SelectproductComponent implements OnInit {
   ngOnInit() {this.navigate();
   this.isLoggedIn();
 this.listComments();
-this.listOders(); 
-this.listCateg()}
+this.listOders();
+this.listCateg(); }
 }

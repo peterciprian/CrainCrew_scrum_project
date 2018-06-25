@@ -1,24 +1,26 @@
 <br>
-<h2><i class="fas fa-box-open"></i> Rendelések</h2>
+<h2>
+  <i class="fas fa-box-open"></i> Rendelések</h2>
 <hr>
 <div class="container">
   <div class="row">
     <div class="col-xs-4 col-lg-4">
-      <input id="user" list="users" class="form-control tableinput" name="myUsers" type="text" placeholder="Felhasználó választás" [(ngModel)]="newOrder.user">
+      <input id="user" list="users" class="form-control tableinput" name="myUsers" type="text" placeholder="Felhasználó választás"
+        [(ngModel)]="newOrder.user">
       <datalist id="users">
         <option *ngFor="let user of users" value="{{user['_id']}}">{{user.username}}</option>
       </datalist>
     </div>
     <div class="col-xs-4 col-lg-4">
-        <div *ngFor="let item of newOrder.items; let i = index">
-          <div class="input-group">
+      <div *ngFor="let item of newOrder.items; let i = index">
+        <div class="input-group">
           <input list="items" class="form-control tableinput" name="myItems" type="text" placeholder="Termék választás" [(ngModel)]="newOrder.items[i].item">
           <datalist id="items">
             <option *ngFor="let item of items" value="{{item['_id']}}">{{item.name}}</option>
           </datalist>
           <input class="form-control" type="number" name="quantity" id="quantity" min="0" placeholder="Mennyiség" [(ngModel)]="newOrder.items[i].quantity">
-          </div>
         </div>
+      </div>
     </div>
     <div class="col-xs-4 col-lg-4">
       <div class="btn-group">
@@ -41,7 +43,6 @@
     <tr class="tr-user">
       <td>{{i+1}}</td>
       <td>
-
         {{order.user['_id']}}
       </td>
       <td>
@@ -69,14 +70,16 @@
       <td>
         {{item.quantity}} db
       </td>
-      <td *ngIf="item.item !== null"><strong>Összeg:</strong> {{item.item.price * item.quantity }}</td>
+      <td *ngIf="item.item !== null">
+        <strong>Összeg: </strong> {{item.item.price * item.quantity }}</td>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><strong>Rendelés végösszege:</strong>{{order | total}}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+        <strong>Rendelés végösszege: </strong>{{order | total}}</td>
     </tr>
     <!--tr>
               <td>Rendelés végösszege: {{order.price}}</td>
@@ -96,15 +99,15 @@
         </button>
       </div>
       <div class="modal-body">
-      <!--p>{{actualOrder.user.username}}</p-->
+        <!--p>{{actualOrder.user.username}}</p-->
         <label for="usersModal">Felhasználó választás</label>
         <select name="users" id="usersModal" class="form-control" [(ngModel)]="actualOrder.user" placeholder="Select User">
           <option *ngFor="let user of users" value="{{user['_id']}}">{{user.username}}</option>
         </select>
         <div *ngFor="let item of actualOrder.items; let i = index">
-        <label for="itemsModal">Termék választás</label>
+          <label for="itemsModal">Termék választás</label>
           <select name="items" id="itemsModal" class="form-control" [(ngModel)]="actualOrder.items[i].item" placeholder="Select Item">
-            <option *ngFor="let item of items" value="{{item['_id']}}" >{{item.name}}</option>
+            <option *ngFor="let item of items" value="{{item['_id']}}">{{item.name}}</option>
           </select>
           <label for="quantityModal">Mennyiség</label>
           <input class="form-control" type="number" name="quantityModal" id="quantityModal" min="0" placeholder="Quantity" [(ngModel)]="actualOrder.items[i].quantity">

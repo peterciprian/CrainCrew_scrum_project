@@ -21,7 +21,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Kategória neve:</span>
         </div>
-        <input [(ngModel)]="categ.name"  class="form-control" formControlName="name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default"
+        <input [(ngModel)]="categ.name" class="form-control" formControlName="name" type="text" aria-label="name" aria-describedby="inputGroup-sizing-default"
           [ngClass]="{
             'is-valid': myForm.controls.name.valid && (myForm.controls.name.dirty || myForm.controls.name.touched), 
             'is-invalid': myForm.controls.name.invalid && (myForm.controls.name.dirty || myForm.controls.name.touched)
@@ -53,16 +53,15 @@
 
 
 <div *ngIf="(longgedIn && isAdmin)" class="container">
-  <table class="table table-striped">
+  <table class="table table-bordered table-striped text-center">
     <thead>
       <tr>
-        <th>Katergória neve:</th>
-        <th>Megjelenési sorrend:</th>
-        <th>Létrehozta:</th>
-        <th>Feltöltve:</th>
-        <th>Módosítva:</th>
-        <th></th>
-        <th></th>
+        <th>Katergória neve</th>
+        <th>Megjelenési sorrend</th>
+        <th>Létrehozta</th>
+        <th>Feltöltve</th>
+        <th>Módosítva</th>
+        <th>Művelet</th>
       </tr>
     </thead>
     <tbody>

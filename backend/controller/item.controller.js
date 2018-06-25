@@ -24,7 +24,6 @@ module.exports = {
       .populate('comments', 'comment')
       .then(item => res.json(item))
       .catch(err => res.send(err));
-
   },
 
   /**
@@ -52,7 +51,6 @@ module.exports = {
       req.body.img = `${url}.jpg`;
       request(address).pipe(fs.createWriteStream(`public/img/${url}.jpg`));
     }
-
     Item.create(req.body)
       .then(item => res.send(item))
       .catch(err => res.send(err));
@@ -71,7 +69,10 @@ module.exports = {
       const urlcim = req.body.url;
       req.body.img = `${urlcim}.jpg`;
       request(address).pipe(fs.createWriteStream(`public/img/${urlcim}.jpg`));
-      deleteFile(req.body.oldImg);
+    
+      if (req.body.oldImg !== 'none') {
+        deleteFile(req.body.oldImg);
+      }
     }
     Item.findByIdAndUpdate(req.params.id, req.body, { new: true })
       .then(item => res.json(item))

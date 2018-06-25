@@ -123,6 +123,30 @@
 
 <!-- *********** Picture view -->
 <div class="container">
+  <!-- NEW view  -->
+  <div *ngIf="showThumbnail==true">
+    <div class="card-deck col-md-4" *ngFor='let item of items'>
+      <div class="card" style="width: 19rem;">
+        <img *ngIf="item.img" class="card-img-top" src="{{'http://localhost:8080/img/' + item.img}}" alt="bicikli kep">
+        <img *ngIf="!item.img" class="card-img-top" src="http://localhost:8080/img/no-photo.jpg" alt="bicikli kep">
+        <div class="card-body">
+          <h5 class="card-title">{{item.name}}</h5>
+          <p class="card-text">{{item.price | currency:'HUF '}} </p>
+        </div>
+        <div class="card-footer">
+          <a class="btn btn-info btn-sm" role="button" href="http://localhost:4200/products/{{item['_id']}}">Részletek</a>
+          <button *ngIf="(longgedIn && isAdmin)" type="button" data-toggle="modal" data-target="#updatePost" (click)="modalChange(item._id)"
+            class="btn btn-sm btn-info">Módosítás</button>
+          <button *ngIf="(longgedIn && isAdmin)" type="button" (click)="delete(item._id)" class="btn btn-sm btn-danger">Törlés</button>
+          <button type="button" (click)="selectedItem(item)" class="btn btn-sm btn-warning">
+            <i class="fas fa-shopping-cart"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- orig  view 
   <div class="card-columns" *ngIf="showThumbnail==true">
     <div class="card" *ngFor='let item of items'>
       <img *ngIf="item.img" class="card-img-top" src="{{'http://localhost:8080/img/' + item.img}}" alt="bicikli kep">
@@ -140,13 +164,13 @@
           <i class="fas fa-shopping-cart"></i>
         </button>
       </div>
-    </div>
-  </div>
+    </div>  
+  </div> -->
 </div>
 
 <!-- *********** list view -->
 <div class="container">
-  <table class="table table-striped" *ngIf="showThumbnail==false">
+  <table class="table table-bordered table-striped text-center" *ngIf="showThumbnail==false">
     <thead>
       <tr>
         <th>
@@ -163,7 +187,6 @@
         <th scope="col">Kép</th>
         <th *ngIf="(longgedIn && isAdmin)" class="sort-th" (click)="sortTable('createdAt')">Feltöltve</th>
         <th *ngIf="(longgedIn && isAdmin)" class="sort-th" (click)="sortTable('updatedAt')">Módosítva</th>
-        <th></th>
         <th></th>
       </tr>
     </thead>
@@ -307,19 +330,22 @@
         <div class="input-group mb-2">
           <input type="text" name="comment" [(ngModel)]="newComment.comment">
           <button (click)='sendNewComment()'>Küldés</button>
-        <div class="input-group-prepend" >
-          <span class="input-group-text">Értékelések:</span>
+          <div class="input-group-prepend">
+            <span class="input-group-text">Értékelések:</span>
+          </div>
+          <ul *ngFor="let comment of actualComments">
+            <li class="form-control">
+              <span>{{comment.comment}}</span>
+            </li>
+          </ul>
         </div>
-        <ul *ngFor = "let comment of actualComments">
-          <li class="form-control"><span>{{comment.comment}}</span></li>
-        </ul>
-      </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-sm btn-info">Close</button>
         <button type="button" (click)="selectedItem(actualItem)" data-dismiss="modal" class="btn btn-sm btn-warning">
-            <i class="fas fa-shopping-cart"></i></button>
+          <i class="fas fa-shopping-cart"></i>
+        </button>
       </div>
     </div>
   </div>

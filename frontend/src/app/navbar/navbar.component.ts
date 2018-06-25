@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Http, RequestOptions } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
-/* import { parse } from 'path'; */
+import { Globals } from '../globals';
 
 
 @Component({
@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
   isAdmin = false;
   public loggedInUser: any;
 
-  public cart = JSON.parse(localStorage.getItem('cartItems'));
+  public cart = JSON.parse(localStorage.getItem('cartItems')) || [];
 
   options = new RequestOptions({ withCredentials: true });
 
@@ -47,7 +47,8 @@ export class NavbarComponent implements OnInit {
     private formBuilder: FormBuilder,
     public http: Http,
     private router: Router,
-    private flashMessagesService: FlashMessagesService) {
+    private flashMessagesService: FlashMessagesService,
+    public global: Globals) {
     this.createForm();
   }
 
@@ -62,14 +63,14 @@ export class NavbarComponent implements OnInit {
     this.http.get(this.baseUrl + 'profile', this.options)
       .subscribe(data => {
         this.loggedInUser = JSON.parse(data['_body']);
-        console.log(this.loggedInUser);
+        // console.log(this.loggedInUser);
         if (this.loggedInUser.user) {
           this.longgedIn = true;
           if (this.loggedInUser.user.role === 'admin') {
             this.isAdmin = true;
           }
         }
-        console.log('Anyone logged in?:' + this.longgedIn);
+        // console.log('Anyone logged in?:' + this.longgedIn);
       });
   }
 
@@ -126,6 +127,7 @@ export class NavbarComponent implements OnInit {
   }
 
   samePasswords(password, confirm) {
+    // tslint:disable-next-line:no-shadowed-variable
     return (group: FormGroup) => {
       if (group.controls[password].value === group.controls[confirm].value) {
         return null;
@@ -137,30 +139,24 @@ export class NavbarComponent implements OnInit {
 
   login() {
     this.http.post(this.baseUrl + 'login', this.user, this.options).subscribe(data => {
-      const res = data.json();
-
-     
-      console.log( data);
+      // console.log( data);
       if (data.ok) {
         this.flashMessagesService.show('Sikeres belépés!', { cssClass: 'alert-success' });
         this.longgedIn = true;
-        console.log(data['_body']);
+        // console.log(data['_body']);
         this.router.navigate(['../products']);
-      }
-      if (res.status === 401) {
-        this.flashMessagesService.show('Sikertelen belépés, ellenőrizd adataid!', { cssClass: 'alert-danger' });
       }
     });
     setTimeout(() => {
       this.isLoggedIn();
     }, 1000);
-    }
+  }
 
 
   logout() {
     this.http.get(this.baseUrl + 'logout', this.options)
       .subscribe(data => {
-        console.log(data['_body']);
+        // console.log(data['_body']);
       });
     this.flashMessagesService.show('Sikeres kilépés.', { cssClass: 'alert-success' });
     this.registerred = false;
@@ -171,19 +167,31 @@ export class NavbarComponent implements OnInit {
 
   register() {
     this.http.post(this.baseUrl + 'register', this.newuser, this.options).subscribe(data => {
-      console.log(data.status);
+      // console.log(data.status);
       if (data.ok) {
         this.flashMessagesService.show('Sikeres regisztráció.', { cssClass: 'alert-success' });
-        console.log(data['_body']);
+        // console.log(data['_body']);
         this.registerred = true;
       } else {
-        console.log('error: ' + data.status);
+        // console.log('error: ' + data.status);
       }
     });
   }
 
+  public getQuantity() {
+    if (JSON.parse(localStorage.getItem('cartItems')) === null) {
+      this.global.badge = 0;
+    } else {
+      /* const cart = JSON.parse(localStorage.getItem('cartItems')).products; */
+      this.cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+      this.global.badge = this.cart.length;
+    }
+  }
+
   ngOnInit() {
     this.isLoggedIn();
+    console.log(this.cart);
+    this.getQuantity();
   }
 
 }

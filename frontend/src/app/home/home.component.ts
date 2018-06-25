@@ -67,6 +67,25 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  list2() {
+    this.http.get(this.baseUrl, this.options)
+      .subscribe(data => {
+        const tempSort = JSON.parse(data['_body']);
+        tempSort.sort((a, b) => {
+          const dateA = new Date(a.updatedAt);
+          const dateB = new Date(b.updatedAt);
+          if (dateA < dateB) {
+            return 1;
+          }
+          if (dateA > dateB) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+        this.items = tempSort;
+      });
+  }
 
   listCateg() {
     this.http.get('http://localhost:8080/categ/', this.options)
@@ -88,15 +107,15 @@ export class HomeComponent implements OnInit {
   this.http.get('http://localhost:8080/user/profile', this.options)
     .subscribe(data => {
       this.loggedInUser = JSON.parse(data['_body']);
-      console.log(this.loggedInUser);
+      // console.log(this.loggedInUser);
       if (this.loggedInUser.user) {
         this.longgedIn = true;
         if (this.loggedInUser.user.role === 'admin') {
           this.isAdmin = true;
         }
       }
-      console.log('Anyone logged in? - product component:' + this.longgedIn);
-      console.log('Is admin:' + this.isAdmin);
+      // console.log('Anyone logged in? - product component:' + this.longgedIn);
+      // console.log('Is admin:' + this.isAdmin);
     });
 }
 
