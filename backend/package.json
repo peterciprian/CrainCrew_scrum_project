@@ -6,7 +6,7 @@
         "test": "mocha --timeout 10000"
     },
     "dependencies": {
-        "bcrypt": "^2.0.1",
+        "bcrypt": "^5.0.0",
         "bluebird": "^3.5.1",
         "body-parser": "~1.15.2",
         "chai": "^4.1.2",
